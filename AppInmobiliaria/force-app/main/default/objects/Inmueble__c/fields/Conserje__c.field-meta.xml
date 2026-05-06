@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Conserje__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Conserje</label>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Inmuebles (Conserje)</relationshipLabel>
+    <relationshipName>Inmuebles_Conserje</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

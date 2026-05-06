@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado__c</fullName>
+    <label>Estado</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Por investigar</fullName>
+                <default>true</default>
+                <label>Por investigar</label>
+            </value>
+            <value>
+                <fullName>Contactado</fullName>
+                <default>false</default>
+                <label>Contactado</label>
+            </value>
+            <value>
+                <fullName>Descartado</fullName>
+                <default>false</default>
+                <label>Descartado</label>
+            </value>
+            <value>
+                <fullName>Convertido a Encargo</fullName>
+                <default>false</default>
+                <label>Convertido a Encargo</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
