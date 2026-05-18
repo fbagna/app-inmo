@@ -11,6 +11,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Demanda__c.Comentarios__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Demanda__c.Habitaciones_Minimas__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -22,11 +27,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Demanda__c.Tipo_Operacion_Buscada__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Demanda__c.Zona_Deseada__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -81,6 +81,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Inmueble__c.Zona__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Noticia__c.Descripcion_Rumor__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -102,6 +107,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Opportunity.Fecha_Caducidad_Encargo__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Opportunity.Ganancia_Agencia__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -173,4 +183,8 @@
         <tab>Noticia__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>RunReports</name>
+    </userPermissions>
 </PermissionSet>

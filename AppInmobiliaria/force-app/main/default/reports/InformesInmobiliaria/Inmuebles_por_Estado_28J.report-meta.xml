@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Inmueble__c.Calle__c</field>
+    </columns>
+    <columns>
+        <field>Inmueble__c.Puerta__c</field>
+    </columns>
+    <columns>
+        <field>Inmueble__c.Piso__c</field>
+    </columns>
+    <columns>
+        <field>Inmueble__c.Propietario__c</field>
+    </columns>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Inmueble__c.Estado_Ocupacion__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Inmuebles por Estado</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Inmueble__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <showGrandTotal>true</showGrandTotal>
+    <showSubTotals>true</showSubTotals>
+    <timeFrameFilter>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>
