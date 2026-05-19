@@ -16,9 +16,6 @@
         <field>Inmueble__c.Puerta__c</field>
     </columns>
     <columns>
-        <field>Inmueble__c.Zona__c</field>
-    </columns>
-    <columns>
         <field>Inmueble__c.Propietario__c</field>
     </columns>
     <columns>

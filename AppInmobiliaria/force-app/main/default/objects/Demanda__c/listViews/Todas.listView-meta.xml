@@ -3,8 +3,17 @@
     <fullName>Todas</fullName>
     <columns>NAME</columns>
     <columns>Cliente_Comprador__c</columns>
-    <columns>Habitaciones_Minimas__c</columns>
+    <columns>Estado__c</columns>
+    <columns>Tipo_Operacion_Buscada__c</columns>
     <columns>Presupuesto_Maximo__c</columns>
+    <columns>Imprescindible_Ascensor__c</columns>
+    <columns>Provincia_Deseada__c</columns>
+    <columns>Poblacion_Deseada__c</columns>
+    <columns>Habitaciones_Minimas__c</columns>
+    <columns>Banos_Minimos__c</columns>
+    <columns>Zona_Deseada__c</columns>
+    <columns>Codigo_Postal_Deseado__c</columns>
+    <columns>Comentarios__c</columns>
     <filterScope>Everything</filterScope>
     <label>Todas</label>
 </ListView>

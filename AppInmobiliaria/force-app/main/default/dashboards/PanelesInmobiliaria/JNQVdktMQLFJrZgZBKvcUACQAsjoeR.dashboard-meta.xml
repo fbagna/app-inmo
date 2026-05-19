@@ -63,16 +63,15 @@
                 <drillToDetailEnabled>false</drillToDetailEnabled>
                 <enableHover>false</enableHover>
                 <expandOthers>false</expandOthers>
-                <groupingColumn>Inmueble__c.Zona__c</groupingColumn>
+                <groupingColumn>Inmueble__c.Provincia__c</groupingColumn>
                 <groupingSortProperties>
                     <groupingSorts>
                         <groupingLevel>g1</groupingLevel>
                         <sortOrder>a</sortOrder>
                     </groupingSorts>
                 </groupingSortProperties>
-                <header>Inmuebles por Zona</header>
+                <header>Inmuebles por Provincia</header>
                 <legendPosition>Right</legendPosition>
-                <maxValuesDisplayed>6</maxValuesDisplayed>
                 <report>InformesInmobiliaria/Inmuebles_por_Zona_p6r</report>
                 <showPercentage>true</showPercentage>
                 <showTotal>true</showTotal>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado_Propuesta__c</fullName>
+    <label>Estado de Propuesta</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Nueva Sugerencia</fullName>
+                <default>true</default>
+                <label>Nueva Sugerencia</label>
+            </value>
+            <value>
+                <fullName>Enviada al Cliente</fullName>
+                <default>false</default>
+                <label>Enviada al Cliente</label>
+            </value>
+            <value>
+                <fullName>Visita Programada</fullName>
+                <default>false</default>
+                <label>Visita Programada</label>
+            </value>
+            <value>
+                <fullName>Oferta Realizada</fullName>
+                <default>false</default>
+                <label>Oferta Realizada</label>
+            </value>
+            <value>
+                <fullName>Descartada</fullName>
+                <default>false</default>
+                <label>Descartada</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
