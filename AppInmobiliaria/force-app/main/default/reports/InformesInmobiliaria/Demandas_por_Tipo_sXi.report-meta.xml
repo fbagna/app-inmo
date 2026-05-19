@@ -1,56 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>OPPORTUNITY_NAME</field>
+        <field>CUST_NAME</field>
     </columns>
     <columns>
-        <field>ACCOUNT_NAME</field>
-    </columns>
-    <columns>
-        <aggregateTypes>Sum</aggregateTypes>
-        <field>Opportunity.Ganancia_Agencia__c</field>
-    </columns>
-    <columns>
-        <field>AMOUNT</field>
+        <field>Demanda__c.Cliente_Comprador__c</field>
     </columns>
     <columns>
         <aggregateTypes>Sum</aggregateTypes>
-        <field>Opportunity.Honorarios_Agencia__c</field>
+        <field>Demanda__c.Habitaciones_Minimas__c</field>
     </columns>
     <columns>
-        <field>CREATED_DATE</field>
+        <aggregateTypes>Sum</aggregateTypes>
+        <field>Demanda__c.Presupuesto_Maximo__c</field>
     </columns>
     <columns>
-        <field>CLOSE_DATE</field>
+        <field>Demanda__c.Comentarios__c</field>
     </columns>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
-        <field>STAGE_NAME</field>
+        <field>Demanda__c.Tipo_Operacion_Buscada__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Pipeline de Encargos Activos</name>
-    <params>
-        <name>open</name>
-        <value>all</value>
-    </params>
-    <params>
-        <name>probability</name>
-        <value>&gt;0</value>
-    </params>
+    <name>Demandas por Tipo</name>
     <params>
         <name>co</name>
         <value>1</value>
     </params>
-    <reportType>Opportunity</reportType>
+    <reportType>CustomEntity$Demanda__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <showGrandTotal>true</showGrandTotal>
     <showSubTotals>true</showSubTotals>
-    <sortColumn>AMOUNT</sortColumn>
-    <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
-        <dateColumn>CLOSE_DATE</dateColumn>
+        <dateColumn>CUST_CREATED_DATE</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

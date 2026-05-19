@@ -18,18 +18,20 @@
         <field>Opportunity.Honorarios_Agencia__c</field>
     </columns>
     <columns>
-        <field>CREATED_DATE</field>
-    </columns>
-    <columns>
         <field>CLOSE_DATE</field>
     </columns>
     <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Month</dateGranularity>
+        <field>CREATED_DATE</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
         <field>STAGE_NAME</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>Pipeline de Encargos Activos</name>
+    <name>Encargos Históricos</name>
     <params>
         <name>open</name>
         <value>all</value>
