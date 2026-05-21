@@ -11,6 +11,7 @@ const COLUMNS = [
     { label: 'Interesado', fieldName: 'Nombre_del_Interesado__c', type: 'text' },
     { label: 'Presupuesto Máx', fieldName: 'Presupuesto_Maximo__c', type: 'currency' },
     { label: 'Habitaciones', fieldName: 'Habitaciones_Minimas__c', type: 'number' },
+    { label: 'Metros2', fieldName: 'Metros_Minimos__c', type: 'number' },
     { label: 'Población', fieldName: 'Poblacion_Deseada__c', type: 'text' }
 ];
 
@@ -24,7 +25,6 @@ const COLUMNS_CRUCES = [
 
 export default class MatchmakingEngine extends LightningElement {
     @api recordId;
-    
     @track demandas = [];
     @track cruces = [];
     columns = COLUMNS;
@@ -39,6 +39,7 @@ export default class MatchmakingEngine extends LightningElement {
     @track filtroPresupuesto = null;
     @track filtroHabitaciones = null;
     @track filtroBanos = null;
+    @track filtroMetros = null;
     @track filtroProvincia = null;
     @track filtroAscensor = false;
 
@@ -47,7 +48,65 @@ export default class MatchmakingEngine extends LightningElement {
     }
 
     get opcionesProvincia() {
-        return [{ label: 'Todas', value: '' }, { label: 'Madrid', value: 'Madrid' }, { label: 'Barcelona', value: 'Barcelona' }]; // Simplificado en JS, tú mantén tu lista completa
+        return [
+            { label: 'Todas', value: '' },
+            { label: 'A Coruña', value: 'A Coruña' },
+            { label: 'Álava', value: 'Álava' },
+            { label: 'Albacete', value: 'Albacete' },
+            { label: 'Alicante', value: 'Alicante' },
+            { label: 'Almería', value: 'Almería' },
+            { label: 'Asturias', value: 'Asturias' },
+            { label: 'Ávila', value: 'Ávila' },
+            { label: 'Badajoz', value: 'Badajoz' },
+            { label: 'Baleares', value: 'Baleares' },
+            { label: 'Barcelona', value: 'Barcelona' },
+            { label: 'Burgos', value: 'Burgos' },
+            { label: 'Cáceres', value: 'Cáceres' },
+            { label: 'Cádiz', value: 'Cádiz' },
+            { label: 'Cantabria', value: 'Cantabria' },
+            { label: 'Castellón', value: 'Castellón' },
+            { label: 'Ceuta', value: 'Ceuta' },
+            { label: 'Ciudad Real', value: 'Ciudad Real' },
+            { label: 'Córdoba', value: 'Córdoba' },
+            { label: 'Cuenca', value: 'Cuenca' },
+            { label: 'Girona', value: 'Girona' },
+            { label: 'Granada', value: 'Granada' },
+            { label: 'Guadalajara', value: 'Guadalajara' },
+            { label: 'Gipuzkoa', value: 'Gipuzkoa' },
+            { label: 'Huelva', value: 'Huelva' },
+            { label: 'Huesca', value: 'Huesca' },
+            { label: 'Jaén', value: 'Jaén' },
+            { label: 'La Rioja', value: 'La Rioja' },
+            { label: 'León', value: 'León' },
+            { label: 'Lleida', value: 'Lleida' },
+            { label: 'Lugo', value: 'Lugo' },
+            { label: 'Madrid', value: 'Madrid' },
+            { label: 'Málaga', value: 'Málaga' },
+            { label: 'Melilla', value: 'Melilla' },
+            { label: 'Murcia', value: 'Murcia' },
+            { label: 'Navarra', value: 'Navarra' },
+            { label: 'Ourense', value: 'Ourense' },
+            { label: 'Palencia', value: 'Palencia' },
+            { label: 'Pontevedra', value: 'Pontevedra' },
+            { label: 'Salamanca', value: 'Salamanca' },
+            { label: 'Santa Cruz de Tenerife', value: 'Santa Cruz de Tenerife' },
+            { label: 'Segovia', value: 'Segovia' },
+            { label: 'Sevilla', value: 'Sevilla' },
+            { label: 'Soria', value: 'Soria' },
+            { label: 'Tarragona', value: 'Tarragona' },
+            { label: 'Teruel', value: 'Teruel' },
+            { label: 'Toledo', value: 'Toledo' },
+            { label: 'Valencia', value: 'Valencia' },
+            { label: 'Valladolid', value: 'Valladolid' },
+            { label: 'Vizcaya', value: 'Vizcaya' },
+            { label: 'Zamora', value: 'Zamora' },
+            { label: 'Zaragoza', value: 'Zaragoza' }
+        ];
+    }
+
+    @api
+    get contextRecordId() {
+        return this.recordId;
     }
 
     @wire(getDatosEncargo, { encargoId: '$recordId' })
@@ -55,7 +114,6 @@ export default class MatchmakingEngine extends LightningElement {
         if (data) {
             let normData = {};
             for (let key in data) { normData[key.replace('gbcinmo__', '')] = data[key]; }
-            
             this.filtroOperacion = normData.Tipo_Operacion__c === 'Venta' ? 'Compra' : normData.Tipo_Operacion__c;
             this.filtroPresupuesto = normData.Precio_Salida__c ? parseFloat(normData.Precio_Salida__c) : null;
             
@@ -65,6 +123,7 @@ export default class MatchmakingEngine extends LightningElement {
                 
                 this.filtroHabitaciones = normInmueble.Habitaciones__c ? parseInt(normInmueble.Habitaciones__c, 10) : null;
                 this.filtroBanos = normInmueble.Banos__c ? parseInt(normInmueble.Banos__c, 10) : null;
+                this.filtroMetros = normInmueble.Metros_Cuadrados__c ? parseInt(normInmueble.Metros_Cuadrados__c, 10) : null;
                 this.filtroAscensor = normInmueble.Tiene_Ascensor__c || false;
                 this.filtroProvincia = normInmueble.Provincia__c || null;
             }
@@ -74,7 +133,7 @@ export default class MatchmakingEngine extends LightningElement {
     @wire(getDemandasCompatibles, { 
         encargoId: '$recordId', operacion: '$filtroOperacion', presupuesto: '$filtroPresupuesto', 
         habitaciones: '$filtroHabitaciones', provincia: '$filtroProvincia',
-        banos: '$filtroBanos', ascensor: '$filtroAscensor'
+        banos: '$filtroBanos', ascensor: '$filtroAscensor', metros: '$filtroMetros'
     })
     wiredDemandas(result) {
         this.wiredDemandasResult = result;
@@ -99,12 +158,9 @@ export default class MatchmakingEngine extends LightningElement {
                 const demandaInfo = row.gbcinmo__Demanda__r || row.Demanda__r || {};
                 const demandaId = row.gbcinmo__Demanda__c || row.Demanda__c;
                 return {
-                    Id: row.Id,
-                    CruceUrl: `/${row.Id}`,
-                    RefCruce: row.Name,
+                    Id: row.Id, CruceUrl: `/${row.Id}`, RefCruce: row.Name,
                     Estado: row.gbcinmo__Estado_Propuesta__c || row.Estado_Propuesta__c,
-                    DemandaUrl: `/${demandaId}`,
-                    RefDemanda: demandaInfo.Name,
+                    DemandaUrl: `/${demandaId}`, RefDemanda: demandaInfo.Name,
                     Interesado: demandaInfo.gbcinmo__Nombre_del_Interesado__c || demandaInfo.Nombre_del_Interesado__c,
                     Presupuesto: demandaInfo.gbcinmo__Presupuesto_Maximo__c || demandaInfo.Presupuesto_Maximo__c
                 };
@@ -115,7 +171,6 @@ export default class MatchmakingEngine extends LightningElement {
     handleFilterChange(event) {
         this.isLoading = true;
         const fieldName = event.target.name;
-        
         if (fieldName === 'filtroAscensor') {
             this.filtroAscensor = event.target.checked;
         } else {
@@ -124,6 +179,7 @@ export default class MatchmakingEngine extends LightningElement {
             if (fieldName === 'filtroPresupuesto') this.filtroPresupuesto = val ? parseFloat(val) : null;
             if (fieldName === 'filtroHabitaciones') this.filtroHabitaciones = val ? parseInt(val, 10) : null;
             if (fieldName === 'filtroBanos') this.filtroBanos = val ? parseInt(val, 10) : null;
+            if (fieldName === 'filtroMetros') this.filtroMetros = val ? parseInt(val, 10) : null;
             if (fieldName === 'filtroProvincia') this.filtroProvincia = val || null;
         }
     }
@@ -131,29 +187,17 @@ export default class MatchmakingEngine extends LightningElement {
     get hasData() { return this.demandas && this.demandas.length > 0; }
     get hasCruces() { return this.cruces && this.cruces.length > 0; }
     get isButtonDisabled() { return this.selectedRows.length === 0; }
-
-    handleRowSelection(event) {
-        this.selectedRows = event.detail.selectedRows.map(row => row.Id);
-    }
+    handleRowSelection(event) { this.selectedRows = event.detail.selectedRows.map(row => row.Id); }
 
     handleProponer() {
         this.isLoading = true;
         crearPropuestas({ encargoId: this.recordId, demandaIds: this.selectedRows })
             .then(() => {
-                this.showToast('¡Éxito!', 'Propuestas creadas correctamente.', 'success');
+                this.dispatchEvent(new ShowToastEvent({ title: '¡Éxito!', message: 'Propuestas creadas correctamente.', variant: 'success' }));
                 refreshApex(this.wiredCrucesResult);
                 return refreshApex(this.wiredDemandasResult); 
             })
-            .catch(error => {
-                this.showToast('Error', 'No se pudieron crear las propuestas.', 'error');
-            })
-            .finally(() => {
-                this.isLoading = false;
-                this.selectedRows = []; 
-            });
-    }
-
-    showToast(title, message, variant) {
-        this.dispatchEvent(new ShowToastEvent({ title, message, variant }));
+            .catch(error => { this.dispatchEvent(new ShowToastEvent({ title: 'Error', message: 'No se pudieron crear las propuestas.', variant: 'error' })); })
+            .finally(() => { this.isLoading = false; this.selectedRows = []; });
     }
 }

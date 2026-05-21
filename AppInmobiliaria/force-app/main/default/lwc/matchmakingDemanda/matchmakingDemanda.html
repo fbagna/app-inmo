@@ -1,8 +1,8 @@
 <template>
-    <lightning-card title="Interesados Compatibles (Motor Matchmaking)" icon-name="standard:flow">
+    <lightning-card title="Inmuebles Compatibles (Búsqueda)" icon-name="standard:home">
         
         <div slot="actions">
-            <lightning-button label="Proponer Inmueble" variant="brand" onclick={handleProponer} disabled={isButtonDisabled}></lightning-button>
+            <lightning-button label="Sugerir Inmuebles" variant="brand" onclick={handleProponer} disabled={isButtonDisabled}></lightning-button>
         </div>
 
         <div class="slds-p-around_medium">
@@ -10,25 +10,25 @@
                 <lightning-layout multiple-rows vertical-align="end">
                     
                     <lightning-layout-item size="12" class="slds-m-bottom_x-small">
-                        <span class="slds-text-title_caps slds-text-color_weak">Ajustar Filtros de Búsqueda</span>
+                        <span class="slds-text-title_caps slds-text-color_weak">Filtros (Basados en el Cliente)</span>
                     </lightning-layout-item>
                     
                     <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
                         <lightning-combobox name="filtroOperacion" label="Operación" value={filtroOperacion} options={opcionesOperacion} onchange={handleFilterChange}></lightning-combobox>
                     </lightning-layout-item>
                     <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filtroPresupuesto" label="Presupuesto Mínimo" value={filtroPresupuesto} onchange={handleFilterChange}></lightning-input>
+                        <lightning-input type="number" name="filtroPresupuesto" label="Presupuesto Máx" value={filtroPresupuesto} onchange={handleFilterChange}></lightning-input>
                     </lightning-layout-item>
                     
                     <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filtroHabitaciones" label="Hab. Máximas" value={filtroHabitaciones} onchange={handleFilterChange}></lightning-input>
+                        <lightning-input type="number" name="filtroHabitaciones" label="Hab. Mínimas" value={filtroHabitaciones} onchange={handleFilterChange}></lightning-input>
                     </lightning-layout-item>
                     <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filtroBanos" label="Baños Máximos" value={filtroBanos} onchange={handleFilterChange}></lightning-input>
+                        <lightning-input type="number" name="filtroBanos" label="Baños Mínimos" value={filtroBanos} onchange={handleFilterChange}></lightning-input>
                     </lightning-layout-item>
                     
                     <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filtroMetros" label="M2 Máximos" value={filtroMetros} onchange={handleFilterChange}></lightning-input>
+                        <lightning-input type="number" name="filtroMetros" label="M2 Mínimos" value={filtroMetros} onchange={handleFilterChange}></lightning-input>
                     </lightning-layout-item>
                     <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
                         <lightning-combobox name="filtroProvincia" label="Provincia" value={filtroProvincia} options={opcionesProvincia} onchange={handleFilterChange}></lightning-combobox>
@@ -42,31 +42,28 @@
             </div>
 
             <template if:true={hasData}>
-                <lightning-datatable key-field="Id" data={demandas} columns={columns} onrowselection={handleRowSelection}></lightning-datatable>
+                <lightning-datatable key-field="Id" data={encargos} columns={columns} onrowselection={handleRowSelection}></lightning-datatable>
             </template>
 
             <template if:false={hasData}>
-                <template if:true={isLoading}><lightning-spinner alternative-text="Cargando..." size="small"></lightning-spinner></template>
+                <template if:true={isLoading}><lightning-spinner size="small"></lightning-spinner></template>
                 <template if:false={isLoading}>
-                    <div class="slds-illustration slds-illustration_small slds-m-vertical_medium" aria-hidden="true">
+                    <div class="slds-illustration slds-illustration_small slds-m-vertical_medium">
                         <div class="slds-text-longform text-center">
-                            <h3 class="slds-text-heading_small">No hay nuevos interesados compatibles</h3>
-                            <p class="slds-text-body_regular">Todos los clientes ya han sido propuestos o los filtros son muy estrictos.</p>
+                            <h3 class="slds-text-heading_small">No hay inmuebles que encajen</h3>
+                            <p class="slds-text-body_regular">Prueba a aumentar el presupuesto o reducir exigencias.</p>
                         </div>
                     </div>
                 </template>
             </template>
 
             <div class="slds-m-top_x-large slds-border_top slds-p-top_medium">
-                <h2 class="slds-text-heading_small slds-m-bottom_medium slds-text-color_default slds-font-weight_bold">
+                <h2 class="slds-text-heading_small slds-m-bottom_medium slds-font-weight_bold">
                     <lightning-icon icon-name="standard:task" size="small" class="slds-m-right_x-small"></lightning-icon>
-                    Propuestas Realizadas (Cruces Activos)
+                    Inmuebles ya propuestos a este cliente
                 </h2>
                 <template if:true={hasCruces}>
                     <lightning-datatable key-field="Id" data={cruces} columns={columnsCruces} hide-checkbox-column="true"></lightning-datatable>
-                </template>
-                <template if:false={hasCruces}>
-                     <p class="slds-text-color_weak slds-m-left_large slds-text-body_small">No hay propuestas realizadas aún para este inmueble.</p>
                 </template>
             </div>
         </div>
