@@ -85,7 +85,7 @@
             <componentInstance>
                 <componentInstanceProperties>
                     <name>relatedListComponentOverride</name>
-                    <value>ADVGRID</value>
+                    <value>NONE</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>rowsToDisplay</name>
@@ -99,7 +99,7 @@
                 <identifier>force_relatedListContainer</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-43e0e9aa-ca7f-40f4-8f53-1f973971bc05</name>
+        <name>Facet-9b6114a5-3393-4ddf-b6a0-1f3bbdcf1ac8</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -111,7 +111,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>body</name>
-                    <value>Facet-43e0e9aa-ca7f-40f4-8f53-1f973971bc05</value>
+                    <value>Facet-9b6114a5-3393-4ddf-b6a0-1f3bbdcf1ac8</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>title</name>
@@ -121,7 +121,7 @@
                 <identifier>flexipage_tab</identifier>
             </componentInstance>
         </itemInstances>
-        <name>Facet-35929252-8300-463e-b60f-8d48b658cc3e</name>
+        <name>Facet-ed15905a-4d53-4a7a-a2cc-1ec1fbaad3ea</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -169,7 +169,7 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>tabs</name>
-                    <value>Facet-35929252-8300-463e-b60f-8d48b658cc3e</value>
+                    <value>Facet-ed15905a-4d53-4a7a-a2cc-1ec1fbaad3ea</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:tabset</componentName>
                 <identifier>flexipage_tabset3</identifier>
@@ -192,8 +192,8 @@
         <name>rightcol</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Demanda Record Page</masterLabel>
-    <sobjectType>Demanda__c</sobjectType>
+    <masterLabel>Cruce Record Page</masterLabel>
+    <sobjectType>Cruce__c</sobjectType>
     <template>
         <name>flexipage:recordHomeTwoColEqualHeaderTemplateDesktop</name>
     </template>

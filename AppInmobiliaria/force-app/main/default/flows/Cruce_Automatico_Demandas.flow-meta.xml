@@ -54,6 +54,31 @@
             <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
         </value>
     </customProperties>
+    <decisions>
+        <name>Hay_Compradores</name>
+        <label>¿Hay Compradores?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Pantalla_Sin_Resultados</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No, está vacío</defaultConnectorLabel>
+        <rules>
+            <name>Si_hay_resultados</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Buscar_Demandas</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Pantalla_Resultados</targetReference>
+            </connector>
+            <label>Sí, hay resultados</label>
+        </rules>
+    </decisions>
     <dynamicChoiceSets>
         <name>Set_Provincia_Deseada</name>
         <dataType>Picklist</dataType>
@@ -62,7 +87,20 @@
         <picklistField>Provincia__c</picklistField>
         <picklistObject>Inmueble__c</picklistObject>
     </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>Set_Tipo_Operacion</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Tipo_Operacion_Buscada__c</picklistField>
+        <picklistObject>Demanda__c</picklistObject>
+    </dynamicChoiceSets>
     <environments>Default</environments>
+    <formulas>
+        <name>Formula_Traduccion_Operacion</name>
+        <dataType>String</dataType>
+        <expression>IF( TEXT({!Obtener_Encargo.Tipo_Operacion__c}) = &quot;Venta&quot;, &quot;Compra&quot;, TEXT({!Obtener_Encargo.Tipo_Operacion__c}) )</expression>
+    </formulas>
     <interviewLabel>Cruce Automático de Demandas {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Cruce Automático de Demandas</label>
     <loops>
@@ -112,7 +150,7 @@
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Pantalla_Resultados</targetReference>
+            <targetReference>Hay_Compradores</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
         <filters>
@@ -141,6 +179,13 @@
             <operator>EqualTo</operator>
             <value>
                 <elementReference>Provincia_Deseada</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Tipo_Operacion_Buscada__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Tipo_de_Operacion</elementReference>
             </value>
         </filters>
         <getFirstRecordOnly>false</getFirstRecordOnly>
@@ -201,6 +246,39 @@
             <targetReference>Buscar_Demandas</targetReference>
         </connector>
         <fields>
+            <name>Depuracion_Chivato</name>
+            <fieldText>&lt;p&gt;&lt;code&gt;Valor calculado por la fórmula: {!Formula_Traduccion_Operacion}&lt;/code&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
+            <name>Tipo_de_Operacion</name>
+            <choiceReferences>Set_Tipo_Operacion</choiceReferences>
+            <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>Formula_Traduccion_Operacion</elementReference>
+            </defaultValue>
+            <fieldText>Tipo de Operación</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <fields>
             <name>Presupuesto_Minimo_del_Comprador</name>
             <dataType>Currency</dataType>
             <defaultValue>
@@ -244,6 +322,9 @@
             <name>Provincia_Deseada</name>
             <choiceReferences>Set_Provincia_Deseada</choiceReferences>
             <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>Obtener_Inmueble.Provincia__c</elementReference>
+            </defaultValue>
             <fieldText>Provincia Deseada</fieldText>
             <fieldType>DropdownBox</fieldType>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
@@ -319,19 +400,46 @@
             <inputParameters>
                 <name>columns</name>
                 <value>
-                    <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-52bc&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Ref Demanda&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;gbcinmo__Cliente_Comprador__c&quot;,&quot;guid&quot;:&quot;column-d549&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Cliente Comprador&quot;,&quot;type&quot;:&quot;customRichText&quot;},{&quot;apiName&quot;:&quot;gbcinmo__Presupuesto_Maximo__c&quot;,&quot;guid&quot;:&quot;column-c26a&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Presupuesto Máximo&quot;,&quot;type&quot;:&quot;currency&quot;}]</stringValue>
+                    <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-52bc&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Ref Demanda&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;gbcinmo__Tipo_Operacion_Buscada__c&quot;,&quot;guid&quot;:&quot;column-8472&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Tipo de Operación Buscada&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;gbcinmo__Presupuesto_Maximo__c&quot;,&quot;guid&quot;:&quot;column-c26a&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Presupuesto Máximo&quot;,&quot;type&quot;:&quot;currency&quot;},{&quot;apiName&quot;:&quot;gbcinmo__Habitaciones_Minimas__c&quot;,&quot;guid&quot;:&quot;column-86d7&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:3,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Habitaciones Mínimas&quot;,&quot;type&quot;:&quot;number&quot;},{&quot;apiName&quot;:&quot;gbcinmo__Provincia_Deseada__c&quot;,&quot;guid&quot;:&quot;column-e67b&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:4,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Provincia Deseada&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;gbcinmo__Poblacion_Deseada__c&quot;,&quot;guid&quot;:&quot;column-14f2&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:5,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Población Deseada&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;&quot;,&quot;guid&quot;:&quot;column-d83a&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:false,&quot;customHeaderLabel&quot;:&quot;&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:5,&quot;sortable&quot;:false}]</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>columnReferences</name>
                 <value>
-                    <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Demanda__c&quot;,&quot;fieldReferences&quot;:[&quot;Name&quot;,&quot;Cliente_Comprador__c&quot;,&quot;Presupuesto_Maximo__c&quot;],&quot;elementReference&quot;:&quot;Buscar_Demandas&quot;}</complexValue>
+                    <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Demanda__c&quot;,&quot;fieldReferences&quot;:[&quot;Name&quot;,&quot;Tipo_Operacion_Buscada__c&quot;,&quot;Presupuesto_Maximo__c&quot;,&quot;Habitaciones_Minimas__c&quot;,&quot;Provincia_Deseada__c&quot;,&quot;Poblacion_Deseada__c&quot;],&quot;elementReference&quot;:&quot;Buscar_Demandas&quot;}</complexValue>
                     <complexValueType>ComplexObjectFieldDetails</complexValueType>
                 </value>
             </inputParameters>
             <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Pantalla_Sin_Resultados</name>
+        <label>Pantalla Sin Resultados</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>false</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Bucle_Demandas</targetReference>
+        </connector>
+        <fields>
+            <name>Texto_Sin_Compradores</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;em&gt;No hemos encontrado ningún comprador activo que encaje con estos filtros. Prueba a relajar las condiciones (ej. bajar el presupuesto) pulsando el botón &apos;Previous&apos; (Anterior).&lt;/em&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -351,7 +459,7 @@
             <targetReference>Obtener_Encargo</targetReference>
         </connector>
     </start>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>colCrucesACrear</name>
         <dataType>SObject</dataType>

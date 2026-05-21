@@ -4,9 +4,6 @@
         <field>CUST_NAME</field>
     </columns>
     <columns>
-        <field>Demanda__c.Cliente_Comprador__c</field>
-    </columns>
-    <columns>
         <aggregateTypes>Sum</aggregateTypes>
         <field>Demanda__c.Habitaciones_Minimas__c</field>
     </columns>

@@ -20,7 +20,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Cliente_Comprador__c</field>
+                <field>Cliente_Interesado__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -106,6 +106,16 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Opportunity.NAME</fields>
+        <fields>Estado_Propuesta__c</fields>
+        <fields>Opportunity.Precio_Salida__c</fields>
+        <fields>Opportunity.Precio_Minimo_Aceptado__c</fields>
+        <fields>Opportunity.OPP_STAGE_NAME</fields>
+        <fields>Comentarios_Cruce__c</fields>
+        <relatedList>Cruce__c.Demanda__c</relatedList>
+    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
