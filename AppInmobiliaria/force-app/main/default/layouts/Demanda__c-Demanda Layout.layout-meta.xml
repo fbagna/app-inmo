@@ -70,15 +70,19 @@
                 <behavior>Edit</behavior>
                 <field>Habitaciones_Minimas__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Imprescindible_Ascensor__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Banos_Minimos__c</field>
+                <field>Metros_Minimos__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Imprescindible_Ascensor__c</field>
+                <field>Banos_Minimos__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -107,14 +111,7 @@
         <style>CustomLinks</style>
     </layoutSections>
     <relatedLists>
-        <fields>NAME</fields>
-        <fields>Opportunity.NAME</fields>
-        <fields>Estado_Propuesta__c</fields>
-        <fields>Opportunity.Precio_Salida__c</fields>
-        <fields>Opportunity.Precio_Minimo_Aceptado__c</fields>
-        <fields>Opportunity.OPP_STAGE_NAME</fields>
-        <fields>Comentarios_Cruce__c</fields>
-        <relatedList>Cruce__c.Demanda__c</relatedList>
+        <relatedList>RelatedNoteList</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

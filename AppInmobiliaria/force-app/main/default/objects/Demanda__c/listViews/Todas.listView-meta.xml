@@ -4,6 +4,7 @@
     <columns>NAME</columns>
     <columns>Cliente_Interesado__c</columns>
     <columns>Estado__c</columns>
+    <columns>Cruces_Pendientes__c</columns>
     <columns>Tipo_Operacion_Buscada__c</columns>
     <columns>Presupuesto_Maximo__c</columns>
     <columns>Provincia_Deseada__c</columns>
