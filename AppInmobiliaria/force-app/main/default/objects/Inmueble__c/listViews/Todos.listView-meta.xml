@@ -2,14 +2,17 @@
 <ListView xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Todos</fullName>
     <columns>NAME</columns>
-    <columns>Calle__c</columns>
-    <columns>Piso__c</columns>
-    <columns>Puerta__c</columns>
+    <columns>Referencia__c</columns>
+    <columns>Tipo_Inmueble__c</columns>
+    <columns>Edificio__c</columns>
+    <columns>Metros_Cuadrados__c</columns>
     <columns>Estado_Ocupacion__c</columns>
     <columns>Propietario__c</columns>
     <columns>Provincia__c</columns>
     <columns>Poblacion__c</columns>
     <columns>Zona__c</columns>
+    <columns>URL_Publicacion__c</columns>
+    <columns>Foto_Principal__c</columns>
     <filterScope>Everything</filterScope>
     <label>Todos</label>
 </ListView>

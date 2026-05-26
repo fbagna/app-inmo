@@ -4,7 +4,7 @@
     <externalId>false</externalId>
     <label>Metros Cuadrados</label>
     <precision>6</precision>
-    <required>false</required>
+    <required>true</required>
     <scale>2</scale>
     <trackTrending>false</trackTrending>
     <type>Number</type>

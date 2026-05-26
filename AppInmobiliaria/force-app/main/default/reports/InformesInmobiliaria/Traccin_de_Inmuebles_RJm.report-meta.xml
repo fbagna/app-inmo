@@ -29,6 +29,7 @@
             <operator>notEqual</operator>
             <value>Closed Won,Closed Lost</value>
         </criteriaItems>
+        <language>es</language>
     </filter>
     <format>Summary</format>
     <groupingsDown>

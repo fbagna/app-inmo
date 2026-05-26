@@ -34,12 +34,13 @@
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <groupingSortProperties/>
-                <header>Alertas Demandas</header>
+                <header>Alertas</header>
                 <indicatorBreakpoint1>0.0</indicatorBreakpoint1>
                 <indicatorBreakpoint2>3.0</indicatorBreakpoint2>
                 <indicatorHighColor>#BE3934</indicatorHighColor>
                 <indicatorLowColor>#00716B</indicatorLowColor>
                 <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
+                <metricLabel>Demandas</metricLabel>
                 <report>InformesInmobiliaria/Cruces_de_Demandas_sin_Gestionar_7J2</report>
                 <showRange>false</showRange>
             </dashboardComponent>
@@ -200,12 +201,13 @@
                 <decimalPrecision>-1</decimalPrecision>
                 <displayUnits>Auto</displayUnits>
                 <groupingSortProperties/>
-                <header>Alertas Encargos</header>
+                <header>Alertas</header>
                 <indicatorBreakpoint1>0.0</indicatorBreakpoint1>
                 <indicatorBreakpoint2>3.0</indicatorBreakpoint2>
                 <indicatorHighColor>#9A3935</indicatorHighColor>
                 <indicatorLowColor>#00716B</indicatorLowColor>
                 <indicatorMiddleColor>#CA8501</indicatorMiddleColor>
+                <metricLabel>Encargos</metricLabel>
                 <report>InformesInmobiliaria/Cruces_de_Encargos_sin_Gestionar_DHr</report>
                 <showRange>false</showRange>
             </dashboardComponent>

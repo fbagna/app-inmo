@@ -402,12 +402,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Demanda__c.Necesita_Financiacion__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Demanda__c.Nombre_del_Interesado__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Demanda__c.Poblacion_Deseada__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Demanda__c.Porcentaje_Financiacion__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -497,6 +507,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Inmueble__c.Codigo_Catastral__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Inmueble__c.Codigo_Postal_Propio__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -527,17 +542,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Inmueble__c.Estado_Ocupacion__c</field>
+        <field>Inmueble__c.Foto_Principal__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Inmueble__c.Habitaciones__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Inmueble__c.Metros_Cuadrados__c</field>
+        <field>Inmueble__c.Otras_Caracteristicas__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -577,12 +587,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Inmueble__c.Referencia__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Inmueble__c.Tiene_Ascensor__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Inmueble__c.Tipo_Inmueble__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Inmueble__c.URL_Publicacion__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -751,6 +771,10 @@
     <layoutAssignments>
         <layout>Opportunity-Opportunity Layout</layout>
     </layoutAssignments>
+    <layoutAssignments>
+        <layout>Opportunity-Opportunity Layout</layout>
+        <recordType>Opportunity.Encargo_Inmobiliario</recordType>
+    </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
@@ -826,6 +850,11 @@
         <viewAllFields>false</viewAllFields>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Opportunity.Encargo_Inmobiliario</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
     <tabVisibilities>
         <tab>Demanda__c</tab>
         <visibility>DefaultOn</visibility>
@@ -1414,6 +1443,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ManageSynonyms</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ManageTranslation</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>

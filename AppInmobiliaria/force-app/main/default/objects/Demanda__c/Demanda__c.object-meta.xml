@@ -161,9 +161,8 @@
     <externalSharingModel>Private</externalSharingModel>
     <label>Demanda</label>
     <nameField>
-        <displayFormat>DEM-{00000}</displayFormat>
-        <label>Ref Demanda</label>
-        <type>AutoNumber</type>
+        <label>Nombre de la Demanda</label>
+        <type>Text</type>
     </nameField>
     <pluralLabel>Demandas</pluralLabel>
     <searchLayouts>
