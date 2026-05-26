@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>CL_Inmueble</fullName>
-    <fields>Calle__c</fields>
-    <fields>Piso__c</fields>
-    <fields>Puerta__c</fields>
+    <fields>Name</fields>
+    <fields>Tipo_Inmueble__c</fields>
+    <fields>Direccion_Matchmaking__c</fields>
+    <fields>Provincia_Matchmaking__c</fields>
+    <fields>Metros_Cuadrados__c</fields>
+    <fields>Habitaciones__c</fields>
     <fields>Propietario__c</fields>
-    <fields>Estado_Ocupacion__c</fields>
-    <label>CL - Inmueble</label>
+    <label>CL_Inmueble</label>
 </CompactLayout>

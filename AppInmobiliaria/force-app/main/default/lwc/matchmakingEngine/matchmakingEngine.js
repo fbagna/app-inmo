@@ -118,15 +118,17 @@ export default class MatchmakingEngine extends LightningElement {
             this.filtroPresupuesto = normData.Precio_Salida__c ? parseFloat(normData.Precio_Salida__c) : null;
             
             if (normData.Inmueble_Asociado__r) {
-                let normInmueble = {};
-                for (let key in normData.Inmueble_Asociado__r) { normInmueble[key.replace('gbcinmo__', '')] = normData.Inmueble_Asociado__r[key]; }
-                
-                this.filtroHabitaciones = normInmueble.Habitaciones__c ? parseInt(normInmueble.Habitaciones__c, 10) : null;
-                this.filtroBanos = normInmueble.Banos__c ? parseInt(normInmueble.Banos__c, 10) : null;
-                this.filtroMetros = normInmueble.Metros_Cuadrados__c ? parseInt(normInmueble.Metros_Cuadrados__c, 10) : null;
-                this.filtroAscensor = normInmueble.Tiene_Ascensor__c || false;
-                this.filtroProvincia = normInmueble.Provincia__c || null;
-            }
+            let normInmueble = {};
+            for (let key in normData.Inmueble_Asociado__r) { normInmueble[key.replace('gbcinmo__', '')] = normData.Inmueble_Asociado__r[key]; }
+            
+            this.filtroHabitaciones = normInmueble.Habitaciones__c ? parseInt(normInmueble.Habitaciones__c, 10) : null;
+            this.filtroBanos = normInmueble.Banos__c ? parseInt(normInmueble.Banos__c, 10) : null;
+            this.filtroMetros = normInmueble.Metros_Cuadrados__c ? parseInt(normInmueble.Metros_Cuadrados__c, 10) : null;
+            
+            // --- ESTAS SON LAS DOS LÍNEAS NUEVAS ---
+            this.filtroAscensor = normInmueble.Ascensor_Matchmaking__c || false;
+            this.filtroProvincia = normInmueble.Provincia_Matchmaking__c || null;
+        }
         }
     }
 

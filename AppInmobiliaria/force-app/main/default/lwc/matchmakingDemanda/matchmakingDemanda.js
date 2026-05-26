@@ -130,7 +130,7 @@ export default class MatchmakingDemanda extends LightningElement {
                 const inm = n.gbcinmo__Inmueble_Asociado__r || n.Inmueble_Asociado__r || {};
                 n.Habitaciones__c = inm.gbcinmo__Habitaciones__c || inm.Habitaciones__c;
                 n.Metros_Cuadrados__c = inm.gbcinmo__Metros_Cuadrados__c || inm.Metros_Cuadrados__c;
-                n.Provincia__c = inm.gbcinmo__Provincia__c || inm.Provincia__c;
+                n.Provincia__c = inm.gbcinmo__Provincia_Matchmaking__c || inm.Provincia_Matchmaking__c;
                 return n;
             });
             this.isLoading = false;

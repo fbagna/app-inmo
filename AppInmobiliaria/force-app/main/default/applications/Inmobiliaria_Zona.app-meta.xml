@@ -8,6 +8,7 @@
     <label>Inmobiliaria Zona</label>
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
+    <tabs>Edificio__c</tabs>
     <tabs>Inmueble__c</tabs>
     <tabs>Noticia__c</tabs>
     <tabs>standard-Account</tabs>

@@ -1,16 +1,12 @@
 public with sharing class MatchmakingController {
 
-    // ============================================================================
-    // MÉTODOS DESDE EL ENCARGO HACIA LAS DEMANDAS (MATCHMAKING ENGINE)
-    // ============================================================================
-
     @AuraEnabled(cacheable=true)
     public static Opportunity getDatosEncargo(Id encargoId) {
         return [SELECT Id, Tipo_Operacion__c, Precio_Salida__c, 
                        Inmueble_Asociado__r.Habitaciones__c, 
-                       Inmueble_Asociado__r.Provincia__c,
+                       Inmueble_Asociado__r.Provincia_Matchmaking__c,
                        Inmueble_Asociado__r.Banos__c,
-                       Inmueble_Asociado__r.Tiene_Ascensor__c,
+                       Inmueble_Asociado__r.Ascensor_Matchmaking__c,
                        Inmueble_Asociado__r.Metros_Cuadrados__c
                 FROM Opportunity 
                 WHERE Id = :encargoId LIMIT 1];
@@ -63,10 +59,6 @@ public with sharing class MatchmakingController {
         if (!nuevosCruces.isEmpty()) insert nuevosCruces;
     }
 
-    // ============================================================================
-    // MÉTODOS DESDE LA DEMANDA HACIA LOS ENCARGOS (MATCHMAKING DEMANDA)
-    // ============================================================================
-
     @AuraEnabled(cacheable=true)
     public static Demanda__c getDatosDemanda(Id demandaId) {
         return [SELECT Id, Tipo_Operacion_Buscada__c, Presupuesto_Maximo__c, Habitaciones_Minimas__c, 
@@ -83,7 +75,7 @@ public with sharing class MatchmakingController {
 
         String query = 'SELECT Id, Name, Tipo_Operacion__c, Precio_Salida__c, ' +
                        'Inmueble_Asociado__c, Inmueble_Asociado__r.Name, Inmueble_Asociado__r.Habitaciones__c, ' +
-                       'Inmueble_Asociado__r.Banos__c, Inmueble_Asociado__r.Provincia__c, Inmueble_Asociado__r.Metros_Cuadrados__c ' +
+                       'Inmueble_Asociado__r.Banos__c, Inmueble_Asociado__r.Provincia_Matchmaking__c, Inmueble_Asociado__r.Metros_Cuadrados__c ' +
                        'FROM Opportunity ' +
                        'WHERE IsClosed = false ' +
                        'AND Id NOT IN :encargosYaCruzados ';
@@ -96,8 +88,8 @@ public with sharing class MatchmakingController {
         if (habitaciones != null && habitaciones > 0) query += ' AND Inmueble_Asociado__r.Habitaciones__c >= :habitaciones ';
         if (banos != null && banos > 0) query += ' AND Inmueble_Asociado__r.Banos__c >= :banos ';
         if (metros != null && metros > 0) query += ' AND Inmueble_Asociado__r.Metros_Cuadrados__c >= :metros '; 
-        if (ascensor != null && ascensor) query += ' AND Inmueble_Asociado__r.Tiene_Ascensor__c = true ';
-        if (String.isNotBlank(provincia)) query += ' AND Inmueble_Asociado__r.Provincia__c = :provincia ';
+        if (ascensor != null && ascensor) query += ' AND Inmueble_Asociado__r.Ascensor_Matchmaking__c = true ';
+        if (String.isNotBlank(provincia)) query += ' AND Inmueble_Asociado__r.Provincia_Matchmaking__c = :provincia ';
         
         query += ' ORDER BY Precio_Salida__c ASC';
         return Database.query(query);
