@@ -3,6 +3,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>panelInmobiliario</componentName>
+                <identifier>gbcinmo_panelInmobiliario</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>dashboardName</name>
                     <value>JNQVdktMQLFJrZgZBKvcUACQAsjoeR</value>

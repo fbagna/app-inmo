@@ -4,6 +4,14 @@
         <label><!-- Inmobiliaria Zona --></label>
         <name>Inmobiliaria_Zona</name>
     </customApplications>
+    <customLabels>
+        <label>No hay fotos subidas. Arrastra imágenes a la sección de Archivos (Files) para verlas en el carrusel.</label>
+        <name>Carousel_No_Photos</name>
+    </customLabels>
+    <customLabels>
+        <label>Galería Fotográfica</label>
+        <name>Carousel_Title</name>
+    </customLabels>
     <flowDefinitions>
         <flows>
             <screens>
@@ -58,6 +66,34 @@
             </screens>
         </flows>
         <fullName>Cruce_Automatico_Demandas</fullName>
+    </flowDefinitions>
+    <flowDefinitions>
+        <flows>
+            <screens>
+                <fields>
+                    <name>Confirmation_Text</name>
+                </fields>
+                <name>Confirm_Selection</name>
+            </screens>
+            <screens>
+                <fields>
+                    <inputParameters>
+                        <name>label</name>
+                        <value/>
+                    </inputParameters>
+                    <inputParameters>
+                        <name>multiple</name>
+                        <value/>
+                    </inputParameters>
+                    <name>Cover_Photo_Upload</name>
+                </fields>
+                <name>File_Upload_Screen</name>
+            </screens>
+            <textTemplates>
+                <name>Plantilla_Imagen_Confirmacion</name>
+            </textTemplates>
+        </flows>
+        <fullName>Upload_Cover_Photo</fullName>
     </flowDefinitions>
     <flowDefinitions>
         <flows/>

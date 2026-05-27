@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Ubicación del Inmueble" icon-name="standard:location">
+        <template if:true={mapMarkers}>
+            <lightning-map 
+                map-markers={mapMarkers} 
+                zoom-level="15"
+                list-view="hidden">
+            </lightning-map>
+        </template>
+        <template if:false={mapMarkers}>
+            <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
+                Calculando ubicación o falta dirección...
+            </div>
+        </template>
+    </lightning-card>
+</template>

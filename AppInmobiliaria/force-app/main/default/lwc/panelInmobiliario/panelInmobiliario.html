@@ -1,0 +1,42 @@
+<template>
+    <lightning-card title="Acciones Rápidas" icon-name="standard:apps">
+        <div class="slds-m-around_medium slds-grid slds-wrap slds-gutters slds-grid_align-center">
+            
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="btn-lanzadera" onclick={navNuevoEdificio}>
+                    <lightning-icon icon-name="custom:custom24" size="large"></lightning-icon>
+                    <span class="btn-text">Nuevo Edificio</span>
+                </button>
+            </div>
+            
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="btn-lanzadera" onclick={navNuevoInmueble}>
+                    <lightning-icon icon-name="custom:custom85" size="large"></lightning-icon>
+                    <span class="btn-text">Nuevo Inmueble</span>
+                </button>
+            </div>
+            
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="btn-lanzadera" onclick={navNuevoEncargo}>
+                    <lightning-icon icon-name="standard:opportunity" size="large"></lightning-icon>
+                    <span class="btn-text">Nuevo Encargo</span>
+                </button>
+            </div>
+
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="btn-lanzadera" onclick={navNuevoDemanda}>
+                    <lightning-icon icon-name="custom:custom15" size="large"></lightning-icon>
+                    <span class="btn-text">Nueva Demanda</span>
+                </button>
+            </div>
+
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="btn-lanzadera" onclick={navNuevaNoticia}>
+                    <lightning-icon icon-name="custom:custom67" size="large"></lightning-icon>
+                    <span class="btn-text">Nueva Noticia</span>
+                </button>
+            </div>
+
+        </div>
+    </lightning-card>
+</template>

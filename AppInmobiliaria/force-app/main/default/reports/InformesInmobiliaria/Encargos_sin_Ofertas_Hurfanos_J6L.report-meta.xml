@@ -35,7 +35,7 @@
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
-        <language>es</language>
+        <language>en_US</language>
     </filter>
     <format>Tabular</format>
     <name>Encargos sin Ofertas (Huérfanos)</name>

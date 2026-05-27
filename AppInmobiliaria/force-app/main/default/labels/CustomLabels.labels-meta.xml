@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Carousel_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Carousel Title</shortDescription>
+        <value>Photo Gallery</value>
+    </labels>
+    <labels>
+        <fullName>Carousel_No_Photos</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Carousel No Photos message</shortDescription>
+        <value>No photos uploaded. Drag images to the Files section to view them in the carousel.</value>
+    </labels>
+</CustomLabels>

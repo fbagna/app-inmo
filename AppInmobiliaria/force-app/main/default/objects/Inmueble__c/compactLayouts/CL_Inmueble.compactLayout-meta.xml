@@ -3,7 +3,6 @@
     <fullName>CL_Inmueble</fullName>
     <fields>Name</fields>
     <fields>Tipo_Inmueble__c</fields>
-    <fields>Direccion_Matchmaking__c</fields>
     <fields>Provincia_Matchmaking__c</fields>
     <fields>Metros_Cuadrados__c</fields>
     <fields>Habitaciones__c</fields>

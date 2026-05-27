@@ -6,6 +6,10 @@
         <visible>false</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>GaleriaInmuebleController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>MatchmakingController</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -526,6 +530,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Inmueble__c.Cover_Image_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Inmueble__c.Direccion_Matchmaking__c</field>
         <readable>false</readable>
@@ -589,6 +598,11 @@
         <editable>false</editable>
         <field>Inmueble__c.Referencia__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Inmueble__c.Thumbnail__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
