@@ -7,12 +7,12 @@
     <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
     <label>Inmobiliaria Zona</label>
     <navType>Standard</navType>
-    <tabs>standard-home</tabs>
+    <tabs>Inicio_Zona</tabs>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Contact</tabs>
     <tabs>Edificio__c</tabs>
     <tabs>Inmueble__c</tabs>
     <tabs>Noticia__c</tabs>
-    <tabs>standard-Account</tabs>
-    <tabs>standard-Contact</tabs>
     <tabs>standard-Opportunity</tabs>
     <tabs>Demanda__c</tabs>
     <uiType>Lightning</uiType>

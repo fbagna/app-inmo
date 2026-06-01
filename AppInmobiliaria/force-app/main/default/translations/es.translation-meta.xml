@@ -87,7 +87,16 @@
                     </inputParameters>
                     <name>Cover_Photo_Upload</name>
                 </fields>
+                <fields>
+                    <name>Remove_Photo_Checkbox</name>
+                </fields>
                 <name>File_Upload_Screen</name>
+            </screens>
+            <screens>
+                <fields>
+                    <name>No_photo_text</name>
+                </fields>
+                <name>No_photo_screen</name>
             </screens>
             <textTemplates>
                 <name>Plantilla_Imagen_Confirmacion</name>

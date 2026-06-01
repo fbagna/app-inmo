@@ -23,13 +23,23 @@ public with sharing class MatchmakingController {
                        'WHERE Estado__c = \'Activa\' ' +
                        'AND Id NOT IN :demandasYaCruzadas ';
         
-        if (String.isNotBlank(operacion)) query += ' AND Tipo_Operacion_Buscada__c = :operacion ';
+        // CORRECCIÓN 1: Lógica inversa (Si vendo, busco a alguien que compre)
+        if (String.isNotBlank(operacion)) {
+            String opInversa = (operacion == 'Venta') ? 'Compra' : operacion;
+            query += ' AND Tipo_Operacion_Buscada__c = :opInversa ';
+        }
+
         if (presupuesto != null) query += ' AND Presupuesto_Maximo__c >= :presupuesto ';
         if (habitaciones != null) query += ' AND Habitaciones_Minimas__c <= :habitaciones ';
         if (banos != null) query += ' AND Banos_Minimos__c <= :banos ';
         if (metros != null) query += ' AND Metros_Minimos__c <= :metros '; 
-        if (ascensor != null && ascensor) query += ' AND Imprescindible_Ascensor__c = true ';
         if (String.isNotBlank(provincia)) query += ' AND Provincia_Deseada__c = :provincia ';
+        
+        // CORRECCIÓN 2: Lógica del Ascensor 
+        // (Si el piso NO tiene ascensor, descartamos a los que lo exijan. Si tiene, le sirve a todos)
+        if (ascensor != null && ascensor == false) {
+            query += ' AND Imprescindible_Ascensor__c = false ';
+        }
         
         query += ' ORDER BY Presupuesto_Maximo__c DESC';
         return Database.query(query);

@@ -15,7 +15,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Extract_First_ID</targetReference>
+            <targetReference>Confirm_Selection</targetReference>
         </connector>
     </assignments>
     <customProperties>
@@ -24,6 +24,46 @@
             <stringValue>{&quot;location&quot;:&quot;top&quot;,&quot;type&quot;:&quot;simple&quot;}</stringValue>
         </value>
     </customProperties>
+    <decisions>
+        <name>Check_if_File_Uploaded</name>
+        <label>Check if File Uploaded</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>No_photo_screen</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No file</defaultConnectorLabel>
+        <rules>
+            <name>Wants_to_Remove</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Remove_Photo_Checkbox</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Clear_Photo_ID</targetReference>
+            </connector>
+            <label>Wants to Remove</label>
+        </rules>
+        <rules>
+            <name>Yes_file_uploaded</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Cover_Photo_Upload.contentVersionIds</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Extract_First_ID</targetReference>
+            </connector>
+            <label>Yes, file uploaded</label>
+        </rules>
+    </decisions>
     <environments>Default</environments>
     <interviewLabel>Upload_Cover_Photo {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Upload_Cover_Photo</label>
@@ -37,9 +77,6 @@
         <nextValueConnector>
             <targetReference>Assign_Single_ID</targetReference>
         </nextValueConnector>
-        <noMoreValuesConnector>
-            <targetReference>Confirm_Selection</targetReference>
-        </noMoreValuesConnector>
     </loops>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -60,11 +97,56 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Property_Details</name>
+        <label>Get Property Details</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>File_Upload_Screen</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Inmueble__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <name>Clear_Photo_ID</name>
+        <label>Clear Photo ID</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <field>Cover_Image_Id__c</field>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputAssignments>
+        <object>Inmueble__c</object>
+    </recordUpdates>
     <recordUpdates>
         <name>Update_Property</name>
         <label>Update Property</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
+        <connector>
+            <targetReference>Extract_First_ID</targetReference>
+        </connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -118,7 +200,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Extract_First_ID</targetReference>
+            <targetReference>Check_if_File_Uploaded</targetReference>
         </connector>
         <fields>
             <name>Cover_Photo_Upload</name>
@@ -154,14 +236,64 @@
                 </width>
             </styleProperties>
         </fields>
+        <fields>
+            <name>Remove_Photo_Checkbox</name>
+            <dataType>Boolean</dataType>
+            <fieldText>Remove current cover photo</fieldText>
+            <fieldType>InputField</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Get_Property_Details.Cover_Image_Id__c</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
+    </screens>
+    <screens>
+        <name>No_photo_screen</name>
+        <label>No photo screen</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>false</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>No_photo_text</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;⚠️ You must select and upload a file before clicking Apply.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <styleProperties>
+                <verticalAlignment>
+                    <stringValue>top</stringValue>
+                </verticalAlignment>
+                <width>
+                    <stringValue>12</stringValue>
+                </width>
+            </styleProperties>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
     </screens>
     <start>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>File_Upload_Screen</targetReference>
+            <targetReference>Get_Property_Details</targetReference>
         </connector>
     </start>
     <status>Active</status>
