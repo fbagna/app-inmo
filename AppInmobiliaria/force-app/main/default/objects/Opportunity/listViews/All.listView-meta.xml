@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>Property_Unit__c</columns>
+    <columns>Operation_Type__c</columns>
+    <columns>Asking_Price__c</columns>
+    <columns>Minimum_Accepted_Price__c</columns>
+    <columns>Agency_Fee_Percentage__c</columns>
+    <columns>Listing_Expiration_Date__c</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

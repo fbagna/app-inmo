@@ -10,10 +10,10 @@
                             <value>Edit</value>
                         </valueListItems>
                         <valueListItems>
-                            <value>gbcinmo__Noticia__c.Convert</value>
+                            <value>gbcinmo__Listing_Lead__c.Convert</value>
                             <visibilityRule>
                                 <criteria>
-                                    <leftValue>{!Record.Estado__c}</leftValue>
+                                    <leftValue>{!Record.Status__c}</leftValue>
                                     <operator>NE</operator>
                                     <rightValue>Convertido a Encargo</rightValue>
                                 </criteria>
@@ -231,7 +231,7 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Noticia Record Page</masterLabel>
-    <sobjectType>Noticia__c</sobjectType>
+    <sobjectType>Listing_Lead__c</sobjectType>
     <template>
         <name>flexipage:recordHomeTwoColEqualHeaderTemplateDesktop</name>
     </template>

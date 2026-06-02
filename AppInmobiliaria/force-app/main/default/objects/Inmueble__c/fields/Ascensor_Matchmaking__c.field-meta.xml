@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Ascensor_Matchmaking__c</fullName>
-    <formula>IF(NOT(ISBLANK(Edificio__c)), Edificio__r.Tiene_Ascensor__c, Tiene_Ascensor__c)</formula>
-    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-    <label>Tiene Ascensor Matchmaking</label>
-    <trackTrending>false</trackTrending>
-    <type>Checkbox</type>
-</CustomField>

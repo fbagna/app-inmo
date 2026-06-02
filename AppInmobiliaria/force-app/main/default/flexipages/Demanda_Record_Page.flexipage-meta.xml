@@ -175,7 +175,7 @@
                 <identifier>flexipage_richText</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.Cruces_Pendientes__c}</leftValue>
+                        <leftValue>{!Record.Pending_Matches__c}</leftValue>
                         <operator>GT</operator>
                         <rightValue>0</rightValue>
                     </criteria>
@@ -184,8 +184,8 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>matchmakingDemanda</componentName>
-                <identifier>gbcinmo_matchmakingDemanda</identifier>
+                <componentName>requestMatchmakingEngine</componentName>
+                <identifier>gbcinmo_requestMatchmakingEngine</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -220,7 +220,7 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Demanda Record Page</masterLabel>
-    <sobjectType>Demanda__c</sobjectType>
+    <sobjectType>Property_Request__c</sobjectType>
     <template>
         <name>flexipage:recordHomeTwoColEqualHeaderTemplateDesktop</name>
     </template>

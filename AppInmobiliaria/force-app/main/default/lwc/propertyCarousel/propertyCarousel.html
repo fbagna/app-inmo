@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title={label.Carousel_Title} icon-name="standard:photo">
+        <div class="slds-p-around_medium">
+            <template if:true={hasPhotos}>
+                <lightning-carousel disable-auto-refresh>
+                    <template for:each={photos} for:item="photo">
+                        <lightning-carousel-image
+                            key={photo.id}
+                            src={photo.url}
+                            header={photo.title}
+                            alt={photo.title}>
+                        </lightning-carousel-image>
+                    </template>
+                </lightning-carousel>
+            </template>
+            <template if:false={hasPhotos}>
+                <div class="slds-text-align_center slds-text-color_weak slds-p-around_medium">
+                    {label.Carousel_No_Photos}
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

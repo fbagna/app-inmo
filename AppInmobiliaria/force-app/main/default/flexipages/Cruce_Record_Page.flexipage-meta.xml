@@ -193,7 +193,7 @@
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Cruce Record Page</masterLabel>
-    <sobjectType>Cruce__c</sobjectType>
+    <sobjectType>Property_Match__c</sobjectType>
     <template>
         <name>flexipage:recordHomeTwoColEqualHeaderTemplateDesktop</name>
     </template>

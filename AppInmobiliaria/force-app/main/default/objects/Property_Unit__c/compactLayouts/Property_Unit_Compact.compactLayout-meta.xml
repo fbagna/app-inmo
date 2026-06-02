@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property_Unit_Compact</fullName>
+    <fields>Name</fields>
+    <fields>Property__c</fields>
+    <fields>Property_Type__c</fields>
+    <fields>Matchmaking_State__c</fields>
+    <fields>Square_Meters__c</fields>
+    <fields>Bedrooms__c</fields>
+    <fields>Owner_Contact__c</fields>
+    <fields>Occupancy_Status__c</fields>
+    <label>Property Unit Compact</label>
+</CompactLayout>

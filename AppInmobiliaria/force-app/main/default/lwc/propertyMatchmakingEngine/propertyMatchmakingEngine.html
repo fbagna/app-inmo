@@ -1,0 +1,74 @@
+<template>
+    <lightning-card title="Compatible Requests (Matchmaking Engine)" icon-name="standard:flow">
+        
+        <div slot="actions">
+            <lightning-button label="Propose Listing" variant="brand" onclick={handlePropose} disabled={isButtonDisabled}></lightning-button>
+        </div>
+
+        <div class="slds-p-around_medium">
+            <div class="slds-box slds-m-bottom_medium slds-theme_shade slds-p-around_small">
+                <lightning-layout multiple-rows vertical-align="end">
+                    
+                    <lightning-layout-item size="12" class="slds-m-bottom_x-small">
+                        <span class="slds-text-title_caps slds-text-color_weak">Adjust Search Filters</span>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
+                        <lightning-combobox name="filterOperation" label="Operation Type" value={filterOperation} options={operationOptions} onchange={handleFilterChange}></lightning-combobox>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
+                        <lightning-input type="number" name="filterBudget" label="Min Budget" value={filterBudget} onchange={handleFilterChange}></lightning-input>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
+                        <lightning-input type="number" name="filterBedrooms" label="Max Bedrooms" value={filterBedrooms} onchange={handleFilterChange}></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
+                        <lightning-input type="number" name="filterBathrooms" label="Max Bathrooms" value={filterBathrooms} onchange={handleFilterChange}></lightning-input>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
+                        <lightning-input type="number" name="filterSquareMeters" label="Max Sq Meters" value={filterSquareMeters} onchange={handleFilterChange}></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
+                        <lightning-combobox name="filterProvince" label="State/Province" value={filterProvince} options={provinceOptions} onchange={handleFilterChange}></lightning-combobox>
+                    </lightning-layout-item>
+                    
+                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-p-bottom_x-small slds-m-top_small">
+                        <lightning-input type="checkbox" name="filterElevator" label="Requires Elevator" checked={filterElevator} onchange={handleFilterChange}></lightning-input>
+                    </lightning-layout-item>
+
+                </lightning-layout>
+            </div>
+
+            <template if:true={hasData}>
+                <lightning-datatable key-field="Id" data={requests} columns={columns} onrowselection={handleRowSelection}></lightning-datatable>
+            </template>
+
+            <template if:false={hasData}>
+                <template if:true={isLoading}><lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner></template>
+                <template if:false={isLoading}>
+                    <div class="slds-illustration slds-illustration_small slds-m-vertical_medium" aria-hidden="true">
+                        <div class="slds-text-longform text-center">
+                            <h3 class="slds-text-heading_small">No compatible requests found</h3>
+                            <p class="slds-text-body_regular">All clients have already been proposed, or the filters are too strict.</p>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+            <div class="slds-m-top_x-large slds-border_top slds-p-top_medium">
+                <h2 class="slds-text-heading_small slds-m-bottom_medium slds-text-color_default slds-font-weight_bold">
+                    <lightning-icon icon-name="standard:task" size="small" class="slds-m-right_x-small"></lightning-icon>
+                    Active Proposals (Matches)
+                </h2>
+                <template if:true={hasMatches}>
+                    <lightning-datatable key-field="Id" data={matches} columns={columnsMatches} hide-checkbox-column="true"></lightning-datatable>
+                </template>
+                <template if:false={hasMatches}>
+                     <p class="slds-text-color_weak slds-m-left_large slds-text-body_small">No proposals have been made for this listing yet.</p>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

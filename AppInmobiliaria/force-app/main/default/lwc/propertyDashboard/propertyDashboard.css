@@ -1,0 +1,31 @@
+.dashboard-btn {
+    box-sizing: border-box;
+    width: 160px; /* Fixed width for uniform buttons */
+    height: 140px; /* Fixed height for uniform buttons */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Aligns icons to the top */
+    padding: 24px 16px 16px 16px;
+    background-color: #f3f3f3;
+    border: 1px solid #d8dde6;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.dashboard-btn:hover {
+    background-color: #e5f2ff;
+    border-color: #0176d3;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-text {
+    margin-top: auto; /* Pushes text to the bottom, keeping icons perfectly aligned above */
+    font-size: 14px;
+    font-weight: 600;
+    color: #080707;
+    text-align: center; /* Centers text if it wraps to two lines */
+    line-height: 1.2;
+}

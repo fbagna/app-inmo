@@ -3,8 +3,8 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>panelInmobiliario</componentName>
-                <identifier>gbcinmo_panelInmobiliario</identifier>
+                <componentName>propertyDashboard</componentName>
+                <identifier>gbcinmo_propertyDashboard</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-941bbf36-4b37-470b-847a-10ffe4e759f4</name>

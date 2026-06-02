@@ -1,0 +1,121 @@
+<template>
+    <lightning-card title="Quick Actions" icon-name="standard:apps">
+        
+        <div class="slds-m-around_medium slds-grid slds-wrap slds-gutters slds-grid_align-center">
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="dashboard-btn" onclick={navNewProperty}><lightning-icon icon-name="custom:custom24" size="large"></lightning-icon><span class="btn-text">New Property (Building)</span></button>
+            </div>
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="dashboard-btn" onclick={navNewUnit}><lightning-icon icon-name="custom:custom85" size="large"></lightning-icon><span class="btn-text">New Unit</span></button>
+            </div>
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="dashboard-btn" onclick={navNewListing}><lightning-icon icon-name="standard:opportunity" size="large"></lightning-icon><span class="btn-text">New Listing</span></button>
+            </div>
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="dashboard-btn" onclick={navNewRequest}><lightning-icon icon-name="custom:custom15" size="large"></lightning-icon><span class="btn-text">New Request</span></button>
+            </div>
+            <div class="slds-col slds-p-bottom_medium">
+                <button class="dashboard-btn" onclick={navNewLead}><lightning-icon icon-name="custom:custom67" size="large"></lightning-icon><span class="btn-text">New Lead</span></button>
+            </div>
+        </div>
+
+        <div class="slds-m-top_large slds-p-top_medium slds-border_top">
+            
+            <h2 class="slds-text-heading_small slds-m-bottom_medium slds-text-color_error slds-p-left_small">
+                <lightning-icon icon-name="utility:warning" size="small" variant="error" class="slds-m-right_x-small"></lightning-icon>
+                <strong>Attention Required</strong>
+            </h2>
+
+            <div class="slds-m-bottom_medium slds-p-horizontal_small">
+                <div class="slds-media slds-media_center slds-m-bottom_small">
+                    <div class="slds-media__figure"><lightning-icon icon-name="standard:opportunity" size="small"></lightning-icon></div>
+                    <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Active Listings</strong></h3></div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_1-of-2">
+                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleListingsNoMatches}>
+                            <span class="slds-badge slds-theme_error slds-m-right_small">{countListingsNoMatches}</span>Listings with 0 matches
+                        </button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleListingsPending}>
+                            <span class="slds-badge slds-theme_warning slds-m-right_small">{countListingsPending}</span>Listings with pending matches
+                        </button>
+                    </div>
+                </div>
+
+                <template if:true={showListingsTable}>
+                    <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
+                        <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">
+                            Showing: <strong>{tableTitle}</strong>
+                        </div>
+                        <div style="height: 200px;">
+                            <lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <div class="slds-m-bottom_medium slds-p-horizontal_small slds-m-top_large">
+                <div class="slds-media slds-media_center slds-m-bottom_small">
+                    <div class="slds-media__figure"><lightning-icon icon-name="custom:custom15" size="small"></lightning-icon></div>
+                    <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Active Requests</strong></h3></div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_1-of-2">
+                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleRequestsNoMatches}>
+                            <span class="slds-badge slds-theme_error slds-m-right_small">{countRequestsNoMatches}</span>Requests with 0 matches
+                        </button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleRequestsPending}>
+                            <span class="slds-badge slds-theme_warning slds-m-right_small">{countRequestsPending}</span>Requests with pending matches
+                        </button>
+                    </div>
+                </div>
+
+                <template if:true={showRequestsTable}>
+                    <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
+                        <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">
+                            Showing: <strong>{tableTitle}</strong>
+                        </div>
+                        <div style="height: 200px;">
+                            <lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <div class="slds-m-bottom_medium slds-p-horizontal_small slds-m-top_large">
+                <div class="slds-media slds-media_center slds-m-bottom_small">
+                    <div class="slds-media__figure"><lightning-icon icon-name="custom:custom67" size="small"></lightning-icon></div>
+                    <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Listing Leads</strong></h3></div>
+                </div>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col slds-size_1-of-2">
+                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleLeadsOverdue}>
+                            <span class="slds-badge slds-theme_error slds-m-right_small">{countLeadsOverdue}</span>Overdue Follow-ups
+                        </button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleLeadsNew}>
+                            <span class="slds-badge slds-theme_warning slds-m-right_small">{countLeadsNew}</span>New Leads to check
+                        </button>
+                    </div>
+                </div>
+
+                <template if:true={showLeadsTable}>
+                    <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
+                        <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">
+                            Showing: <strong>{tableTitle}</strong>
+                        </div>
+                        <div style="height: 200px;">
+                            <lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            
+        </div>
+    </lightning-card>
+</template>

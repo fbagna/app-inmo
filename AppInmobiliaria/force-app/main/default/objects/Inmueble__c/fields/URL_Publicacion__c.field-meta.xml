@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>URL_Publicacion__c</fullName>
-    <inlineHelpText>Enlace al anuncio en Idealista, Fotocasa o la web corporativa.</inlineHelpText>
-    <label>URL Publicación</label>
-    <required>false</required>
-    <trackTrending>false</trackTrending>
-    <type>Url</type>
-</CustomField>

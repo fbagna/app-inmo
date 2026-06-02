@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <excludeButtons>OpenSlackRecordChannel</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>false</customLabel>
@@ -69,33 +68,33 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Inmueble_Asociado__c</field>
+                <field>Property_Unit__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Tipo_Operacion__c</field>
+                <field>Operation_Type__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Fecha_Caducidad_Encargo__c</field>
+                <field>Listing_Expiration_Date__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Honorarios_Agencia__c</field>
+                <field>Agency_Fee_Percentage__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Ganancia_Agencia__c</field>
+                <field>Agency_Profit__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Precio_Salida__c</field>
+                <field>Asking_Price__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Precio_Minimo_Aceptado__c</field>
+                <field>Minimum_Accepted_Price__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -121,17 +120,17 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Metros_Cuadrados_Inmueble__c</field>
+                <field>Property_Square_Meters__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Provincia_Inmueble__c</field>
+                <field>Property_State_Province__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Habitaciones_Inmueble__c</field>
+                <field>Property_Bedrooms__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -195,19 +194,14 @@
             <sortOrder>0</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
-            <actionName>Opportunity.Buscar_Compradores</actionName>
-            <actionType>QuickAction</actionType>
-            <sortOrder>1</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
             <actionName>Clone</actionName>
             <actionType>StandardButton</actionType>
-            <sortOrder>2</sortOrder>
+            <sortOrder>1</sortOrder>
         </platformActionListItems>
         <platformActionListItems>
             <actionName>Delete</actionName>
             <actionType>StandardButton</actionType>
-            <sortOrder>3</sortOrder>
+            <sortOrder>2</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <quickActionList>
@@ -264,11 +258,11 @@
     </relatedContent>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Inmueble_Objetivo__c</fields>
-        <fields>Descripcion_Rumor__c</fields>
-        <fields>Estado__c</fields>
-        <fields>Fecha_Seguimiento__c</fields>
-        <relatedList>Noticia__c.Converted_Opportunity__c</relatedList>
+        <fields>Target_Property_Unit__c</fields>
+        <fields>Description__c</fields>
+        <fields>Status__c</fields>
+        <fields>Follow_Up_Date__c</fields>
+        <relatedList>Listing_Lead__c.Converted_Opportunity__c</relatedList>
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedNoteList</relatedList>

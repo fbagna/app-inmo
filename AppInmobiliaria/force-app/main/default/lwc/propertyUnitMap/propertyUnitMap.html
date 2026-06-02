@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Property Location" icon-name="standard:location">
+        <template if:true={mapMarkers}>
+            <div class="slds-m-around_small">
+                <lightning-map
+                    map-markers={mapMarkers}
+                    zoom-level="15">
+                </lightning-map>
+            </div>
+        </template>
+        <template if:false={mapMarkers}>
+            <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
+                Calculating location or missing address...
+            </div>
+        </template>
+    </lightning-card>
+</template>

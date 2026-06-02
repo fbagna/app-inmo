@@ -153,7 +153,7 @@
                 <identifier>flexipage_richText</identifier>
                 <visibilityRule>
                     <criteria>
-                        <leftValue>{!Record.Cruces_Pendientes__c}</leftValue>
+                        <leftValue>{!Record.Pending_Matches__c}</leftValue>
                         <operator>GT</operator>
                         <rightValue>0</rightValue>
                     </criteria>
@@ -162,8 +162,8 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>matchmakingEngine</componentName>
-                <identifier>gbcinmo_matchmakingEngine</identifier>
+                <componentName>propertyMatchmakingEngine</componentName>
+                <identifier>gbcinmo_propertyMatchmakingEngine</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>

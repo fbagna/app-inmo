@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
-    <fullName>Banos_Enteros</fullName>
-    <active>true</active>
-    <errorConditionFormula>FLOOR(Banos__c) &lt;&gt; Banos__c</errorConditionFormula>
-    <errorDisplayField>Banos__c</errorDisplayField>
-    <errorMessage>El número de baños debe ser un valor exacto entero (sin decimales).</errorMessage>
-</ValidationRule>
