@@ -255,6 +255,6 @@
         <default>false</default>
         <label>Zaragoza</label>
     </customValue>
-    <masterLabel>Provincias España</masterLabel>
+    <masterLabel>Spanish Provinces</masterLabel>
     <sorted>false</sorted>
 </GlobalValueSet>

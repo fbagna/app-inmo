@@ -345,6 +345,11 @@
         <field>Opportunity.gbcinmo__Total_Matches__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable> 
+        <field>gbcinmo__Property_Request__c.gbcinmo__Request_Number__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
 
     <hasActivationRequired>false</hasActivationRequired>
     <label>Property Access</label>

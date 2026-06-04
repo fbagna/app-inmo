@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Translations xmlns="http://soap.sforce.com/2006/04/metadata">
     <customApplications>
-        <label><!-- Inmobiliaria Zona --></label>
+        <label>Inmobiliaria Zona</label>
         <name>Inmobiliaria_Zona</name>
     </customApplications>
+
     <customLabels>
         <label>No hay fotos subidas. Arrastra imágenes a la sección de Archivos (Files) para verlas en el carrusel.</label>
         <name>Carousel_No_Photos</name>
@@ -12,61 +13,7 @@
         <label>Galería Fotográfica</label>
         <name>Carousel_Title</name>
     </customLabels>
-    <flowDefinitions>
-        <flows>
-            <screens>
-                <fields>
-                    <name>Depuracion_Chivato</name>
-                </fields>
-                <fields>
-                    <name>Habitaciones_Minimas</name>
-                </fields>
-                <fields>
-                    <name>Presupuesto_Minimo_del_Comprador</name>
-                </fields>
-                <fields>
-                    <name>Provincia_Deseada</name>
-                </fields>
-                <fields>
-                    <name>Tipo_de_Operacion</name>
-                </fields>
-                <name>Pantalla_Filtros</name>
-            </screens>
-            <screens>
-                <fields>
-                    <inputParameters>
-                        <name>columns</name>
-                        <value/>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>label</name>
-                        <value/>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>minRowSelection</name>
-                        <value/>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>selectionMode</name>
-                        <value/>
-                    </inputParameters>
-                    <inputParameters>
-                        <name>shouldDisplayLabel</name>
-                        <value/>
-                    </inputParameters>
-                    <name>Tabla_Demandas</name>
-                </fields>
-                <name>Pantalla_Resultados</name>
-            </screens>
-            <screens>
-                <fields>
-                    <name>Texto_Sin_Compradores</name>
-                </fields>
-                <name>Pantalla_Sin_Resultados</name>
-            </screens>
-        </flows>
-        <fullName>Cruce_Automatico_Demandas</fullName>
-    </flowDefinitions>
+
     <flowDefinitions>
         <flows>
             <screens>
@@ -99,7 +46,7 @@
                 <name>No_photo_screen</name>
             </screens>
             <textTemplates>
-                <name>Plantilla_Imagen_Confirmacion</name>
+                <name>Confirmation_template</name>
             </textTemplates>
         </flows>
         <fullName>Upload_Cover_Photo</fullName>
@@ -108,138 +55,140 @@
         <flows/>
         <fullName>sfdc_default_ReportExport_Protection_Flow</fullName>
     </flowDefinitions>
+
     <quickActions>
-        <label><!-- LogACall --></label>
+        <label></label>
         <name>LogACall</name>
     </quickActions>
     <quickActions>
-        <label><!-- NewAccount --></label>
+        <label></label>
         <name>NewAccount</name>
     </quickActions>
     <quickActions>
-        <label><!-- NewCase --></label>
+        <label></label>
         <name>NewCase</name>
     </quickActions>
     <quickActions>
-        <label><!-- NewContact --></label>
+        <label></label>
         <name>NewContact</name>
     </quickActions>
     <quickActions>
-        <label><!-- NewEvent --></label>
+        <label></label>
         <name>NewEvent</name>
     </quickActions>
     <quickActions>
-        <label><!-- NewGroup --></label>
+        <label></label>
         <name>NewGroup</name>
     </quickActions>
     <quickActions>
-        <label><!-- NewLead --></label>
+        <label></label>
         <name>NewLead</name>
     </quickActions>
     <quickActions>
-        <label><!-- NewNote --></label>
+        <label></label>
         <name>NewNote</name>
     </quickActions>
     <quickActions>
-        <label><!-- NewOpportunity --></label>
+        <label></label>
         <name>NewOpportunity</name>
     </quickActions>
     <quickActions>
-        <label><!-- NewTask --></label>
+        <label></label>
         <name>NewTask</name>
     </quickActions>
     <quickActions>
-        <label><!-- SendEmail --></label>
+        <label></label>
         <name>SendEmail</name>
     </quickActions>
+
     <reportTypes>
-        <description><!-- Orchestration Run Logs Spring &apos;24 --></description>
-        <label><!-- Orchestration Run Logs Spring &apos;24 --></label>
+        <description></description>
+        <label></label>
         <name>flow_orchestration_log_ootb_crt_two_four_eight</name>
         <sections>
-            <label><!-- Orchestration Run Log --></label>
+            <label></label>
             <name>Orchestration Run Log</name>
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Orchestration Runs --></description>
-        <label><!-- Orchestration Runs --></label>
+        <description></description>
+        <label></label>
         <name>flow_orchestration_run_crt</name>
         <sections>
-            <label><!-- Orchestration Runs --></label>
+            <label></label>
             <name>Orchestration Runs</name>
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Orchestration Runs Spring &apos;24 --></description>
-        <label><!-- Orchestration Runs Spring &apos;24 --></label>
+        <description></description>
+        <label></label>
         <name>flow_orchestration_run_ootb_crt_two_four_eight</name>
         <sections>
-            <label><!-- Orchestration Runs --></label>
+            <label></label>
             <name>Orchestration Runs</name>
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Orchestration Stage Runs Spring &apos;24 --></description>
-        <label><!-- Orchestration Stage Runs Spring &apos;24 --></label>
+        <description></description>
+        <label></label>
         <name>flow_orchestration_stage_run_ootb_crt_two_four_eight</name>
         <sections>
-            <label><!-- Orchestration Stage Runs --></label>
+            <label></label>
             <name>Orchestration Stage Runs</name>
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Orchestration Step Runs Spring &apos;24 --></description>
-        <label><!-- Orchestration Step Runs Spring &apos;24 --></label>
+        <description></description>
+        <label></label>
         <name>flow_orchestration_step_run_ootb_crt_two_four_eight</name>
         <sections>
-            <label><!-- Orchestration Step Runs --></label>
+            <label></label>
             <name>Orchestration Step Runs</name>
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Orchestration Work Items Spring &apos;24 --></description>
-        <label><!-- Orchestration Work Items Spring &apos;24 --></label>
+        <description></description>
+        <label></label>
         <name>flow_orchestration_work_item_ootb_crt_two_four_eight</name>
         <sections>
             <columns>
-                <label><!-- Orchestration Step Run: Label --></label>
+                <label></label>
                 <name>Orchestration Step Run: Label</name>
             </columns>
             <columns>
-                <label><!-- Orchestration Step Run: Name --></label>
+                <label></label>
                 <name>Orchestration Step Run: Name</name>
             </columns>
             <columns>
-                <label><!-- Orchestration Step Run: Status --></label>
+                <label></label>
                 <name>Orchestration Step Run: Status</name>
             </columns>
-            <label><!-- Orchestration Step Runs --></label>
+            <label></label>
             <name>Orchestration Step Runs</name>
         </sections>
         <sections>
             <columns>
-                <label><!-- Assigned Group or Queue --></label>
+                <label></label>
                 <name>Assigned Group or Queue</name>
             </columns>
             <columns>
-                <label><!-- Assigned User --></label>
+                <label></label>
                 <name>Assigned User</name>
             </columns>
-            <label><!-- Orchestration Work Items --></label>
+            <label></label>
             <name>Orchestration Work Items</name>
         </sections>
     </reportTypes>
     <reportTypes>
-        <description><!-- Screen Flows --></description>
-        <label><!-- Screen Flows --></label>
+        <description></description>
+        <label></label>
         <name>screen_flows_prebuilt_crt</name>
         <sections>
-            <label><!-- Flow Interview Log Entries --></label>
+            <label></label>
             <name>Flow Interview Log Entries</name>
         </sections>
         <sections>
-            <label><!-- Flow Interview Logs --></label>
+            <label></label>
             <name>Flow Interview Logs</name>
         </sections>
     </reportTypes>

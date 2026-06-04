@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Tipo de Inmueble</label>
+    <name>Property_Type__c</name>
+    <picklistValues>
+        <masterLabel>Apartment</masterLabel>
+        <translation>Piso / Apartamento</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Commercial Space</masterLabel>
+        <translation>Local Comercial</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>House</masterLabel>
+        <translation>Chalet / Casa</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Land</masterLabel>
+        <translation>Terreno / Parcela</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Office</masterLabel>
+        <translation>Oficina</translation>
+    </picklistValues>
+</CustomFieldTranslation>

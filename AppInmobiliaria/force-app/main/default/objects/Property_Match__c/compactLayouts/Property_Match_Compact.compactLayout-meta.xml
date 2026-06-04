@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property_Match_Compact</fullName>
+    <fields>Name</fields>
+    <fields>Opportunity__c</fields>
+    <fields>Owner_Name__c</fields>
+    <fields>Property_Request__c</fields>
+    <fields>Client_Name__c</fields>
+    <fields>Match_Status__c</fields>
+    <label>Property Match Compact</label>
+</CompactLayout>

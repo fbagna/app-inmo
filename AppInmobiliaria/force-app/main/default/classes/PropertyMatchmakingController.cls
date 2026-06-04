@@ -32,11 +32,12 @@ public with sharing class PropertyMatchmakingController {
         String query = 'SELECT Id, Name, gbcinmo__Client_Name__c, gbcinmo__Max_Budget__c, ' +
                        'gbcinmo__Min_Bedrooms__c, gbcinmo__Desired_City__c, gbcinmo__Min_Square_Meters__c ' +
                        'FROM gbcinmo__Property_Request__c ' +
-                       'WHERE gbcinmo__Status__c = \'Activa\' ' + 
+                       'WHERE gbcinmo__Status__c = \'Active\' ' + // Updated to English API Name
                        'AND Id NOT IN :matchedRequestIds ';
         
         if (String.isNotBlank(operationType)) {
-            String inverseOperation = (operationType == 'Venta') ? 'Compra' : operationType;
+            // Updated translation logic for English API Names
+            String inverseOperation = (operationType == 'Sale') ? 'Purchase' : operationType;
             query += ' AND gbcinmo__Desired_Operation_Type__c = :inverseOperation ';
         }
 
@@ -73,7 +74,7 @@ public with sharing class PropertyMatchmakingController {
             gbcinmo__Property_Match__c newMatch = new gbcinmo__Property_Match__c();
             newMatch.gbcinmo__Opportunity__c = listingId;
             newMatch.gbcinmo__Property_Request__c = requestId;
-            newMatch.gbcinmo__Match_Status__c = 'Nueva Sugerencia'; 
+            newMatch.gbcinmo__Match_Status__c = 'New Suggestion'; // Updated to English API Name
             newMatches.add(newMatch);
         }
         if (!newMatches.isEmpty()) {
@@ -106,7 +107,6 @@ public with sharing class PropertyMatchmakingController {
             matchedListingIds.add(match.gbcinmo__Opportunity__c); 
         }
 
-        // We added Minimum Accepted Price and Bathrooms to the query
         String query = 'SELECT Id, Name, gbcinmo__Operation_Type__c, gbcinmo__Asking_Price__c, gbcinmo__Minimum_Accepted_Price__c, ' +
                        'gbcinmo__Property_Unit__r.gbcinmo__Bedrooms__c, ' +
                        'gbcinmo__Property_Unit__r.gbcinmo__Bathrooms__c, ' +
@@ -117,7 +117,8 @@ public with sharing class PropertyMatchmakingController {
                        'AND Id NOT IN :matchedListingIds ';
         
         if (String.isNotBlank(operationType)) {
-            String inverseOperation = (operationType == 'Compra') ? 'Venta' : operationType;
+            // Updated translation logic for English API Names
+            String inverseOperation = (operationType == 'Purchase') ? 'Sale' : operationType;
             query += ' AND gbcinmo__Operation_Type__c = :inverseOperation ';
         }
         if (maxBudget != null && maxBudget > 0) query += ' AND gbcinmo__Asking_Price__c <= :maxBudget ';
@@ -149,7 +150,7 @@ public with sharing class PropertyMatchmakingController {
             gbcinmo__Property_Match__c newMatch = new gbcinmo__Property_Match__c();
             newMatch.gbcinmo__Property_Request__c = requestId;
             newMatch.gbcinmo__Opportunity__c = listingId;
-            newMatch.gbcinmo__Match_Status__c = 'Nueva Sugerencia'; 
+            newMatch.gbcinmo__Match_Status__c = 'New Suggestion'; // Updated to English API Name
             newMatches.add(newMatch);
         }
         if (!newMatches.isEmpty()) {

@@ -13,7 +13,7 @@
         <dataType>Picklist</dataType>
         <displayField xsi:nil="true"/>
         <object xsi:nil="true"/>
-        <picklistField>Tipo_Operacion__c</picklistField>
+        <picklistField>Operation_Type__c</picklistField>
         <picklistObject>Opportunity</picklistObject>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
@@ -62,7 +62,19 @@
         <inputAssignments>
             <field>AccountId</field>
             <value>
-                <elementReference>Get_News_Record.Inmueble_Objetivo__r.Propietario__r.Id</elementReference>
+                <elementReference>Get_News_Record.Target_Property_Unit__r.Owner_Contact__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Agency_Fee_Percentage__c</field>
+            <value>
+                <elementReference>Agency_Fee_Percentage</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Asking_Price__c</field>
+            <value>
+                <elementReference>Asking_Price</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -78,21 +90,15 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Fecha_Caducidad_Encargo__c</field>
+            <field>Listing_Expiration_Date__c</field>
             <value>
                 <elementReference>Listing_Expiration_Date</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Honorarios_Agencia__c</field>
+            <field>Minimum_Accepted_Price__c</field>
             <value>
-                <elementReference>Agency_Fee_Percentage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Inmueble_Asociado__c</field>
-            <value>
-                <elementReference>Get_News_Record.Inmueble_Objetivo__c</elementReference>
+                <elementReference>Minimum_Accepted_Price</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -102,27 +108,21 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Precio_Minimo_Aceptado__c</field>
+            <field>Operation_Type__c</field>
             <value>
-                <elementReference>Minimum_Accepted_Price</elementReference>
+                <elementReference>Operation_Type</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Precio_Salida__c</field>
+            <field>Property_Unit__c</field>
             <value>
-                <elementReference>Asking_Price</elementReference>
+                <elementReference>Get_News_Record.Target_Property_Unit__c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>StageName</field>
             <value>
                 <elementReference>Initial_Stage</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Tipo_Operacion__c</field>
-            <value>
-                <elementReference>Operation_Type</elementReference>
             </value>
         </inputAssignments>
         <object>Opportunity</object>
@@ -146,7 +146,7 @@
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Noticia__c</object>
+        <object>Listing_Lead__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
@@ -169,12 +169,12 @@
             </value>
         </inputAssignments>
         <inputAssignments>
-            <field>Estado__c</field>
+            <field>Status__c</field>
             <value>
-                <stringValue>Convertido a Encargo</stringValue>
+                <stringValue>Converted</stringValue>
             </value>
         </inputAssignments>
-        <object>Noticia__c</object>
+        <object>Listing_Lead__c</object>
     </recordUpdates>
     <screens>
         <name>Conversion_Form_Screen</name>
@@ -197,7 +197,7 @@
                     <name>Opportunity_Name</name>
                     <dataType>String</dataType>
                     <defaultValue>
-                        <elementReference>Get_News_Record.Inmueble_Objetivo__r.Name</elementReference>
+                        <elementReference>Get_News_Record.Target_Property_Unit__r.Name</elementReference>
                     </defaultValue>
                     <fieldText>Opportunity Name</fieldText>
                     <fieldType>InputField</fieldType>
@@ -368,7 +368,7 @@
         <fields>
             <name>Opportunity_Description</name>
             <defaultValue>
-                <stringValue>{!Get_News_Record.Descripcion_Rumor__c}</stringValue>
+                <stringValue>{!Get_News_Record.Description__c}</stringValue>
             </defaultValue>
             <fieldText>Description</fieldText>
             <fieldType>LargeTextArea</fieldType>

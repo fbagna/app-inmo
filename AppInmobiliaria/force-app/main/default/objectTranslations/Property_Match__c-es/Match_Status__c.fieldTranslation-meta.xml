@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Estado del Cruce</label>
+    <name>Match_Status__c</name>
+    <picklistValues>
+        <masterLabel>Discarded</masterLabel>
+        <translation>Descartada</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>New Suggestion</masterLabel>
+        <translation>Nueva Sugerencia</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Offer Made</masterLabel>
+        <translation>Oferta Realizada</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Sent to Client</masterLabel>
+        <translation>Enviada al Cliente</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Viewing Scheduled</masterLabel>
+        <translation>Visita Programada</translation>
+    </picklistValues>
+</CustomFieldTranslation>

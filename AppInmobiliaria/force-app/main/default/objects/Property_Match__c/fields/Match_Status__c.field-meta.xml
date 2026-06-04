@@ -10,29 +10,29 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Nueva Sugerencia</fullName>
+                <fullName>New Suggestion</fullName>
                 <default>true</default>
-                <label>Nueva Sugerencia</label>
+                <label>New Suggestion</label>
             </value>
             <value>
-                <fullName>Enviada al Cliente</fullName>
+                <fullName>Sent to Client</fullName>
                 <default>false</default>
-                <label>Enviada al Cliente</label>
+                <label>Sent to Client</label>
             </value>
             <value>
-                <fullName>Visita Programada</fullName>
+                <fullName>Viewing Scheduled</fullName>
                 <default>false</default>
-                <label>Visita Programada</label>
+                <label>Viewing Scheduled</label>
             </value>
             <value>
-                <fullName>Oferta Realizada</fullName>
+                <fullName>Offer Made</fullName>
                 <default>false</default>
-                <label>Oferta Realizada</label>
+                <label>Offer Made</label>
             </value>
             <value>
-                <fullName>Descartada</fullName>
+                <fullName>Discarded</fullName>
                 <default>false</default>
-                <label>Descartada</label>
+                <label>Discarded</label>
             </value>
         </valueSetDefinition>
     </valueSet>

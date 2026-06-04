@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Property Request</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Property Requests</value>
+    </caseValues>
+    <layouts>
+        <layout>Property Request Layout</layout>
+        <sections>
+            <label></label>
+            <section>Additional Information</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Financing</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Location Details</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>Property Features</section>
+        </sections>
+        <sections>
+            <label></label>
+            <section>System Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Banos_Minimos_Enteros</name>
+    </validationRules>
+</CustomObjectTranslation>

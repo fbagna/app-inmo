@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <layouts>
+        <layout>Opportunity Layout</layout>
+        <sections>
+            <label>Vínculos personalizados</label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label>Información del Encargo</label>
+            <section>Listing Information</section>
+        </sections>
+        <sections>
+            <label>Información del Inmueble</label>
+            <section>Property Information</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label></label>
+        <name>Property_Listing</name>
+    </recordTypes>
+</CustomObjectTranslation>

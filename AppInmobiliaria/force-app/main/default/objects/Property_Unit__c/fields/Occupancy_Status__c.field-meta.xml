@@ -10,19 +10,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Vacío</fullName>
-                <default>false</default>
-                <label>Vacío</label>
+                <fullName>Vacant</fullName>
+                <default>true</default>
+                <label>Vacant</label>
             </value>
             <value>
-                <fullName>Alquilado</fullName>
+                <fullName>Rented</fullName>
                 <default>false</default>
-                <label>Alquilado</label>
+                <label>Rented</label>
             </value>
             <value>
-                <fullName>Propietario Reside</fullName>
+                <fullName>Owner Occupied</fullName>
                 <default>false</default>
-                <label>Propietario Reside</label>
+                <label>Owner Occupied</label>
             </value>
         </valueSetDefinition>
     </valueSet>

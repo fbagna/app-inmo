@@ -11,19 +11,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Venta</fullName>
+                <fullName>Sale</fullName>
                 <default>true</default>
-                <label>Venta</label>
+                <label>Sale</label>
             </value>
             <value>
-                <fullName>Alquiler</fullName>
+                <fullName>Rent</fullName>
                 <default>false</default>
-                <label>Alquiler</label>
+                <label>Rent</label>
             </value>
             <value>
-                <fullName>Traspaso</fullName>
+                <fullName>Transfer</fullName>
                 <default>false</default>
-                <label>Traspaso</label>
+                <label>Transfer</label>
             </value>
         </valueSetDefinition>
     </valueSet>

@@ -10,24 +10,24 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Activa</fullName>
+                <fullName>Active</fullName>
                 <default>true</default>
-                <label>Activa</label>
+                <label>Active</label>
             </value>
             <value>
-                <fullName>En pausa</fullName>
+                <fullName>On Hold</fullName>
                 <default>false</default>
-                <label>En pausa</label>
+                <label>On Hold</label>
             </value>
             <value>
-                <fullName>Satisfecha</fullName>
+                <fullName>Fulfilled</fullName>
                 <default>false</default>
-                <label>Satisfecha</label>
+                <label>Fulfilled</label>
             </value>
             <value>
-                <fullName>Descartada</fullName>
+                <fullName>Discarded</fullName>
                 <default>false</default>
-                <label>Descartada</label>
+                <label>Discarded</label>
             </value>
         </valueSetDefinition>
     </valueSet>

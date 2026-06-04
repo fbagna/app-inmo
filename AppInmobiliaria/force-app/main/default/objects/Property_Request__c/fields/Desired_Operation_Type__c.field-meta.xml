@@ -10,14 +10,14 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Compra</fullName>
+                <fullName>Purchase</fullName>
                 <default>true</default>
-                <label>Compra</label>
+                <label>Purchase</label>
             </value>
             <value>
-                <fullName>Alquiler</fullName>
+                <fullName>Rent</fullName>
                 <default>false</default>
-                <label>Alquiler</label>
+                <label>Rent</label>
             </value>
         </valueSetDefinition>
     </valueSet>

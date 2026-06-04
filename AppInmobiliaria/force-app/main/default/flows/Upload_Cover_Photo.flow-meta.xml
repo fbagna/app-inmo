@@ -115,7 +115,7 @@
             </value>
         </filters>
         <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>Inmueble__c</object>
+        <object>Property_Unit__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordUpdates>
@@ -137,7 +137,7 @@
                 <stringValue></stringValue>
             </value>
         </inputAssignments>
-        <object>Inmueble__c</object>
+        <object>Property_Unit__c</object>
     </recordUpdates>
     <recordUpdates>
         <name>Update_Property</name>
@@ -161,7 +161,7 @@
                 <elementReference>singleVersionId</elementReference>
             </value>
         </inputAssignments>
-        <object>Inmueble__c</object>
+        <object>Property_Unit__c</object>
     </recordUpdates>
     <screens>
         <name>Confirm_Selection</name>
@@ -176,7 +176,7 @@
         </connector>
         <fields>
             <name>Confirmation_Text</name>
-            <fieldText>&lt;p&gt;Review your selection. If it looks correct, click &apos;Confirm &amp;amp; Save&apos;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!Plantilla_Imagen_Confirmacion}&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Review your selection. If it looks correct, click &apos;Confirm &amp;amp; Save&apos;.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;{!Confirmation_template}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -298,7 +298,7 @@
     </start>
     <status>Active</status>
     <textTemplates>
-        <name>Plantilla_Imagen_Confirmacion</name>
+        <name>Confirmation_template</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>&lt;img src=&quot;/sfc/servlet.shepherd/version/download/{!singleVersionId}&quot; style=&quot;max-height:300px; border-radius:8px;&quot;/&gt;</text>
     </textTemplates>

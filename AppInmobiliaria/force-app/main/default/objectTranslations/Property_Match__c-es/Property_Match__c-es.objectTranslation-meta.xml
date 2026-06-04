@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value></value>
+    </caseValues>
+    <gender></gender>
+    <layouts>
+        <layout>Property Match Layout</layout>
+        <sections>
+            <label>Vínculos personalizados</label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label>Seguimiento</label>
+            <section>Follow-Up</section>
+        </sections>
+        <sections>
+            <label>Comparativa Comercial (Inmueble vs Demanda)</label>
+            <section>Match Comparison (Property vs Request)</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel></nameFieldLabel>
+</CustomObjectTranslation>

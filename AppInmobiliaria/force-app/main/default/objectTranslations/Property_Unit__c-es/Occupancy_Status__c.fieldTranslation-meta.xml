@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Estado de Ocupación</label>
+    <name>Occupancy_Status__c</name>
+    <picklistValues>
+        <masterLabel>Owner Occupied</masterLabel>
+        <translation>Propietario Reside</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Rented</masterLabel>
+        <translation>Alquilado</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Vacant</masterLabel>
+        <translation>Vacío</translation>
+    </picklistValues>
+</CustomFieldTranslation>

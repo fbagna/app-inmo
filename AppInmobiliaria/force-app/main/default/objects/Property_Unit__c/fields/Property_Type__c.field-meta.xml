@@ -10,29 +10,29 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>Piso / Apartamento</fullName>
+                <fullName>Apartment</fullName>
                 <default>true</default>
-                <label>Piso / Apartamento</label>
+                <label>Apartment</label>
             </value>
             <value>
-                <fullName>Chalet / Casa</fullName>
+                <fullName>House</fullName>
                 <default>false</default>
-                <label>Chalet / Casa</label>
+                <label>House</label>
             </value>
             <value>
-                <fullName>Local Comercial</fullName>
+                <fullName>Commercial Space</fullName>
                 <default>false</default>
-                <label>Local Comercial</label>
+                <label>Commercial Space</label>
             </value>
             <value>
-                <fullName>Oficina</fullName>
+                <fullName>Office</fullName>
                 <default>false</default>
-                <label>Oficina</label>
+                <label>Office</label>
             </value>
             <value>
-                <fullName>Terreno / Parcela</fullName>
+                <fullName>Land</fullName>
                 <default>false</default>
-                <label>Terreno / Parcela</label>
+                <label>Land</label>
             </value>
         </valueSetDefinition>
     </valueSet>

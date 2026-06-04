@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value></value>
+    </caseValues>
+    <gender></gender>
+    <layouts>
+        <layout>Property Unit Layout</layout>
+        <sections>
+            <label>Características</label>
+            <section>Características</section>
+        </sections>
+        <sections>
+            <label>Información extra</label>
+            <section>Extra information</section>
+        </sections>
+        <sections>
+            <label>Información del sistema</label>
+            <section>Información del sistema</section>
+        </sections>
+        <sections>
+            <label>Otras características</label>
+            <section>Otras características</section>
+        </sections>
+        <sections>
+            <label>Vínculos personalizados</label>
+            <section>Vínculos personalizados</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel></nameFieldLabel>
+    <quickActions>
+        <aspect>Master</aspect>
+        <label>📸 Gestionar Portada</label>
+        <name>Upload_Cover_Photo</name>
+    </quickActions>
+    <validationRules>
+        <errorMessage></errorMessage>
+        <name>Whole_Bathrooms</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -36,7 +36,7 @@ public with sharing class PropertyAlertsController {
                        gbcinmo__Client_Contact__c, gbcinmo__Client_Name__c, 
                        gbcinmo__Desired_Operation_Type__c 
                 FROM gbcinmo__Property_Request__c 
-                WHERE gbcinmo__Status__c = 'Activa' // Adjust if picklist value changed
+                WHERE gbcinmo__Status__c = 'Active' // Updated to English API Name
                 AND Id NOT IN (SELECT gbcinmo__Property_Request__c FROM gbcinmo__Property_Match__c) 
                 WITH SECURITY_ENFORCED 
                 ORDER BY CreatedDate DESC 
@@ -49,8 +49,8 @@ public with sharing class PropertyAlertsController {
                        gbcinmo__Client_Contact__c, gbcinmo__Client_Name__c, 
                        gbcinmo__Desired_Operation_Type__c 
                 FROM gbcinmo__Property_Request__c 
-                WHERE gbcinmo__Status__c = 'Activa' // Adjust if picklist value changed
-                AND Id IN (SELECT gbcinmo__Property_Request__c FROM gbcinmo__Property_Match__c WHERE gbcinmo__Match_Status__c = 'Nueva Sugerencia') 
+                WHERE gbcinmo__Status__c = 'Active' // Updated to English API Name
+                AND Id IN (SELECT gbcinmo__Property_Request__c FROM gbcinmo__Property_Match__c WHERE gbcinmo__Match_Status__c = 'New Suggestion') 
                 WITH SECURITY_ENFORCED 
                 ORDER BY CreatedDate DESC 
                 LIMIT 15];
@@ -64,7 +64,7 @@ public with sharing class PropertyAlertsController {
     public static List<gbcinmo__Listing_Lead__c> getOverdueLeads() {
         return [SELECT Id, Name, gbcinmo__Status__c, gbcinmo__Follow_Up_Date__c, gbcinmo__Lead_Source__c 
                 FROM gbcinmo__Listing_Lead__c 
-                WHERE gbcinmo__Status__c NOT IN ('Descartado', 'Convertido a Encargo') // Adjust if picklist values changed
+                WHERE gbcinmo__Status__c NOT IN ('Discarded', 'Converted') // Updated to English API Names
                 AND gbcinmo__Follow_Up_Date__c < TODAY 
                 WITH SECURITY_ENFORCED 
                 ORDER BY gbcinmo__Follow_Up_Date__c ASC 
@@ -75,7 +75,7 @@ public with sharing class PropertyAlertsController {
     public static List<gbcinmo__Listing_Lead__c> getNewLeads() {
         return [SELECT Id, Name, gbcinmo__Status__c, gbcinmo__Follow_Up_Date__c, gbcinmo__Lead_Source__c 
                 FROM gbcinmo__Listing_Lead__c 
-                WHERE gbcinmo__Status__c NOT IN ('Descartado', 'Convertido a Encargo') // Adjust if picklist values changed
+                WHERE gbcinmo__Status__c NOT IN ('Discarded', 'Converted') // Updated to English API Names
                 AND (gbcinmo__Follow_Up_Date__c >= TODAY OR gbcinmo__Follow_Up_Date__c = NULL)
                 WITH SECURITY_ENFORCED 
                 ORDER BY CreatedDate DESC 

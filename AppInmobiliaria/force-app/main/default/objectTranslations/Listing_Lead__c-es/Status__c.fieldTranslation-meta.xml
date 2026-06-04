@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Estado</label>
+    <name>Status__c</name>
+    <picklistValues>
+        <masterLabel>Contacted</masterLabel>
+        <translation>Contactado</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Converted</masterLabel>
+        <translation>Convertido a Encargo</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>Discarded</masterLabel>
+        <translation>Descartado</translation>
+    </picklistValues>
+    <picklistValues>
+        <masterLabel>To Investigate</masterLabel>
+        <translation>Por investigar</translation>
+    </picklistValues>
+</CustomFieldTranslation>
