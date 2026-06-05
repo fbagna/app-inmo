@@ -1,0 +1,53 @@
+Name,Level__c,Location_Value__c,Parent_Value__c
+Madrid (City),City,Madrid,Madrid
+Alcalá de Henares,City,Alcala_de_Henares,Madrid
+Móstoles,City,Mostoles,Madrid
+Getafe,City,Getafe,Madrid
+Leganés,City,Leganes,Madrid
+Barcelona (City),City,Barcelona,Barcelona
+L'Hospitalet de Llobregat,City,Hospitalet_de_Llobregat,Barcelona
+Badalona,City,Badalona,Barcelona
+Terrassa,City,Terrassa,Barcelona
+Sabadell,City,Sabadell,Barcelona
+Valencia (City),City,Valencia,Valencia
+Torrent,City,Torrent,Valencia
+Gandía,City,Gandia,Valencia
+Sevilla (City),City,Sevilla,Sevilla
+Dos Hermanas,City,Dos_Hermanas,Sevilla
+Málaga (City),City,Malaga,Malaga
+Marbella,City,Marbella,Malaga
+Zaragoza (City),City,Zaragoza,Zaragoza
+Murcia (City),City,Murcia,Murcia
+Palma,City,Palma,Baleares
+Ibiza,City,Ibiza,Baleares
+Las Palmas de Gran Canaria,City,Las_Palmas,Las_Palmas
+Bilbao,City,Bilbao,Vizcaya
+Barakaldo,City,Barakaldo,Vizcaya
+Alicante (City),City,Alicante,Alicante
+Elche,City,Elche,Alicante
+Córdoba (City),City,Cordoba,Cordoba
+Valladolid (City),City,Valladolid,Valladolid
+Vigo,City,Vigo,Pontevedra
+Gijón,City,Gijon,Asturias
+Oviedo,City,Oviedo,Asturias
+A Coruña (City),City,A_Coruna,A_Coruna
+Santiago de Compostela,City,Santiago,A_Coruna
+Vitoria-Gasteiz,City,Vitoria,Alava
+San Sebastián,City,San_Sebastian,Gipuzkoa
+Santander,City,Santander,Cantabria
+Pamplona,City,Pamplona,Navarra
+Almería (City),City,Almeria,Almeria
+Cádiz (City),City,Cadiz,Cadiz
+Jerez de la Frontera,City,Jerez,Cadiz
+Granada (City),City,Granada,Granada
+Huelva (City),City,Huelva,Huelva
+Jaén (City),City,Jaen,Jaen
+Logroño,City,Logrono,La_Rioja
+Salamanca (City),City,Salamanca,Salamanca
+Toledo (City),City,Toledo,Toledo
+Burgos (City),City,Burgos,Burgos
+Cáceres (City),City,Caceres,Caceres
+Castellón de la Plana,City,Castellon,Castellon
+Girona (City),City,Girona,Girona
+Lleida (City),City,Lleida,Lleida
+Tarragona (City),City,Tarragona,Tarragona

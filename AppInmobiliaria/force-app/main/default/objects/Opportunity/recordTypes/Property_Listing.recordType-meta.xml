@@ -60,10 +60,6 @@
             <fullName>Sale</fullName>
             <default>true</default>
         </values>
-        <values>
-            <fullName>Transfer</fullName>
-            <default>false</default>
-        </values>
     </picklistValues>
     <picklistValues>
         <picklist>Type</picklist>

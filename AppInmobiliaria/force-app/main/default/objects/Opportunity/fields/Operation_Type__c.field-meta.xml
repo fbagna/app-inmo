@@ -25,6 +25,12 @@
                 <default>false</default>
                 <label>Transfer</label>
             </value>
+            <value>
+                <fullName>Lease Transfer</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Lease Transfer</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

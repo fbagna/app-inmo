@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Madrid</fullName>
+        <default>false</default>
+        <label>Madrid</label>
+    </customValue>
+    <customValue>
+        <fullName>Barcelona</fullName>
+        <default>false</default>
+        <label>Barcelona</label>
+    </customValue>
+    <description>Lista maestra de ciudades principales de operación</description>
+    <masterLabel>Cities</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

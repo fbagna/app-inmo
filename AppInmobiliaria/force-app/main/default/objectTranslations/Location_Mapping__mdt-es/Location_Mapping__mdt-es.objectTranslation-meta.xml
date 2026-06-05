@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>true</plural>
+        <value>Mapeos de Ubicaciones</value>
+    </caseValues>
+    <caseValues>
+        <plural>false</plural>
+        <value>Mapeo de Ubicación</value>
+    </caseValues>
+    <gender>Masculine</gender>
+    <fields>
+        <name>Level__c</name>
+        <label>Nivel</label>
+    </fields>
+    <fields>
+        <name>Location_Value__c</name>
+        <label>Valor de Ubicación</label>
+    </fields>
+    <fields>
+        <name>Parent_Value__c</name>
+        <label>Valor Padre</label>
+    </fields>
+</CustomObjectTranslation>

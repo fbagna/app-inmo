@@ -29,6 +29,30 @@
                 <default>false</default>
                 <label>Convertido a Encargo</label>
             </value>
+            <value>
+                <fullName>Contacted</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Contacted</label>
+            </value>
+            <value>
+                <fullName>Converted</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Converted</label>
+            </value>
+            <value>
+                <fullName>Discarded</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Discarded</label>
+            </value>
+            <value>
+                <fullName>To Investigate</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>To Investigate</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

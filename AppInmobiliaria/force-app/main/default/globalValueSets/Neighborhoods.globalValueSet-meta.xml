@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>Madrid_Centro</fullName>
+        <default>false</default>
+        <label>Centro (Madrid)</label>
+    </customValue>
+    <customValue>
+        <fullName>Madrid_Arganzuela</fullName>
+        <default>false</default>
+        <label>Arganzuela (Madrid)</label>
+    </customValue>
+    <customValue>
+        <fullName>Madrid_Retiro</fullName>
+        <default>false</default>
+        <label>Retiro (Madrid)</label>
+    </customValue>
+    <customValue>
+        <fullName>Madrid_Salamanca</fullName>
+        <default>false</default>
+        <label>Salamanca (Madrid)</label>
+    </customValue>
+    <customValue>
+        <fullName>Madrid_Chamartin</fullName>
+        <default>false</default>
+        <label>Chamartín (Madrid)</label>
+    </customValue>
+    <customValue>
+        <fullName>Madrid_Tetuan</fullName>
+        <default>false</default>
+        <label>Tetuán (Madrid)</label>
+    </customValue>
+    <customValue>
+        <fullName>Madrid_Chamberi</fullName>
+        <default>false</default>
+        <label>Chamberí (Madrid)</label>
+    </customValue>
+    <customValue>
+        <fullName>Madrid_Hortaleza</fullName>
+        <default>false</default>
+        <label>Hortaleza (Madrid)</label>
+    </customValue>
+    <customValue>
+        <fullName>Barcelona_Ciutat_Vella</fullName>
+        <default>false</default>
+        <label>Ciutat Vella (Barcelona)</label>
+    </customValue>
+    <customValue>
+        <fullName>Barcelona_Eixample</fullName>
+        <default>false</default>
+        <label>L&apos;Eixample (Barcelona)</label>
+    </customValue>
+    <customValue>
+        <fullName>Barcelona_Sants_Montjuic</fullName>
+        <default>false</default>
+        <label>Sants-Montjuïc (Barcelona)</label>
+    </customValue>
+    <customValue>
+        <fullName>Barcelona_Les_Corts</fullName>
+        <default>false</default>
+        <label>Les Corts (Barcelona)</label>
+    </customValue>
+    <customValue>
+        <fullName>Barcelona_Sarria_Sant_Gervasi</fullName>
+        <default>false</default>
+        <label>Sarrià-Sant Gervasi (Barcelona)</label>
+    </customValue>
+    <customValue>
+        <fullName>Barcelona_Gracia</fullName>
+        <default>false</default>
+        <label>Gràcia (Barcelona)</label>
+    </customValue>
+    <description>Lista maestra de distritos y barrios de ciudades principales</description>
+    <masterLabel>Neighborhoods</masterLabel>
+    <sorted>true</sorted>
+</GlobalValueSet>

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Request_Number__c</fullName>
+    <displayFormat>REQ-{00000}</displayFormat>
     <externalId>false</externalId>
     <label>Request Number</label>
     <trackTrending>false</trackTrending>
     <type>AutoNumber</type>
-    <displayFormat>REQ-{00000}</displayFormat>
-    <startingNumber>1</startingNumber>
 </CustomField>

@@ -1,0 +1,79 @@
+Name,Level__c,Location_Value__c,Parent_Value__c
+Madrid,Province,Madrid,Spain
+Barcelona,Province,Barcelona,Spain
+Valencia,Province,Valencia,Spain
+Sevilla,Province,Sevilla,Spain
+Málaga,Province,Malaga,Spain
+Alicante,Province,Alicante,Spain
+Vizcaya,Province,Vizcaya,Spain
+Baleares,Province,Baleares,Spain
+Madrid (City),City,Madrid,Madrid
+Alcalá de Henares,City,Alcala_de_Henares,Madrid
+Móstoles,City,Mostoles,Madrid
+Getafe,City,Getafe,Madrid
+Leganés,City,Leganes,Madrid
+Alcobendas,City,Alcobendas,Madrid
+Las Rozas,City,Las_Rozas,Madrid
+Barcelona (City),City,Barcelona,Barcelona
+L'Hospitalet de Llobregat,City,Hospitalet_de_Llobregat,Barcelona
+Badalona,City,Badalona,Barcelona
+Terrassa,City,Terrassa,Barcelona
+Sabadell,City,Sabadell,Barcelona
+Mataró,City,Mataro,Barcelona
+Valencia (City),City,Valencia,Valencia
+Torrent,City,Torrent,Valencia
+Gandía,City,Gandia,Valencia
+Paterna,City,Paterna,Valencia
+Sagunto,City,Sagunto,Valencia
+Sevilla (City),City,Sevilla,Sevilla
+Dos Hermanas,City,Dos_Hermanas,Sevilla
+Alcalá de Guadaíra,City,Alcala_de_Guadaira,Sevilla
+Mairena del Aljarafe,City,Mairena_del_Aljarafe,Sevilla
+Utrera,City,Utrera,Sevilla
+Málaga (City),City,Malaga,Málaga
+Marbella,City,Marbella,Málaga
+Mijas,City,Mijas,Málaga
+Fuengirola,City,Fuengirola,Málaga
+Estepona,City,Estepona,Málaga
+Torremolinos,City,Torremolinos,Málaga
+Alicante (City),City,Alicante,Alicante
+Elche,City,Elche,Alicante
+Torrevieja,City,Torrevieja,Alicante
+Benidorm,City,Benidorm,Alicante
+Bilbao,City,Bilbao,Vizcaya
+Barakaldo,City,Barakaldo,Vizcaya
+Getxo,City,Getxo,Vizcaya
+Portugalete,City,Portugalete,Vizcaya
+Palma,City,Palma,Baleares
+Calvià,City,Calvia,Baleares
+Ibiza,City,Ibiza,Baleares
+Manacor,City,Manacor,Baleares
+Centro (Madrid),Neighborhood,Madrid_Centro,Madrid
+Arganzuela (Madrid),Neighborhood,Madrid_Arganzuela,Madrid
+Retiro (Madrid),Neighborhood,Madrid_Retiro,Madrid
+Salamanca (Madrid),Neighborhood,Madrid_Salamanca,Madrid
+Chamartín (Madrid),Neighborhood,Madrid_Chamartin,Madrid
+Tetuán (Madrid),Neighborhood,Madrid_Tetuan,Madrid
+Chamberí (Madrid),Neighborhood,Madrid_Chamberi,Madrid
+Hortaleza (Madrid),Neighborhood,Madrid_Hortaleza,Madrid
+Ciutat Vella (Barcelona),Neighborhood,Barcelona_Ciutat_Vella,Barcelona
+L'Eixample (Barcelona),Neighborhood,Barcelona_Eixample,Barcelona
+Sants-Montjuïc (Barcelona),Neighborhood,Barcelona_Sants_Montjuic,Barcelona
+Les Corts (Barcelona),Neighborhood,Barcelona_Les_Corts,Barcelona
+Sarrià-Sant Gervasi (Barcelona),Neighborhood,Barcelona_Sarria_Sant_Gervasi,Barcelona
+Gràcia (Barcelona),Neighborhood,Barcelona_Gracia,Barcelona
+Ciutat Vella (Valencia),Neighborhood,Valencia_Ciutat_Vella,Valencia
+L'Eixample (Valencia),Neighborhood,Valencia_Eixample,Valencia
+Extramurs (Valencia),Neighborhood,Valencia_Extramurs,Valencia
+Campanar (Valencia),Neighborhood,Valencia_Campanar,Valencia
+Poblats Marítims (Valencia),Neighborhood,Valencia_Poblats_Maritims,Valencia
+Casco Antiguo (Sevilla),Neighborhood,Sevilla_Casco_Antiguo,Sevilla
+Triana (Sevilla),Neighborhood,Sevilla_Triana,Sevilla
+Nervión (Sevilla),Neighborhood,Sevilla_Nervion,Sevilla
+Los Remedios (Sevilla),Neighborhood,Sevilla_Los_Remedios,Sevilla
+Macarena (Sevilla),Neighborhood,Sevilla_Macarena,Sevilla
+Centro (Málaga),Neighborhood,Malaga_Centro,Málaga
+Este (Málaga),Neighborhood,Malaga_Este,Málaga
+Ciudad Jardín (Málaga),Neighborhood,Malaga_Ciudad_Jardin,Málaga
+Cruz de Humilladero,Neighborhood,Malaga_Cruz_Humilladero,Málaga
+Carretera de Cádiz,Neighborhood,Malaga_Carretera_Cadiz,Málaga

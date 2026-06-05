@@ -7,35 +7,32 @@
 
         <div class="slds-p-around_medium">
             <div class="slds-box slds-m-bottom_medium slds-theme_shade slds-p-around_small">
-                <lightning-layout multiple-rows vertical-align="end">
+                
+                <div class="slds-m-bottom_small">
+                    <span class="slds-text-title_caps slds-text-color_weak">Adjust Search Filters</span>
+                </div>
+
+                <lightning-layout multiple-rows>
                     
-                    <lightning-layout-item size="12" class="slds-m-bottom_x-small">
-                        <span class="slds-text-title_caps slds-text-color_weak">Adjust Search Filters</span>
-                    </lightning-layout-item>
-                    
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-combobox name="filterOperation" label="Operation Type" value={filterOperation} options={operationOptions} onchange={handleFilterChange}></lightning-combobox>
-                    </lightning-layout-item>
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filterBudget" label="Min Budget" value={filterBudget} onchange={handleFilterChange}></lightning-input>
-                    </lightning-layout-item>
-                    
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filterBedrooms" label="Max Bedrooms" value={filterBedrooms} onchange={handleFilterChange}></lightning-input>
-                    </lightning-layout-item>
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filterBathrooms" label="Max Bathrooms" value={filterBathrooms} onchange={handleFilterChange}></lightning-input>
+                    <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small">
+                        <lightning-combobox name="filterOperation" label="Operation Type" value={filterOperation} options={operationOptions} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-combobox>
+                        <lightning-input type="number" name="filterMinBudget" label="Min Client Budget" value={filterMinBudget} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
+                        <lightning-input type="number" name="filterMaxBudget" label="Max Client Budget" value={filterMaxBudget} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
                     </lightning-layout-item>
                     
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filterSquareMeters" label="Max Sq Meters" value={filterSquareMeters} onchange={handleFilterChange}></lightning-input>
+                    <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small">
+                        <lightning-combobox name="filterProvince" label="State/Province" value={filterProvince} options={provinceOptions} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-combobox>
+                        <lightning-combobox name="filterCity" label="City" value={filterCity} options={cityOptions} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-combobox>
+                        <lightning-combobox name="filterNeighborhood" label="Neighborhood" value={filterNeighborhood} options={neighborhoodOptions} onchange={handleFilterChange} disabled={isNeighborhoodDisabled} class="slds-m-bottom_x-small"></lightning-combobox>
                     </lightning-layout-item>
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-combobox name="filterProvince" label="State/Province" value={filterProvince} options={provinceOptions} onchange={handleFilterChange}></lightning-combobox>
-                    </lightning-layout-item>
-                    
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-p-bottom_x-small slds-m-top_small">
-                        <lightning-input type="checkbox" name="filterElevator" label="Requires Elevator" checked={filterElevator} onchange={handleFilterChange}></lightning-input>
+
+                    <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small">
+                        <lightning-input type="number" name="filterSquareMeters" label="Max Client Sq Meters" value={filterSquareMeters} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
+                        <lightning-input type="number" name="filterBedrooms" label="Max Client Bedrooms" value={filterBedrooms} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
+                        <lightning-input type="number" name="filterBathrooms" label="Max Client Bathrooms" value={filterBathrooms} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
+                        <div class="slds-m-top_medium">
+                            <lightning-input type="checkbox" name="filterElevator" label="Requires Elevator" checked={filterElevator} onchange={handleFilterChange}></lightning-input>
+                        </div>
                     </lightning-layout-item>
 
                 </lightning-layout>

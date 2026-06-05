@@ -6,119 +6,198 @@ import getCompatibleRequests from '@salesforce/apex/PropertyMatchmakingControlle
 import getPreviousMatches from '@salesforce/apex/PropertyMatchmakingController.getPreviousMatches';
 import createMatches from '@salesforce/apex/PropertyMatchmakingController.createMatches';
 
-const COLUMNS = [
-    { label: 'Ref', fieldName: 'RequestUrl', type: 'url', typeAttributes: { label: { fieldName: 'Name' }, target: '_blank' } },
-    { label: 'Client', fieldName: 'Client_Name__c', type: 'text' },
-    { label: 'Max Budget', fieldName: 'Max_Budget__c', type: 'currency' },
-    { label: 'Bedrooms', fieldName: 'Min_Bedrooms__c', type: 'number' },
-    { label: 'Sq Meters', fieldName: 'Min_Square_Meters__c', type: 'number' },
-    { label: 'City', fieldName: 'Desired_City__c', type: 'text' }
-];
-
-const COLUMNS_MATCHES = [
-    { label: 'Match Ref', fieldName: 'MatchUrl', type: 'url', typeAttributes: { label: { fieldName: 'MatchRef' }, target: '_blank' } },
-    { label: 'Status', fieldName: 'Status', type: 'text' },
-    { label: 'Client Ref', fieldName: 'RequestUrl', type: 'url', typeAttributes: { label: { fieldName: 'RequestRef' }, target: '_blank' } },
-    { label: 'Client', fieldName: 'ClientName', type: 'text' },
-    { label: 'Budget', fieldName: 'Budget', type: 'currency' }
-];
+import getProvinces from '@salesforce/apex/PropertyMatchmakingController.getProvinces';
+import getCities from '@salesforce/apex/PropertyMatchmakingController.getCities';
+import getNeighborhoods from '@salesforce/apex/PropertyMatchmakingController.getNeighborhoods';
+import getLocationDictionary from '@salesforce/apex/PropertyMatchmakingController.getLocationDictionary';
 
 export default class PropertyMatchmakingEngine extends LightningElement {
     @api recordId;
     @track requests = [];
     @track matches = [];
-    columns = COLUMNS;
-    columnsMatches = COLUMNS_MATCHES;
+    
+    columns = [
+        { label: 'Request', fieldName: 'RequestUrl', type: 'url', typeAttributes: { label: { fieldName: 'Request_Reference__c' }, target: '_blank' } },
+        { label: 'Min Budget', fieldName: 'Min_Budget__c', type: 'currency' },
+        { label: 'Max Budget', fieldName: 'Max_Budget__c', type: 'currency' },
+        { label: 'City', fieldName: 'Desired_City__c', type: 'text' },
+        { label: 'Neighborhood', fieldName: 'Desired_Neighborhood__c', type: 'text' },
+        { label: 'Sq Meters', fieldName: 'Min_Square_Meters__c', type: 'number' },
+        { label: 'Bedrooms', fieldName: 'Min_Bedrooms__c', type: 'number' },
+        { label: 'Bathrooms', fieldName: 'Min_Bathrooms__c', type: 'number' }
+    ];
+    
+    columnsMatches = [
+        { label: 'Match Ref', fieldName: 'MatchUrl', type: 'url', typeAttributes: { label: { fieldName: 'MatchRef' }, target: '_blank' } },
+        { label: 'Status', fieldName: 'Status', type: 'text' },
+        { label: 'Client Ref', fieldName: 'RequestUrl', type: 'url', typeAttributes: { label: { fieldName: 'RequestRef' }, target: '_blank' } },
+        { label: 'Client', fieldName: 'ClientName', type: 'text' },
+        { label: 'Budget', fieldName: 'Budget', type: 'currency' }
+    ];
+
     selectedRows = [];
     isLoading = true;
     
     wiredRequestsResult;
     wiredMatchesResult;
+    rawRequestsData = null;
+    locationDict = {};
 
     @track filterOperation = null;
-    @track filterBudget = null;
+    @track filterMinBudget = null;
+    @track filterMaxBudget = null;
     @track filterBedrooms = null;
     @track filterBathrooms = null;
     @track filterSquareMeters = null;
     @track filterProvince = null;
+    @track filterCity = null;
+    @track filterNeighborhood = null;
     @track filterElevator = false;
+
+    @track rawProvinces = [];
+    @track rawCities = [];
+    @track rawNeighborhoods = [];
+
+    @wire(getLocationDictionary)
+    wiredLocDict({ data, error }) {
+        if (data) {
+            this.locationDict = data;
+            this.processRequests();
+        }
+        if (error) console.error('Error loading dictionary:', error);
+    }
+
+    @wire(getProvinces)
+    wiredProvinces({ data, error }) {
+        if (data) this.rawProvinces = data;
+        if (error) console.error('Error loading provinces:', error);
+    }
+
+    @wire(getCities, { provinceValue: '$filterProvince' })
+    wiredCities({ data, error }) {
+        if (data) this.rawCities = data;
+        else this.rawCities = [];
+        if (error) console.error('Error loading cities:', error);
+    }
+
+    @wire(getNeighborhoods, { cityValue: '$filterCity' })
+    wiredNeighborhoods({ data, error }) {
+        if (data) this.rawNeighborhoods = data;
+        else this.rawNeighborhoods = [];
+        if (error) console.error('Error loading neighborhoods:', error);
+    }
 
     get operationOptions() {
         return [
             { label: 'Any', value: '' }, 
-            { label: 'Compra', value: 'Compra' }, 
-            { label: 'Alquiler', value: 'Alquiler' }, 
-            { label: 'Traspaso', value: 'Traspaso' }
+            { label: 'Sale', value: 'Sale' }, 
+            { label: 'Rent', value: 'Rent' }, 
+            { label: 'Transfer', value: 'Transfer' }
         ];
     }
 
     get provinceOptions() {
-        return [
-            { label: 'All', value: '' },
-            { label: 'A Coruña', value: 'A Coruña' }, { label: 'Álava', value: 'Álava' }, { label: 'Albacete', value: 'Albacete' },
-            { label: 'Alicante', value: 'Alicante' }, { label: 'Almería', value: 'Almería' }, { label: 'Asturias', value: 'Asturias' },
-            { label: 'Ávila', value: 'Ávila' }, { label: 'Badajoz', value: 'Badajoz' }, { label: 'Baleares', value: 'Baleares' },
-            { label: 'Barcelona', value: 'Barcelona' }, { label: 'Burgos', value: 'Burgos' }, { label: 'Cáceres', value: 'Cáceres' },
-            { label: 'Cádiz', value: 'Cádiz' }, { label: 'Cantabria', value: 'Cantabria' }, { label: 'Castellón', value: 'Castellón' },
-            { label: 'Ceuta', value: 'Ceuta' }, { label: 'Ciudad Real', value: 'Ciudad Real' }, { label: 'Córdoba', value: 'Córdoba' },
-            { label: 'Cuenca', value: 'Cuenca' }, { label: 'Girona', value: 'Girona' }, { label: 'Granada', value: 'Granada' },
-            { label: 'Guadalajara', value: 'Guadalajara' }, { label: 'Gipuzkoa', value: 'Gipuzkoa' }, { label: 'Huelva', value: 'Huelva' },
-            { label: 'Huesca', value: 'Huesca' }, { label: 'Jaén', value: 'Jaén' }, { label: 'La Rioja', value: 'La Rioja' },
-            { label: 'León', value: 'León' }, { label: 'Lleida', value: 'Lleida' }, { label: 'Lugo', value: 'Lugo' },
-            { label: 'Madrid', value: 'Madrid' }, { label: 'Málaga', value: 'Málaga' }, { label: 'Melilla', value: 'Melilla' },
-            { label: 'Murcia', value: 'Murcia' }, { label: 'Navarra', value: 'Navarra' }, { label: 'Ourense', value: 'Ourense' },
-            { label: 'Palencia', value: 'Palencia' }, { label: 'Pontevedra', value: 'Pontevedra' }, { label: 'Salamanca', value: 'Salamanca' },
-            { label: 'Santa Cruz de Tenerife', value: 'Santa Cruz de Tenerife' }, { label: 'Segovia', value: 'Segovia' }, { label: 'Sevilla', value: 'Sevilla' },
-            { label: 'Soria', value: 'Soria' }, { label: 'Tarragona', value: 'Tarragona' }, { label: 'Teruel', value: 'Teruel' },
-            { label: 'Toledo', value: 'Toledo' }, { label: 'Valencia', value: 'Valencia' }, { label: 'Valladolid', value: 'Valladolid' },
-            { label: 'Vizcaya', value: 'Vizcaya' }, { label: 'Zamora', value: 'Zamora' }, { label: 'Zaragoza', value: 'Zaragoza' }
-        ];
+        return [{ label: 'All', value: '' }, ...(this.rawProvinces || [])];
     }
 
-    @api
-    get contextRecordId() {
-        return this.recordId;
+    get cityOptions() {
+        let options = [{ label: 'All', value: '' }, ...(this.rawCities || [])];
+        if (this.filterProvince) {
+            options.push({ label: 'Other / Not Listed', value: 'Other' });
+        }
+        return options;
+    }
+
+    get isNeighborhoodDisabled() {
+        return !this.filterCity || !this.rawNeighborhoods || this.rawNeighborhoods.length === 0;
+    }
+
+    get neighborhoodOptions() {
+        return [{ label: 'All / Not Applicable', value: '' }, ...(this.rawNeighborhoods || [])];
     }
 
     @wire(getListingDetails, { listingId: '$recordId' })
     wiredListing({ error, data }) {
         if (data) {
-            let normData = {};
-            for (let key in data) { normData[key.replace('gbcinmo__', '')] = data[key]; }
-            this.filterOperation = normData.Operation_Type__c === 'Venta' ? 'Compra' : normData.Operation_Type__c;
-            this.filterBudget = normData.Asking_Price__c ? parseFloat(normData.Asking_Price__c) : null;
-            
-            // Navegación profunda al Inmueble y al Edificio
-            if (data.gbcinmo__Property_Unit__r) {
-                let unit = data.gbcinmo__Property_Unit__r;
-                this.filterBedrooms = unit.gbcinmo__Bedrooms__c ? parseInt(unit.gbcinmo__Bedrooms__c, 10) : null;
-                this.filterBathrooms = unit.gbcinmo__Bathrooms__c ? parseInt(unit.gbcinmo__Bathrooms__c, 10) : null;
-                this.filterSquareMeters = unit.gbcinmo__Square_Meters__c ? parseInt(unit.gbcinmo__Square_Meters__c, 10) : null;
+            try {
+                let n = {};
+                for (let key in data) { n[key.replace('gbcinmo__', '')] = data[key]; }
+                this.filterOperation = n.Operation_Type__c || null;
                 
-                if(unit.gbcinmo__Property__r) {
-                    this.filterElevator = unit.gbcinmo__Property__r.gbcinmo__Has_Elevator__c || false;
-                    this.filterProvince = unit.gbcinmo__Property__r.gbcinmo__State_Province__c || null;
+                if (n.Minimum_Accepted_Price__c) {
+                    this.filterMinBudget = parseFloat(n.Minimum_Accepted_Price__c);
+                } else if (n.Asking_Price__c) {
+                    this.filterMinBudget = parseFloat(n.Asking_Price__c);
+                } else {
+                    this.filterMinBudget = null;
                 }
+                
+                this.filterMaxBudget = n.Asking_Price__c ? parseFloat(n.Asking_Price__c) : null;
+                
+                if (data.gbcinmo__Property_Unit__r) {
+                    let unit = data.gbcinmo__Property_Unit__r;
+                    this.filterBedrooms = unit.gbcinmo__Bedrooms__c || null;
+                    this.filterBathrooms = unit.gbcinmo__Bathrooms__c || null;
+                    this.filterSquareMeters = unit.gbcinmo__Square_Meters__c || null;
+                    
+                    if(unit.gbcinmo__Property__r) {
+                        this.filterElevator = unit.gbcinmo__Property__r.gbcinmo__Has_Elevator__c || false;
+                        this.filterProvince = unit.gbcinmo__Property__r.gbcinmo__State_Province__c || null;
+                        this.filterCity = unit.gbcinmo__Property__r.gbcinmo__City__c || null;
+                        this.filterNeighborhood = unit.gbcinmo__Property__r.gbcinmo__Neighborhood__c || null;
+                    }
+                }
+            } catch (e) {
+                console.error('Error parsing Listing details:', e);
             }
         }
     }
 
     @wire(getCompatibleRequests, { 
-        listingId: '$recordId', operationType: '$filterOperation', maxBudget: '$filterBudget', 
-        minBedrooms: '$filterBedrooms', stateProvince: '$filterProvince',
-        minBathrooms: '$filterBathrooms', hasElevator: '$filterElevator', minSquareMeters: '$filterSquareMeters'
+        listingId: '$recordId', operationType: '$filterOperation', minBudget: '$filterMinBudget', maxBudget: '$filterMaxBudget',
+        minBedrooms: '$filterBedrooms', stateProvince: '$filterProvince', city: '$filterCity', 
+        neighborhood: '$filterNeighborhood', minBathrooms: '$filterBathrooms', 
+        hasElevator: '$filterElevator', minSquareMeters: '$filterSquareMeters'
     })
     wiredRequests(result) {
         this.wiredRequestsResult = result;
         if (result.data) {
-            this.requests = result.data.map(row => {
+            this.rawRequestsData = result.data;
+            this.processRequests(); 
+        } else if (result.error) {
+            console.error('Apex error in getCompatibleRequests:', result.error);
+            this.isLoading = false;
+        }
+    }
+
+    processRequests() {
+        if (!this.rawRequestsData) return;
+        
+        try {
+            this.requests = this.rawRequestsData.map(row => {
                 let newRow = {};
                 for (let key in row) { newRow[key.replace('gbcinmo__', '')] = row[key]; }
                 newRow.RequestUrl = `/${newRow.Id}`; 
+
+                newRow.Request_Reference__c = row.gbcinmo__Request_Reference__c || row.Request_Reference__c || newRow.Name;
+
+                if (newRow.Desired_City__c) {
+                    newRow.Desired_City__c = newRow.Desired_City__c.split(';')
+                        .map(val => this.locationDict[val] || val)
+                        .join(', ');
+                }
+
+                if (newRow.Desired_Neighborhood__c) {
+                    newRow.Desired_Neighborhood__c = newRow.Desired_Neighborhood__c.split(';')
+                        .map(val => this.locationDict[val] || val)
+                        .join(', ');
+                }
+
                 return newRow;
             });
-            this.isLoading = false;
-        } else if (result.error) {
+        } catch (e) {
+            console.error('Error mapping and translating requests:', e);
+        } finally {
             this.isLoading = false;
         }
     }
@@ -129,31 +208,67 @@ export default class PropertyMatchmakingEngine extends LightningElement {
         if (result.data) {
             this.matches = result.data.map(row => {
                 const reqInfo = row.gbcinmo__Property_Request__r || {};
-                const reqId = row.gbcinmo__Property_Request__c;
+                const requestRefName = reqInfo.gbcinmo__Request_Reference__c || reqInfo.Request_Reference__c || reqInfo.Name;
+                
                 return {
                     Id: row.Id, MatchUrl: `/${row.Id}`, MatchRef: row.Name,
                     Status: row.gbcinmo__Match_Status__c,
-                    RequestUrl: `/${reqId}`, RequestRef: reqInfo.Name,
+                    RequestUrl: `/${row.gbcinmo__Property_Request__c}`, RequestRef: requestRefName,
                     ClientName: reqInfo.gbcinmo__Client_Name__c,
                     Budget: reqInfo.gbcinmo__Max_Budget__c
                 };
             });
+        } else if (result.error) {
+            console.error('Apex error in getPreviousMatches:', result.error);
         }
     }
 
     handleFilterChange(event) {
-        this.isLoading = true;
-        const fieldName = event.target.name;
-        if (fieldName === 'filterElevator') {
-            this.filterElevator = event.target.checked;
-        } else {
-            const val = event.target.value;
-            if (fieldName === 'filterOperation') this.filterOperation = val || null;
-            if (fieldName === 'filterBudget') this.filterBudget = val ? parseFloat(val) : null;
-            if (fieldName === 'filterBedrooms') this.filterBedrooms = val ? parseInt(val, 10) : null;
-            if (fieldName === 'filterBathrooms') this.filterBathrooms = val ? parseInt(val, 10) : null;
-            if (fieldName === 'filterSquareMeters') this.filterSquareMeters = val ? parseInt(val, 10) : null;
-            if (fieldName === 'filterProvince') this.filterProvince = val || null;
+        try {
+            const name = event.target.name;
+            const isCheckbox = event.target.type === 'checkbox';
+            let val = isCheckbox ? event.target.checked : event.target.value;
+            if (!isCheckbox && val === '') val = null;
+
+            if (name === 'filterMinBudget' || name === 'filterMaxBudget') val = val ? parseFloat(val) : null;
+            if (name === 'filterBedrooms' || name === 'filterBathrooms' || name === 'filterSquareMeters') val = val ? parseInt(val, 10) : null;
+
+            let hasChanged = false;
+
+            if (name === 'filterOperation' && this.filterOperation !== val) { this.filterOperation = val; hasChanged = true; }
+            if (name === 'filterMinBudget' && this.filterMinBudget !== val) { this.filterMinBudget = val; hasChanged = true; }
+            if (name === 'filterMaxBudget' && this.filterMaxBudget !== val) { this.filterMaxBudget = val; hasChanged = true; }
+            if (name === 'filterBedrooms' && this.filterBedrooms !== val) { this.filterBedrooms = val; hasChanged = true; }
+            if (name === 'filterBathrooms' && this.filterBathrooms !== val) { this.filterBathrooms = val; hasChanged = true; }
+            if (name === 'filterSquareMeters' && this.filterSquareMeters !== val) { this.filterSquareMeters = val; hasChanged = true; }
+            
+            if (name === 'filterProvince' && this.filterProvince !== val) {
+                this.filterProvince = val;
+                this.filterCity = null;
+                this.filterNeighborhood = null;
+                hasChanged = true;
+            }
+            if (name === 'filterCity' && this.filterCity !== val) {
+                this.filterCity = val;
+                this.filterNeighborhood = null;
+                hasChanged = true;
+            }
+            if (name === 'filterNeighborhood' && this.filterNeighborhood !== val) {
+                this.filterNeighborhood = val;
+                hasChanged = true;
+            }
+            if (name === 'filterElevator' && this.filterElevator !== val) {
+                this.filterElevator = val;
+                hasChanged = true;
+            }
+
+            if (hasChanged) {
+                this.isLoading = true;
+            }
+            
+        } catch(e) {
+            console.error('Error in handleFilterChange:', e);
+            this.isLoading = false; 
         }
     }
 

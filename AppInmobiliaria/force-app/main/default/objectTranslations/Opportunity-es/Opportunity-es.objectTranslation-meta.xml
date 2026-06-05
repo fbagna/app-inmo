@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <name>City__c</name>
+        <label>Ciudad</label>
+    </fields>
+    <fields>
+        <name>Neighborhood__c</name>
+        <label>Barrio / Distrito</label>
+    </fields>
+    <fields>
+        <name>Bathrooms__c</name>
+        <label>Baños del Inmueble</label>
+    </fields>
+    <fields>
+        <name>Has_Elevator__c</name>
+        <label>Inmueble con Ascensor</label>
+    </fields>
     <layouts>
         <layout>Opportunity Layout</layout>
         <sections>

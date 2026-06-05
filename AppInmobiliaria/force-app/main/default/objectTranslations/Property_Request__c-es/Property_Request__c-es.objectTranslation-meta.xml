@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
+        <name>Desired_City__c</name>
+        <label>Ciudad Buscada</label>
+    </fields>
+    <fields>
+        <name>Desired_Neighborhood__c</name>
+        <label>Barrios / Distritos Buscados</label>
+    </fields>
+    <fields>
         <name>Request_Number__c</name>
         <label>Número de Demanda</label>
+    </fields>
+    <fields>
+        <name>Min_Budget__c</name>
+        <label>Presupuesto Mínimo</label>
     </fields>
     <caseValues>
         <plural>false</plural>

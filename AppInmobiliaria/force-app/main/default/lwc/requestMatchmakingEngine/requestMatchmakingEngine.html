@@ -7,35 +7,32 @@
 
         <div class="slds-p-around_medium">
             <div class="slds-box slds-m-bottom_medium slds-theme_shade slds-p-around_small">
-                <lightning-layout multiple-rows vertical-align="end">
+                
+                <div class="slds-m-bottom_small">
+                    <span class="slds-text-title_caps slds-text-color_weak">Filters (Based on Client Request)</span>
+                </div>
+
+                <lightning-layout multiple-rows>
                     
-                    <lightning-layout-item size="12" class="slds-m-bottom_x-small">
-                        <span class="slds-text-title_caps slds-text-color_weak">Filters (Based on Client Request)</span>
-                    </lightning-layout-item>
-                    
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-combobox name="filterOperation" label="Operation Type" value={filterOperation} options={operationOptions} onchange={handleFilterChange}></lightning-combobox>
-                    </lightning-layout-item>
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filterBudget" label="Max Budget" value={filterBudget} onchange={handleFilterChange}></lightning-input>
-                    </lightning-layout-item>
-                    
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filterBedrooms" label="Min Bedrooms" value={filterBedrooms} onchange={handleFilterChange}></lightning-input>
-                    </lightning-layout-item>
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filterBathrooms" label="Min Bathrooms" value={filterBathrooms} onchange={handleFilterChange}></lightning-input>
+                    <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small">
+                        <lightning-combobox name="filterOperation" label="Operation Type" value={filterOperation} options={operationOptions} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-combobox>
+                        <lightning-input type="number" name="filterMinBudget" label="Min Budget" value={filterMinBudget} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
+                        <lightning-input type="number" name="filterBudget" label="Max Budget" value={filterBudget} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
                     </lightning-layout-item>
                     
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-input type="number" name="filterSquareMeters" label="Min Sq Meters" value={filterSquareMeters} onchange={handleFilterChange}></lightning-input>
+                    <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small">
+                        <lightning-combobox name="filterProvince" label="State/Province" value={filterProvince} options={provinceOptions} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-combobox>
+                        <lightning-combobox name="filterDesiredCities" label="City" value={filterDesiredCities} options={cityOptions} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-combobox>
+                        <lightning-combobox name="filterDesiredNeighborhoods" label="Neighborhood" value={filterDesiredNeighborhoods} options={neighborhoodOptions} onchange={handleFilterChange} disabled={isNeighborhoodDisabled} class="slds-m-bottom_x-small"></lightning-combobox>
                     </lightning-layout-item>
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small">
-                        <lightning-combobox name="filterProvince" label="State/Province" value={filterProvince} options={provinceOptions} onchange={handleFilterChange}></lightning-combobox>
-                    </lightning-layout-item>
-                    
-                    <lightning-layout-item size="12" medium-device-size="6" padding="horizontal-small" class="slds-p-bottom_x-small slds-m-top_small">
-                        <lightning-input type="checkbox" name="filterElevator" label="Requires Elevator" checked={filterElevator} onchange={handleFilterChange}></lightning-input>
+
+                    <lightning-layout-item size="12" medium-device-size="4" padding="horizontal-small">
+                        <lightning-input type="number" name="filterSquareMeters" label="Min Sq Meters" value={filterSquareMeters} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
+                        <lightning-input type="number" name="filterBedrooms" label="Min Bedrooms" value={filterBedrooms} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
+                        <lightning-input type="number" name="filterBathrooms" label="Min Bathrooms" value={filterBathrooms} onchange={handleFilterChange} class="slds-m-bottom_x-small"></lightning-input>
+                        <div class="slds-m-top_medium">
+                            <lightning-input type="checkbox" name="filterElevator" label="Requires Elevator" checked={filterElevator} onchange={handleFilterChange}></lightning-input>
+                        </div>
                     </lightning-layout-item>
 
                 </lightning-layout>
@@ -46,24 +43,29 @@
             </template>
 
             <template if:false={hasData}>
-                <template if:true={isLoading}><lightning-spinner size="small" alternative-text="Loading..."></lightning-spinner></template>
+                <template if:true={isLoading}>
+                    <lightning-spinner alternative-text="Loading..." size="small"></lightning-spinner>
+                </template>
                 <template if:false={isLoading}>
-                    <div class="slds-illustration slds-illustration_small slds-m-vertical_medium">
+                    <div class="slds-illustration slds-illustration_small slds-m-vertical_medium" aria-hidden="true">
                         <div class="slds-text-longform text-center">
                             <h3 class="slds-text-heading_small">No compatible listings found</h3>
-                            <p class="slds-text-body_regular">Try increasing the budget or reducing requirements.</p>
+                            <p class="slds-text-body_regular">Try adjusting the filters to expand the search.</p>
                         </div>
                     </div>
                 </template>
             </template>
 
             <div class="slds-m-top_x-large slds-border_top slds-p-top_medium">
-                <h2 class="slds-text-heading_small slds-m-bottom_medium slds-font-weight_bold">
-                    <lightning-icon icon-name="standard:task" size="small" class="slds-m-right_x-small"></lightning-icon>
+                <h2 class="slds-text-heading_small slds-m-bottom_medium slds-text-color_default slds-font-weight_bold">
+                    <lightning-icon icon-name="standard:task_list" size="small" class="slds-m-right_x-small"></lightning-icon>
                     Listings already proposed to this client
                 </h2>
                 <template if:true={hasMatches}>
                     <lightning-datatable key-field="Id" data={matches} columns={columnsMatches} hide-checkbox-column="true"></lightning-datatable>
+                </template>
+                <template if:false={hasMatches}>
+                     <p class="slds-text-color_weak slds-m-left_large slds-text-body_small">No proposals have been made for this request yet.</p>
                 </template>
             </div>
         </div>

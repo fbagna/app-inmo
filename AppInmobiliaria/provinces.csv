@@ -1,0 +1,53 @@
+Name,Level__c,Location_Value__c,Parent_Value__c
+A Coruña,Province,A_Coruna,Spain
+Alava,Province,Alava,Spain
+Albacete,Province,Albacete,Spain
+Alicante,Province,Alicante,Spain
+Almería,Province,Almeria,Spain
+Asturias,Province,Asturias,Spain
+Avila,Province,Avila,Spain
+Badajoz,Province,Badajoz,Spain
+Baleares,Province,Baleares,Spain
+Barcelona,Province,Barcelona,Spain
+Burgos,Province,Burgos,Spain
+Cáceres,Province,Caceres,Spain
+Cádiz,Province,Cadiz,Spain
+Cantabria,Province,Cantabria,Spain
+Castellón,Province,Castellon,Spain
+Ceuta,Province,Ceuta,Spain
+Ciudad Real,Province,Ciudad_Real,Spain
+Córdoba,Province,Cordoba,Spain
+Cuenca,Province,Cuenca,Spain
+Girona,Province,Girona,Spain
+Granada,Province,Granada,Spain
+Guadalajara,Province,Guadalajara,Spain
+Gipuzkoa,Province,Gipuzkoa,Spain
+Huelva,Province,Huelva,Spain
+Huesca,Province,Huesca,Spain
+Jaén,Province,Jaen,Spain
+La Rioja,Province,La_Rioja,Spain
+Las Palmas,Province,Las_Palmas,Spain
+León,Province,Leon,Spain
+Lleida,Province,Lleida,Spain
+Lugo,Province,Lugo,Spain
+Madrid,Province,Madrid,Spain
+Málaga,Province,Malaga,Spain
+Melilla,Province,Melilla,Spain
+Murcia,Province,Murcia,Spain
+Navarra,Province,Navarra,Spain
+Ourense,Province,Ourense,Spain
+Palencia,Province,Palencia,Spain
+Pontevedra,Province,Pontevedra,Spain
+Salamanca,Province,Salamanca,Spain
+Santa Cruz de Tenerife,Province,Santa_Cruz_de_Tenerife,Spain
+Segovia,Province,Segovia,Spain
+Sevilla,Province,Sevilla,Spain
+Soria,Province,Soria,Spain
+Tarragona,Province,Tarragona,Spain
+Teruel,Province,Teruel,Spain
+Toledo,Province,Toledo,Spain
+Valencia,Province,Valencia,Spain
+Valladolid,Province,Valladolid,Spain
+Vizcaya,Province,Vizcaya,Spain
+Zamora,Province,Zamora,Spain
+Zaragoza,Province,Zaragoza,Spain
