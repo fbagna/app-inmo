@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Ubicación</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Ubicaciones</value>
+    </caseValues>
+    <gender>Feminine</gender>
+    <fields>
+        <name>Level__c</name>
+        <label>Nivel de Jerarquía</label>
+        <picklistValues>
+            <masterLabel>Country</masterLabel>
+            <translation>País</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>State</masterLabel>
+            <translation>Provincia / Estado</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>City</masterLabel>
+            <translation>Ciudad / Municipio</translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Neighborhood</masterLabel>
+            <translation>Barrio</translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <name>Parent_Location__c</name>
+        <label>Ubicación Padre</label>
+    </fields>
+    <fields>
+        <name>Active__c</name>
+        <label>Activo</label>
+    </fields>
+</CustomObjectTranslation>

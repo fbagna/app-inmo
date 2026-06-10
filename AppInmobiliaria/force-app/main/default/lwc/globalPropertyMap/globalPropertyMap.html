@@ -1,7 +1,7 @@
 <template>
-    <lightning-card title="Available Properties Map" icon-name="standard:location">
+    <lightning-card title={labels.cardTitle} icon-name="standard:location">
         <template if:true={mapMarkers}>
-            <div class="map-container">
+            <div class="map-container" style="height: 450px;">
                 <lightning-map
                     map-markers={mapMarkers}
                     zoom-level="12"
@@ -11,7 +11,7 @@
         </template>
         <template if:false={mapMarkers}>
             <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
-                Searching locations...
+                {labels.searchingText}
             </div>
         </template>
     </lightning-card>

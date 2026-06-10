@@ -13,6 +13,46 @@
         <label>Galería Fotográfica</label>
         <name>Carousel_Title</name>
     </customLabels>
+    <customLabels>
+        <label>Buscador de Ubicación</label>
+        <name>LocationSearchTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>País</label>
+        <name>CountryLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecciona un país...</label>
+        <name>CountryPlaceholder</name>
+    </customLabels>
+    <customLabels>
+        <label>Provincia / Estado</label>
+        <name>StateLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecciona una provincia...</label>
+        <name>StatePlaceholder</name>
+    </customLabels>
+    <customLabels>
+        <label>Ciudad / Municipio</label>
+        <name>CityLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecciona una ciudad...</label>
+        <name>CityPlaceholder</name>
+    </customLabels>
+    <customLabels>
+        <label>Barrio</label>
+        <name>NeighborhoodLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecciona un barrio...</label>
+        <name>NeighborhoodPlaceholder</name>
+    </customLabels>
+    <customLabels>
+        <label>Cargando...</label>
+        <name>LoadingText</name>
+    </customLabels>
 
     <flowDefinitions>
         <flows>

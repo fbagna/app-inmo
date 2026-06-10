@@ -60,8 +60,8 @@ public with sharing class PropertyMatchmakingController {
         return [SELECT Id, gbcinmo__Listing_Reference__c, gbcinmo__Operation_Type__c, gbcinmo__Asking_Price__c, gbcinmo__Minimum_Accepted_Price__c,
                        gbcinmo__Property_Unit__r.gbcinmo__Bedrooms__c, 
                        gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__State_Province__c,
-                       gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__City__c,
-                       gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__Neighborhood__c,
+                       /* gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__City__c, */
+                       /* gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__Neighborhood__c, */
                        gbcinmo__Property_Unit__r.gbcinmo__Bathrooms__c,
                        gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__Has_Elevator__c,
                        gbcinmo__Property_Unit__r.gbcinmo__Square_Meters__c
@@ -87,7 +87,8 @@ public with sharing class PropertyMatchmakingController {
         }
 
         String query = 'SELECT Id, Name, gbcinmo__Request_Reference__c, gbcinmo__Client_Name__c, gbcinmo__Min_Budget__c, gbcinmo__Max_Budget__c, ' +
-                       'gbcinmo__Min_Bedrooms__c, gbcinmo__Desired_City__c, gbcinmo__Min_Square_Meters__c, gbcinmo__Desired_Neighborhood__c ' +
+                       'gbcinmo__Min_Bedrooms__c, gbcinmo__Min_Square_Meters__c ' +
+                       /* 'gbcinmo__Desired_City__c, gbcinmo__Desired_Neighborhood__c ' + */
                        'FROM gbcinmo__Property_Request__c ' +
                        'WHERE gbcinmo__Status__c = \'Active\' ' + 
                        'AND Id NOT IN :matchedRequestIds ';
@@ -105,12 +106,15 @@ public with sharing class PropertyMatchmakingController {
         if (minSquareMeters != null) query += ' AND gbcinmo__Min_Square_Meters__c <= :minSquareMeters '; 
         if (String.isNotBlank(stateProvince)) query += ' AND gbcinmo__Desired_State_Province__c = :stateProvince ';
         
+        /* COMMENTED OUT FOR FIELD DELETION
         if (String.isNotBlank(city)) {
             query += ' AND (gbcinmo__Desired_City__c = NULL OR gbcinmo__Desired_City__c INCLUDES (\'' + String.escapeSingleQuotes(city) + '\')) ';
         }
         if (String.isNotBlank(neighborhood)) {
             query += ' AND (gbcinmo__Desired_Neighborhood__c = NULL OR gbcinmo__Desired_Neighborhood__c INCLUDES (\'' + String.escapeSingleQuotes(neighborhood) + '\')) ';
         }
+        */
+
         if (hasElevator != null && hasElevator == false) {
             query += ' AND gbcinmo__Elevator_Required__c = false ';
         }
@@ -151,7 +155,8 @@ public with sharing class PropertyMatchmakingController {
         /* WITH SECURITY_ENFORCED has been removed to prevent silent FLS failures */
         return [SELECT Id, gbcinmo__Request_Reference__c, gbcinmo__Desired_Operation_Type__c, gbcinmo__Min_Budget__c, gbcinmo__Max_Budget__c, gbcinmo__Min_Bedrooms__c, 
                        gbcinmo__Min_Bathrooms__c, gbcinmo__Elevator_Required__c, gbcinmo__Desired_State_Province__c, 
-                       gbcinmo__Desired_City__c, gbcinmo__Desired_Neighborhood__c, gbcinmo__Min_Square_Meters__c 
+                       /* gbcinmo__Desired_City__c, gbcinmo__Desired_Neighborhood__c, */ 
+                       gbcinmo__Min_Square_Meters__c 
                 FROM gbcinmo__Property_Request__c 
                 WHERE Id = :requestId 
                 LIMIT 1];
@@ -177,9 +182,9 @@ public with sharing class PropertyMatchmakingController {
                        'gbcinmo__Property_Unit__r.gbcinmo__Bedrooms__c, ' +
                        'gbcinmo__Property_Unit__r.gbcinmo__Bathrooms__c, ' +
                        'gbcinmo__Property_Unit__r.gbcinmo__Square_Meters__c, ' +
-                       'gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__State_Province__c, ' +
-                       'gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__City__c, ' +
-                       'gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__Neighborhood__c ' +
+                       'gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__State_Province__c ' +
+                       /* ', gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__City__c, ' + */
+                       /* 'gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__Neighborhood__c ' + */
                        'FROM Opportunity ' +
                        'WHERE IsClosed = false ' +
                        'AND Id NOT IN :matchedListingIds ';
@@ -202,6 +207,7 @@ public with sharing class PropertyMatchmakingController {
         if (requiresElevator != null && requiresElevator) query += ' AND gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__Has_Elevator__c = true ';
         if (String.isNotBlank(stateProvince)) query += ' AND gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__State_Province__c = :stateProvince ';
         
+        /* COMMENTED OUT FOR FIELD DELETION
         if (String.isNotBlank(desiredCities)) {
             List<String> cityList = desiredCities.split(';');
             query += ' AND gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__City__c IN :cityList ';
@@ -210,7 +216,8 @@ public with sharing class PropertyMatchmakingController {
             List<String> neighList = desiredNeighborhoods.split(';');
             query += ' AND gbcinmo__Property_Unit__r.gbcinmo__Property__r.gbcinmo__Neighborhood__c IN :neighList ';
         }
-        
+        */
+
         query += ' ORDER BY gbcinmo__Asking_Price__c ASC';
         return Database.query(query);
     }

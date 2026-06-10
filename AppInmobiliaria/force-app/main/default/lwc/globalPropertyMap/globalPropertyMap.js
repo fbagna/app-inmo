@@ -1,15 +1,25 @@
 import { LightningElement, wire } from 'lwc';
 import getAvailableProperties from '@salesforce/apex/PropertyMapController.getAvailableProperties';
 
+/* Import Custom Labels for full localization support */
+import cardTitleLbl from '@salesforce/label/c.Map_Card_Title';
+import searchingTextLbl from '@salesforce/label/c.Map_Searching_Text';
+import labelPrefixLbl from '@salesforce/label/c.Map_Label_Prefix';
+
 export default class GlobalPropertyMap extends LightningElement {
     mapMarkers;
+
+    /* Bind imported labels locally */
+    labels = {
+        cardTitle: cardTitleLbl,
+        searchingText: searchingTextLbl,
+        labelPrefix: labelPrefixLbl
+    };
 
     @wire(getAvailableProperties)
     wiredProperties({ error, data }) {
         if (data && data.length > 0) {
-            // Transform Apex data to Google Maps required format
             this.mapMarkers = data.map(listing => {
-                // Navigate relationships safely
                 const unit = listing.gbcinmo__Property_Unit__r || {};
                 const property = unit.gbcinmo__Property__r || {};
                 const street = property.gbcinmo__Street__c || '';
@@ -23,8 +33,8 @@ export default class GlobalPropertyMap extends LightningElement {
                     },
                     title: listing.Name,
                     value: listing.Id,
-                    description: `Location: ${street}, ${state}`,
-                    icon: 'custom:custom85' // Red building icon
+                    description: `${this.labels.labelPrefix}: ${street}, ${state}`,
+                    icon: 'custom:custom85'
                 };
             });
         } else if (error) {

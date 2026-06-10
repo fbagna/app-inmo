@@ -1,121 +1,193 @@
 <template>
-    <lightning-card title="Quick Actions" icon-name="standard:apps">
-        
-        <div class="slds-m-around_medium slds-grid slds-wrap slds-gutters slds-grid_align-center">
-            <div class="slds-col slds-p-bottom_medium">
-                <button class="dashboard-btn" onclick={navNewProperty}><lightning-icon icon-name="custom:custom24" size="large"></lightning-icon><span class="btn-text">New Property (Building)</span></button>
+    <template if:true={selectedPropertyId}>
+        <div class="slds-p-around_medium slds-theme_default slds-box">
+            
+            <div class="slds-page-header slds-m-bottom_medium">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media slds-media_center">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="custom:custom24" size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1><span class="slds-page-header__title slds-truncate" title="Property Workspace">Property Workspace</span></h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__col-actions">
+                        <lightning-button 
+                            label="Back to Dashboard Hub" 
+                            icon-name="utility:back" 
+                            variant="neutral"
+                            onclick={handleBackToDashboard}>
+                        </lightning-button>
+                    </div>
+                </div>
             </div>
-            <div class="slds-col slds-p-bottom_medium">
-                <button class="dashboard-btn" onclick={navNewUnit}><lightning-icon icon-name="custom:custom85" size="large"></lightning-icon><span class="btn-text">New Unit</span></button>
-            </div>
-            <div class="slds-col slds-p-bottom_medium">
-                <button class="dashboard-btn" onclick={navNewListing}><lightning-icon icon-name="standard:opportunity" size="large"></lightning-icon><span class="btn-text">New Listing</span></button>
-            </div>
-            <div class="slds-col slds-p-bottom_medium">
-                <button class="dashboard-btn" onclick={navNewRequest}><lightning-icon icon-name="custom:custom15" size="large"></lightning-icon><span class="btn-text">New Request</span></button>
-            </div>
-            <div class="slds-col slds-p-bottom_medium">
-                <button class="dashboard-btn" onclick={navNewLead}><lightning-icon icon-name="custom:custom67" size="large"></lightning-icon><span class="btn-text">New Lead</span></button>
+
+            <lightning-record-view-form record-id={selectedPropertyId} object-api-name="gbcinmo__Property__c">
+                <div class="slds-grid slds-wrap slds-gutters slds-p-horizontal_small">
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
+                        <lightning-output-field field-name="Name"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
+                        <lightning-output-field field-name="gbcinmo__Street__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
+                        <lightning-output-field field-name="gbcinmo__Postal_Code__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
+                        <lightning-output-field field-name="gbcinmo__City__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
+                        <lightning-output-field field-name="gbcinmo__State_Province__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
+                        <lightning-output-field field-name="gbcinmo__Country__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
+                        <lightning-output-field field-name="gbcinmo__Doorman__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
+                        <lightning-output-field field-name="gbcinmo__Has_Elevator__c"></lightning-output-field>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+                        <lightning-output-field field-name="gbcinmo__Comments__c"></lightning-output-field>
+                    </div>
+                </div>
+            </lightning-record-view-form>
+
+            <div class="slds-m-top_large">
+                <h3 class="slds-text-heading_small slds-m-bottom_medium slds-border_bottom slds-p-bottom_x-small">
+                    <lightning-icon icon-name="custom:custom85" size="small" class="slds-m-right_x-small"></lightning-icon>
+                    Associated Units (Apartments / Offices)
+                </h3>
+                <template if:true={hasUnits}>
+                    <div style="height: 250px;">
+                        <lightning-datatable key-field="Id" data={relatedUnitsData} columns={unitColumns} hide-checkbox-column></lightning-datatable>
+                    </div>
+                </template>
+                <template if:false={hasUnits}>
+                    <div class="slds-illustration slds-illustration_small slds-p-around_large slds-text-align_center" style="background: #f3f3f3; border-radius: 4px;">
+                        <div class="slds-text-color_weak slds-text-heading_medium">No units registered yet</div>
+                        <p class="slds-text-color_weak slds-m-top_xxx-small">This property building does not have any sub-units attached yet.</p>
+                    </div>
+                </template>
             </div>
         </div>
+    </template>
 
-        <div class="slds-m-top_large slds-p-top_medium slds-border_top">
+    <template if:false={selectedPropertyId}>
+        <lightning-tabset variant="scoped">
             
-            <h2 class="slds-text-heading_small slds-m-bottom_medium slds-text-color_error slds-p-left_small">
-                <lightning-icon icon-name="utility:warning" size="small" variant="error" class="slds-m-right_x-small"></lightning-icon>
-                <strong>Attention Required</strong>
-            </h2>
-
-            <div class="slds-m-bottom_medium slds-p-horizontal_small">
-                <div class="slds-media slds-media_center slds-m-bottom_small">
-                    <div class="slds-media__figure"><lightning-icon icon-name="standard:opportunity" size="small"></lightning-icon></div>
-                    <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Active Listings</strong></h3></div>
-                </div>
-                <div class="slds-grid slds-gutters">
-                    <div class="slds-col slds-size_1-of-2">
-                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleListingsNoMatches}>
-                            <span class="slds-badge slds-theme_error slds-m-right_small">{countListingsNoMatches}</span>Listings with 0 matches
-                        </button>
-                    </div>
-                    <div class="slds-col slds-size_1-of-2">
-                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleListingsPending}>
-                            <span class="slds-badge slds-theme_warning slds-m-right_small">{countListingsPending}</span>Listings with pending matches
-                        </button>
-                    </div>
+            <lightning-tab label="Operations & Alerts" icon-name="standard:dashboard">
+                <div class="slds-m-vertical_medium slds-grid slds-wrap slds-gutters slds-grid_align-center">
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewProperty}><lightning-icon icon-name="custom:custom24" size="small"></lightning-icon><span class="btn-text">New Property</span></button></div>
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewUnit}><lightning-icon icon-name="custom:custom85" size="small"></lightning-icon><span class="btn-text">New Unit</span></button></div>
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewListing}><lightning-icon icon-name="standard:opportunity" size="small"></lightning-icon><span class="btn-text">New Listing</span></button></div>
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewRequest}><lightning-icon icon-name="custom:custom15" size="small"></lightning-icon><span class="btn-text">New Request</span></button></div>
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewLead}><lightning-icon icon-name="custom:custom67" size="small"></lightning-icon><span class="btn-text">New Lead</span></button></div>
                 </div>
 
-                <template if:true={showListingsTable}>
-                    <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
-                        <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">
-                            Showing: <strong>{tableTitle}</strong>
+                <div class="slds-m-top_large slds-p-top_medium slds-border_top">
+                    <h2 class="slds-text-heading_small slds-m-bottom_medium slds-text-color_error">
+                        <lightning-icon icon-name="utility:warning" size="small" variant="error" class="slds-m-right_x-small"></lightning-icon><strong>Attention Required Alerts</strong>
+                    </h2>
+                    
+                    <div class="slds-m-bottom_medium">
+                        <div class="slds-media slds-media_center slds-m-bottom_small">
+                            <div class="slds-media__figure"><lightning-icon icon-name="standard:opportunity" size="small"></lightning-icon></div>
+                            <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Active Listings Desk</strong></h3></div>
                         </div>
-                        <div style="height: 200px;">
-                            <lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable>
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleListingsNoMatches}><span class="slds-badge slds-theme_error slds-m-right_small">{countListingsNoMatches}</span>Listings with 0 matches</button></div>
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleListingsPending}><span class="slds-badge slds-theme_warning slds-m-right_small">{countListingsPending}</span>Listings with pending matches</button></div>
                         </div>
+                        <template if:true={showListingsTable}>
+                            <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
+                                <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">Showing: <strong>{tableTitle}</strong></div>
+                                <div style="height: 200px;"><lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable></div>
+                            </div>
+                        </template>
                     </div>
-                </template>
-            </div>
 
-            <div class="slds-m-bottom_medium slds-p-horizontal_small slds-m-top_large">
-                <div class="slds-media slds-media_center slds-m-bottom_small">
-                    <div class="slds-media__figure"><lightning-icon icon-name="custom:custom15" size="small"></lightning-icon></div>
-                    <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Active Requests</strong></h3></div>
-                </div>
-                <div class="slds-grid slds-gutters">
-                    <div class="slds-col slds-size_1-of-2">
-                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleRequestsNoMatches}>
-                            <span class="slds-badge slds-theme_error slds-m-right_small">{countRequestsNoMatches}</span>Requests with 0 matches
-                        </button>
-                    </div>
-                    <div class="slds-col slds-size_1-of-2">
-                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleRequestsPending}>
-                            <span class="slds-badge slds-theme_warning slds-m-right_small">{countRequestsPending}</span>Requests with pending matches
-                        </button>
-                    </div>
-                </div>
-
-                <template if:true={showRequestsTable}>
-                    <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
-                        <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">
-                            Showing: <strong>{tableTitle}</strong>
+                    <div class="slds-m-bottom_medium slds-m-top_large">
+                        <div class="slds-media slds-media_center slds-m-bottom_small">
+                            <div class="slds-media__figure"><lightning-icon icon-name="custom:custom15" size="small"></lightning-icon></div>
+                            <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Active Requests Desk</strong></h3></div>
                         </div>
-                        <div style="height: 200px;">
-                            <lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable>
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleRequestsNoMatches}><span class="slds-badge slds-theme_error slds-m-right_small">{countRequestsNoMatches}</span>Requests with 0 matches</button></div>
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleRequestsPending}><span class="slds-badge slds-theme_warning slds-m-right_small">{countRequestsPending}</span>Requests with pending matches</button></div>
                         </div>
+                        <template if:true={showRequestsTable}>
+                            <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
+                                <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">Showing: <strong>{tableTitle}</strong></div>
+                                <div style="height: 200px;"><lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable></div>
+                            </div>
+                        </template>
                     </div>
-                </template>
-            </div>
 
-            <div class="slds-m-bottom_medium slds-p-horizontal_small slds-m-top_large">
-                <div class="slds-media slds-media_center slds-m-bottom_small">
-                    <div class="slds-media__figure"><lightning-icon icon-name="custom:custom67" size="small"></lightning-icon></div>
-                    <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Listing Leads</strong></h3></div>
-                </div>
-                <div class="slds-grid slds-gutters">
-                    <div class="slds-col slds-size_1-of-2">
-                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleLeadsOverdue}>
-                            <span class="slds-badge slds-theme_error slds-m-right_small">{countLeadsOverdue}</span>Overdue Follow-ups
-                        </button>
-                    </div>
-                    <div class="slds-col slds-size_1-of-2">
-                        <button class="slds-button slds-button_outline-brand slds-button_stretch slds-p-vertical_xxx-small" onclick={toggleLeadsNew}>
-                            <span class="slds-badge slds-theme_warning slds-m-right_small">{countLeadsNew}</span>New Leads to check
-                        </button>
+                    <div class="slds-m-bottom_medium slds-m-top_large">
+                        <div class="slds-media slds-media_center slds-m-bottom_small">
+                            <div class="slds-media__figure"><lightning-icon icon-name="custom:custom67" size="small"></lightning-icon></div>
+                            <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Listing Leads Desk</strong></h3></div>
+                        </div>
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleLeadsOverdue}><span class="slds-badge slds-theme_error slds-m-right_small">{countLeadsOverdue}</span>Overdue Follow-ups</button></div>
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleLeadsNew}><span class="slds-badge slds-theme_warning slds-m-right_small">{countLeadsNew}</span>New Leads to check</button></div>
+                        </div>
+                        <template if:true={showLeadsTable}>
+                            <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
+                                <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">Showing: <strong>{tableTitle}</strong></div>
+                                <div style="height: 200px;"><lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable></div>
+                            </div>
+                        </template>
                     </div>
                 </div>
+            </lightning-tab>
 
-                <template if:true={showLeadsTable}>
-                    <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
-                        <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">
-                            Showing: <strong>{tableTitle}</strong>
+            <lightning-tab label="Real Estate Portfolio" icon-name="custom:custom24">
+                <div class="slds-grid slds-wrap slds-p-around_small">
+                    
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-border_right slds-p-right_small">
+                        <lightning-vertical-navigation selected-item="properties_opt">
+                            <lightning-vertical-navigation-section label="Console Menu">
+                                <lightning-vertical-navigation-item label="Properties (Buildings)" name="properties_opt" icon-name="custom:custom24"></lightning-vertical-navigation-item>
+                                <lightning-vertical-navigation-item label="Property Units" name="units_opt" icon-name="custom:custom85" disabled></lightning-vertical-navigation-item>
+                                <lightning-vertical-navigation-item label="Opportunities / Listings" name="listings_opt" icon-name="standard:opportunity" disabled></lightning-vertical-navigation-item>
+                                <lightning-vertical-navigation-item label="Property Requests" name="requests_opt" icon-name="custom:custom15" disabled></lightning-vertical-navigation-item>
+                                <lightning-vertical-navigation-item label="Listing Leads" name="leads_opt" icon-name="custom:custom67" disabled></lightning-vertical-navigation-item>
+                            </lightning-vertical-navigation-section>
+                        </lightning-vertical-navigation>
+                    </div>
+
+                    <div class="slds-col slds-size_1-of-1 slds-medium-size_9-of-12 slds-p-left_large">
+                        <div class="slds-grid slds-grid_align-spread slds-m-bottom_medium slds-grid_vertical-align-center">
+                            <div>
+                                <h3 class="slds-text-heading_small"><strong>Registered Buildings Portfolio</strong></h3>
+                                <p class="slds-text-color_weak" style="font-size: 12px;">Launch individual building workspace benches using action row brand triggers.</p>
+                            </div>
+                            <div><lightning-button variant="brand" label="New Property" icon-name="utility:add" onclick={navNewProperty}></lightning-button></div>
                         </div>
-                        <div style="height: 200px;">
-                            <lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable>
+                        <div style="height: 350px;">
+                            <lightning-datatable key-field="Id" data={propertiesInventoryData} columns={propertyInventoryColumns} hide-checkbox-column onrowaction={handlePropertyInventoryAction}></lightning-datatable>
                         </div>
                     </div>
-                </template>
-            </div>
+
+                </div>
+            </lightning-tab>
+
+            <lightning-tab label="Geo Map View" icon-name="standard:map">
+                <div class="slds-p-around_small">
+                    <c-global-property-map></c-global-property-map>
+                </div>
+            </lightning-tab>
             
-        </div>
-    </lightning-card>
+        </lightning-tabset>
+    </template>
 </template>

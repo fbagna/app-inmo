@@ -14,4 +14,201 @@
         <shortDescription>Carousel No Photos message</shortDescription>
         <value>No photos uploaded. Drag images to the Files section to view them in the carousel.</value>
     </labels>
+    <labels>
+        <fullName>LocationSearchTitle</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Location Search Title</shortDescription>
+        <value>Location Search</value>
+    </labels>
+    <labels>
+        <fullName>CountryLabel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Country Label</shortDescription>
+        <value>Country</value>
+    </labels>
+    <labels>
+        <fullName>CountryPlaceholder</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Country Placeholder</shortDescription>
+        <value>Select a country...</value>
+    </labels>
+    <labels>
+        <fullName>StateLabel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>State Label</shortDescription>
+        <value>State / Province</value>
+    </labels>
+    <labels>
+        <fullName>StatePlaceholder</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>State Placeholder</shortDescription>
+        <value>Select a state...</value>
+    </labels>
+    <labels>
+        <fullName>CityLabel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>City Label</shortDescription>
+        <value>City / Municipality</value>
+    </labels>
+    <labels>
+        <fullName>CityPlaceholder</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>City Placeholder</shortDescription>
+        <value>Select a city...</value>
+    </labels>
+    <labels>
+        <fullName>NeighborhoodLabel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Neighborhood Label</shortDescription>
+        <value>Neighborhood</value>
+    </labels>
+    <labels>
+        <fullName>NeighborhoodPlaceholder</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Neighborhood Placeholder</shortDescription>
+        <value>Select a neighborhood...</value>
+    </labels>
+    <labels>
+        <fullName>LoadingText</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Loading Spinner Text</shortDescription>
+        <value>Loading...</value>
+    </labels>
+
+    <labels>
+        <fullName>PropertyModalTitle</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title for the new property creation modal dialog</shortDescription>
+        <value>New Property (Building/Address)</value>
+    </labels>
+    <labels>
+        <fullName>PropertyAddressLabel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for the custom address field layout override</shortDescription>
+        <value>Address</value>
+    </labels>
+    <labels>
+        <fullName>PropertySectionSpecs</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Header section title for building specifications</shortDescription>
+        <value>Building Specifications</value>
+    </labels>
+    <labels>
+        <fullName>PropertyQuickAddLink</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Hyperlink text to switch to inline doorman creation</shortDescription>
+        <value>+ Can't find doorman? Create contact</value>
+    </labels>
+    <labels>
+        <fullName>PropertyQuickAddHeader</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Section title for the inline doorman form layout</shortDescription>
+        <value>Quick Add Doorman Contact</value>
+    </labels>
+    <labels>
+        <fullName>PropertyFirstNameLabel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Input element label for the contact first name field</shortDescription>
+        <value>First Name</value>
+    </labels>
+    <labels>
+        <fullName>PropertyLastNameLabel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Input element label for the contact last name field</shortDescription>
+        <value>Last Name</value>
+    </labels>
+    <labels>
+        <fullName>PropertyCancelLink</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Hyperlink text to dismiss inline doorman addition panels</shortDescription>
+        <value>Cancel Quick Add</value>
+    </labels>
+    <labels>
+        <fullName>PropertyBtnCancel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Footer navigation dismiss button element label text</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>PropertyBtnSave</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Footer main data submission action button label text</shortDescription>
+        <value>Save Property</value>
+    </labels>
+    <labels>
+        <fullName>PropertyToastAttention</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Toast alert status notification title string parameter</shortDescription>
+        <value>Attention</value>
+    </labels>
+    <labels>
+        <fullName>PropertyToastAttentionMsg</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Toast missing geographical validation inputs context string text</shortDescription>
+        <value>Please fill in all mandatory location fields marked with an asterisk.</value>
+    </labels>
+    <labels>
+        <fullName>PropertyToastBackgroundError</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Toast error description during async transaction loops processing</shortDescription>
+        <value>An error occurred during background contact preprocessing creation.</value>
+    </labels>
+    <labels>
+        <fullName>PropertyToastSuccessTitle</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Toast operation succeeded status title string identifier</shortDescription>
+        <value>Success!</value>
+    </labels>
+    <labels>
+        <fullName>PropertyToastSuccessMsg</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Toast data record created feedback message text parameters</shortDescription>
+        <value>Property created successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Map_Card_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title for the available properties map container card</shortDescription>
+        <value>Available Properties Map</value>
+    </labels>
+    <labels>
+        <fullName>Map_Searching_Text</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Fallback loading text while scanning map geo locations</shortDescription>
+        <value>Searching locations...</value>
+    </labels>
+    <labels>
+        <fullName>Map_Label_Prefix</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Text prefix used before address description in markers</shortDescription>
+        <value>Location</value>
+    </labels>
 </CustomLabels>

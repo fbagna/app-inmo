@@ -1,70 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Neighborhood__c</fullName>
+    <externalId>false</externalId>
     <label>Neighborhood</label>
+    <length>255</length>
     <required>false</required>
-    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
-    <type>Picklist</type>
-    <valueSet>
-        <controllingField>City__c</controllingField>
-        <restricted>true</restricted>
-        <valueSetName>Neighborhoods</valueSetName>
-        <valueSettings>
-            <controllingFieldValue>Madrid</controllingFieldValue>
-            <valueName>Madrid_Arganzuela</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Madrid</controllingFieldValue>
-            <valueName>Madrid_Centro</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Madrid</controllingFieldValue>
-            <valueName>Madrid_Chamartin</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Madrid</controllingFieldValue>
-            <valueName>Madrid_Chamberi</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Madrid</controllingFieldValue>
-            <valueName>Madrid_Hortaleza</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Madrid</controllingFieldValue>
-            <valueName>Madrid_Retiro</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Madrid</controllingFieldValue>
-            <valueName>Madrid_Salamanca</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Madrid</controllingFieldValue>
-            <valueName>Madrid_Tetuan</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Barcelona</controllingFieldValue>
-            <valueName>Barcelona_Ciutat_Vella</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Barcelona</controllingFieldValue>
-            <valueName>Barcelona_Gracia</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Barcelona</controllingFieldValue>
-            <valueName>Barcelona_Eixample</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Barcelona</controllingFieldValue>
-            <valueName>Barcelona_Les_Corts</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Barcelona</controllingFieldValue>
-            <valueName>Barcelona_Sants_Montjuic</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Barcelona</controllingFieldValue>
-            <valueName>Barcelona_Sarria_Sant_Gervasi</valueName>
-        </valueSettings>
-    </valueSet>
+    <type>Text</type>
+    <unique>false</unique>
 </CustomField>

@@ -1,0 +1,53 @@
+<template>
+    <div class="slds-grid slds-wrap slds-gutters">
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_small">
+            <lightning-combobox
+                name="country"
+                label={labels.country}
+                value={selectedCountryId}
+                placeholder={labels.countryPlaceholder}
+                options={countryOptions}
+                onchange={handleCountryChange}
+                spinner-active={isLoadingCountries}>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_small">
+            <lightning-combobox
+                name="state"
+                label={labels.state}
+                value={selectedStateId}
+                placeholder={labels.statePlaceholder}
+                options={stateOptions}
+                onchange={handleStateChange}
+                disabled={isStateDisabled}
+                required>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_small">
+            <lightning-combobox
+                name="city"
+                label={labels.city}
+                value={selectedCityId}
+                placeholder={labels.cityPlaceholder}
+                options={cityOptions}
+                onchange={handleCityChange}
+                disabled={isCityDisabled}
+                required>
+            </lightning-combobox>
+        </div>
+
+        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_small">
+            <lightning-combobox
+                name="neighborhood"
+                label={labels.neighborhood}
+                value={selectedNeighborhoodId}
+                placeholder={labels.neighborhoodPlaceholder}
+                options={neighborhoodOptions}
+                onchange={handleNeighborhoodChange}
+                disabled={isNeighborhoodDisabled}>
+            </lightning-combobox>
+        </div>
+    </div>
+</template>

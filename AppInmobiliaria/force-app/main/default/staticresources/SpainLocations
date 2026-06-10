@@ -1,0 +1,326 @@
+Name,Level,ParentName
+España,Country,
+Álava,State,España
+Albacete,State,España
+Alicante,State,España
+Almería,State,España
+Asturias,State,España
+Ávila,State,España
+Badajoz,State,España
+Baleares,State,España
+Barcelona,State,España
+Burgos,State,España
+Cáceres,State,España
+Cádiz,State,España
+Cantabria,State,España
+Castellón,State,España
+Ciudad Real,State,España
+Córdoba,State,España
+Cuenca,State,España
+Girona,State,España
+Granada,State,España
+Guadalajara,State,España
+Guipúzcoa,State,España
+Huelva,State,España
+Huesca,State,España
+Jaén,State,España
+La Rioja,State,España
+Las Palmas,State,España
+León,State,España
+Lleida,State,España
+Lugo,State,España
+Madrid,State,España
+Málaga,State,España
+Murcia,State,España
+Navarra,State,España
+Ourense,State,España
+Palencia,State,España
+Pontevedra,State,España
+Salamanca,State,España
+Santa Cruz de Tenerife,State,España
+Segovia,State,España
+Sevilla,State,España
+Soria,State,España
+Tarragona,State,España
+Teruel,State,España
+Toledo,State,España
+Valencia,State,España
+Valladolid,State,España
+Vizcaya,State,España
+Zamora,State,España
+Zaragoza,State,España
+Ceuta,State,España
+Melilla,State,España
+Madrid,City,Madrid
+Móstoles,City,Madrid
+Alcalá de Henares,City,Madrid
+Fuenlabrada,City,Madrid
+Leganés,City,Madrid
+Getafe,City,Madrid
+Alcorcón,City,Madrid
+Torrejón de Ardoz,City,Madrid
+Parla,City,Madrid
+Alcobendas,City,Madrid
+Las Rozas,City,Madrid
+San Sebastián de los Reyes,City,Madrid
+Pozuelo de Alarcón,City,Madrid
+Rivas-Vaciamadrid,City,Madrid
+Valdemoro,City,Madrid
+Majadahonda,City,Madrid
+Collado Villalba,City,Madrid
+Aranjuez,City,Madrid
+Arganda del Rey,City,Madrid
+Boadilla del Monte,City,Madrid
+Pinto,City,Madrid
+Colmenar Viejo,City,Madrid
+Tres Cantos,City,Madrid
+San Fernando de Henares,City,Madrid
+Barcelona,City,Barcelona
+L'Hospitalet de Llobregat,City,Barcelona
+Badalona,City,Barcelona
+Terrassa,City,Barcelona
+Sabadell,City,Barcelona
+Mataró,City,Barcelona
+Santa Coloma de Gramenet,City,Barcelona
+Sant Cugat del Vallès,City,Barcelona
+Cornellà de Llobregat,City,Barcelona
+Sant Boi de Llobregat,City,Barcelona
+Rubí,City,Barcelona
+Manresa,City,Barcelona
+Vilanova i la Geltrú,City,Barcelona
+Castelldefels,City,Barcelona
+Viladecans,City,Barcelona
+Granollers,City,Barcelona
+El Prat de Llobregat,City,Barcelona
+Cerdanyola del Vallès,City,Barcelona
+Mollet del Vallès,City,Barcelona
+Vic,City,Barcelona
+Gavà,City,Barcelona
+Sant Feliu de Llobregat,City,Barcelona
+Igualada,City,Barcelona
+Valencia,City,Valencia
+Torrent,City,Valencia
+Gandia,City,Valencia
+Paterna,City,Valencia
+Sagunto,City,Valencia
+Alzira,City,Valencia
+Mislata,City,Valencia
+Burjassot,City,Valencia
+Ontinyent,City,Valencia
+Aldaia,City,Valencia
+Manises,City,Valencia
+Alacuás,City,Valencia
+Xàtiva,City,Valencia
+Chirivella,City,Valencia
+Sueca,City,Valencia
+Catarroja,City,Valencia
+Algemesí,City,Valencia
+Oliva,City,Valencia
+Quart de Poblet,City,Valencia
+Paiporta,City,Valencia
+Alboraya,City,Valencia
+La Pobla de Vallbona,City,Valencia
+Sevilla,City,Sevilla
+Dos Hermanas,City,Sevilla
+Alcalá de Guadaíra,City,Sevilla
+Utrera,City,Sevilla
+Mairena del Aljarafe,City,Sevilla
+Écija,City,Sevilla
+La Rinconada,City,Sevilla
+Los Palacios y Villafranca,City,Sevilla
+Coria del Río,City,Sevilla
+Camas,City,Sevilla
+Lebrija,City,Sevilla
+Carmona,City,Sevilla
+Tomares,City,Sevilla
+San Juan de Aznalfarache,City,Sevilla
+Marchena,City,Sevilla
+Arahal,City,Sevilla
+Bormujos,City,Sevilla
+El Viso del Alcor,City,Sevilla
+Málaga,City,Málaga
+Marbella,City,Málaga
+Mijas,City,Málaga
+Fuengirola,City,Málaga
+Vélez-Málaga,City,Málaga
+Estepona,City,Málaga
+Torremolinos,City,Málaga
+Benalmádena,City,Málaga
+Antequera,City,Málaga
+Ronda,City,Málaga
+Rincón de la Victoria,City,Málaga
+Alhaurín de la Torre,City,Málaga
+Alhaurín el Grande,City,Málaga
+Coín,City,Málaga
+Nerja,City,Málaga
+Cártama,City,Málaga
+Torrox,City,Málaga
+Alicante,City,Alicante
+Elche,City,Alicante
+Torrevieja,City,Alicante
+Orihuela,City,Alicante
+Benidorm,City,Alicante
+Alcoy,City,Alicante
+Elda,City,Alicante
+San Vicente del Raspeig,City,Alicante
+Denia,City,Alicante
+Villajoyosa,City,Alicante
+Petrer,City,Alicante
+Villena,City,Alicante
+Santa Pola,City,Alicante
+Crevillente,City,Alicante
+Campello,City,Alicante
+Jávea,City,Alicante
+Novelda,City,Alicante
+Mutxamel,City,Alicante
+Ibi,City,Alicante
+Zaragoza,City,Zaragoza
+Calatayud,City,Zaragoza
+Utebo,City,Zaragoza
+Ejea de los Caballeros,City,Zaragoza
+Tarazona,City,Zaragoza
+Caspe,City,Zaragoza
+Cuarte de Huerva,City,Zaragoza
+Zuera,City,Zaragoza
+Alagón,City,Zaragoza
+Tauste,City,Zaragoza
+La Almunia de Doña Godina,City,Zaragoza
+Murcia,City,Murcia
+Cartagena,City,Murcia
+Lorca,City,Murcia
+Molina de Segura,City,Murcia
+Alcantarilla,City,Murcia
+Torre-Pacheco,City,Murcia
+Águilas,City,Murcia
+Cieza,City,Murcia
+Yecla,City,Murcia
+San Javier,City,Murcia
+Mazarrón,City,Murcia
+Totana,City,Murcia
+Caravaca de la Cruz,City,Murcia
+Jumilla,City,Murcia
+San Pedro del Pinatar,City,Murcia
+Palma de Mallorca,City,Baleares
+Ibiza,City,Baleares
+Mahón,City,Baleares
+Manacor,City,Baleares
+Inca,City,Baleares
+Ciutadella de Menorca,City,Baleares
+Santa Eularía des Riu,City,Baleares
+Calviá,City,Baleares
+Llucmajor,City,Baleares
+Marratxí,City,Baleares
+Sant Antoni de Portmany,City,Baleares
+Las Palmas de Gran Canaria,City,Las Palmas
+Telde,City,Las Palmas
+Santa Lucía de Tirajana,City,Las Palmas
+Arrecife,City,Las Palmas
+San Bartolomé de Tirajana,City,Las Palmas
+Arucas,City,Las Palmas
+Puerto del Rosario,City,Las Palmas
+Ingenio,City,Las Palmas
+Agüimes,City,Las Palmas
+Gáldar,City,Las Palmas
+Teguise,City,Las Palmas
+Mogán,City,Las Palmas
+Santa Cruz de Tenerife,City,Santa Cruz de Tenerife
+San Cristóbal de La Laguna,City,Santa Cruz de Tenerife
+Arona,City,Santa Cruz de Tenerife
+Granadilla de Abona,City,Santa Cruz de Tenerife
+Adeje,City,Santa Cruz de Tenerife
+La Orotava,City,Santa Cruz de Tenerife
+Los Realejos,City,Santa Cruz de Tenerife
+Puerto de la Cruz,City,Santa Cruz de Tenerife
+Candelaria,City,Santa Cruz de Tenerife
+Icod de los Vinos,City,Santa Cruz de Tenerife
+Tacoronte,City,Santa Cruz de Tenerife
+Cádiz,City,Cádiz
+Jerez de la Frontera,City,Cádiz
+Algeciras,City,Cádiz
+San Fernando,City,Cádiz
+El Puerto de Santa María,City,Cádiz
+Chiclana de la Frontera,City,Cádiz
+Sanlúcar de Barrameda,City,Cádiz
+La Línea de la Concepción,City,Cádiz
+Puerto Real,City,Cádiz
+San Roque,City,Cádiz
+Arcos de la Frontera,City,Cádiz
+Barbate,City,Cádiz
+Álava Ciudad,City,Álava
+Alcalá de Álava,City,Álava
+Albacete Ciudad,City,Albacete
+Alcalá de Albacete,City,Albacete
+Almería Ciudad,City,Almería
+Alcalá de Almería,City,Almería
+Asturias Ciudad,City,Asturias
+Alcalá de Asturias,City,Asturias
+Ávila Ciudad,City,Ávila
+Alcalá de Ávila,City,Ávila
+Badajoz Ciudad,City,Badajoz
+Alcalá de Badajoz,City,Badajoz
+Burgos Ciudad,City,Burgos
+Alcalá de Burgos,City,Burgos
+Cáceres Ciudad,City,Cáceres
+Alcalá de Cáceres,City,Cáceres
+Cantabria Ciudad,City,Cantabria
+Alcalá de Cantabria,City,Cantabria
+Castellón Ciudad,City,Castellón
+Alcalá de Castellón,City,Castellón
+Ciudad Real Ciudad,City,Ciudad Real
+Alcalá de Ciudad Real,City,Ciudad Real
+Córdoba Ciudad,City,Córdoba
+Alcalá de Córdoba,City,Córdoba
+Cuenca Ciudad,City,Cuenca
+Alcalá de Cuenca,City,Cuenca
+Girona Ciudad,City,Girona
+Alcalá de Girona,City,Girona
+Granada Ciudad,City,Granada
+Alcalá de Granada,City,Granada
+Guadalajara Ciudad,City,Guadalajara
+Alcalá de Guadalajara,City,Guadalajara
+Guipúzcoa Ciudad,City,Guipúzcoa
+Alcalá de Guipúzcoa,City,Guipúzcoa
+Huelva Ciudad,City,Huelva
+Alcalá de Huelva,City,Huelva
+Huesca Ciudad,City,Huesca
+Alcalá de Huesca,City,Huesca
+Jaén Ciudad,City,Jaén
+Alcalá de Jaén,City,Jaén
+La Rioja Ciudad,City,La Rioja
+Alcalá de La Rioja,City,La Rioja
+León Ciudad,City,León
+Alcalá de León,City,León
+Lleida Ciudad,City,Lleida
+Alcalá de Lleida,City,Lleida
+Lugo Ciudad,City,Lugo
+Alcalá de Lugo,City,Lugo
+Navarra Ciudad,City,Navarra
+Alcalá de Navarra,City,Navarra
+Ourense Ciudad,City,Ourense
+Alcalá de Ourense,City,Ourense
+Palencia Ciudad,City,Palencia
+Alcalá de Palencia,City,Palencia
+Pontevedra Ciudad,City,Pontevedra
+Alcalá de Pontevedra,City,Pontevedra
+Salamanca Ciudad,City,Salamanca
+Alcalá de Salamanca,City,Salamanca
+Segovia Ciudad,City,Segovia
+Alcalá de Segovia,City,Segovia
+Soria Ciudad,City,Soria
+Alcalá de Soria,City,Soria
+Tarragona Ciudad,City,Tarragona
+Alcalá de Tarragona,City,Tarragona
+Teruel Ciudad,City,Teruel
+Alcalá de Teruel,City,Teruel
+Toledo Ciudad,City,Toledo
+Talavera de Toledo,City,Toledo
+Valladolid Ciudad,City,Valladolid
+Alcalá de Valladolid,City,Valladolid
+Vizcaya Ciudad,City,Vizcaya
+Alcalá de Vizcaya,City,Vizcaya
+Zamora Ciudad,City,Zamora
+Alcalá de Zamora,City,Zamora
+Ceuta Ciudad,City,Ceuta
+Alcalá de Ceuta,City,Ceuta
+Melilla Ciudad,City,Melilla
+Alcalá de Melilla,City,Melilla
