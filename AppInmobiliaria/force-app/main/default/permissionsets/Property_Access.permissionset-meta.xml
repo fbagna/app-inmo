@@ -406,6 +406,11 @@
         <field>Location__c.Parent_Location__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Property__c.Country__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
 
     <hasActivationRequired>false</hasActivationRequired>
     <label>Property Access</label>

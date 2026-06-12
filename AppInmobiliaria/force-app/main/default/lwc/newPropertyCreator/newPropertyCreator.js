@@ -3,7 +3,9 @@ import LightningModal from 'lightning/modal';
 import { createRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-/* Import Custom Labels to enable real native translation workbench localizations */
+/* ========================================================================= */
+/* --- CUSTOM LABELS METADATA DICTIONARY LINKAGE (ZERO HARDCODE) ---------- */
+/* ========================================================================= */
 import modalTitleLbl from '@salesforce/label/c.PropertyModalTitle';
 import addressFieldLbl from '@salesforce/label/c.PropertyAddressLabel';
 import sectionSpecsLbl from '@salesforce/label/c.PropertySectionSpecs';
@@ -22,7 +24,7 @@ import toastSuccessMsg from '@salesforce/label/c.PropertyToastSuccessMsg';
 
 export default class NewPropertyCreator extends LightningModal {
     
-    /* Safely bind imported metadata components to the template layer */
+    /* Bind imported unifed platform references local schema access tokens */
     labels = {
         modalTitle: modalTitleLbl,
         addressLabel: addressFieldLbl,
@@ -55,6 +57,7 @@ export default class NewPropertyCreator extends LightningModal {
             : 'slds-grid slds-wrap slds-gutters slds-p-around_small slds-hide';
     }
 
+    /* Intercepts cascading events emitted from the local sub-component map boundaries */
     handleLocationChange(event) {
         this.locationData.country = event.detail.country;
         this.locationData.state = event.detail.state;
@@ -67,11 +70,15 @@ export default class NewPropertyCreator extends LightningModal {
         this.isQuickAddDoorman = !this.isQuickAddDoorman;
     }
 
+    /**
+     * @description Orchestrates form validation layers and submits packaged metadata matrices.
+     */
     async handleSubmit(event) {
         event.preventDefault(); 
         
         const fields = event.detail.fields;
 
+        // Perform internal location selections tracking validation lookups
         const locationCmp = this.template.querySelector('c-location-selector');
         const isLocationValid = locationCmp ? locationCmp.validate() : true;
 
@@ -80,6 +87,7 @@ export default class NewPropertyCreator extends LightningModal {
             return;
         }
 
+        // Validate programmatic rapid contact onboarding elements rules
         if (this.isQuickAddDoorman) {
             const lastNameCmp = this.template.querySelector('[data-id="doormanLast"]');
             if (lastNameCmp) {
@@ -91,6 +99,7 @@ export default class NewPropertyCreator extends LightningModal {
         this.isFormReady = false; 
 
         try {
+            // Process transactional rapid programmatic doorman contact payload creation
             if (this.isQuickAddDoorman) {
                 const firstName = this.template.querySelector('[data-id="doormanFirst"]').value;
                 const lastName = this.template.querySelector('[data-id="doormanLast"]').value;
@@ -102,11 +111,13 @@ export default class NewPropertyCreator extends LightningModal {
                 fields['gbcinmo__Doorman__c'] = newContact.id; 
             }
 
+            // Map safe location payload strings mapping variables back into the operational transaction form fields array
             fields['gbcinmo__Country__c'] = this.locationData.country;
-            fields['gbcinmo__State__c'] = this.locationData.state;
+            fields['gbcinmo__State_Province__c'] = this.locationData.state; // Corrected to match custom picklist API schema tokens
             fields['gbcinmo__City__c'] = this.locationData.city;
             fields['gbcinmo__Neighborhood__c'] = this.locationData.neighborhood;
 
+            // Submit verified context blocks parameters down to standard system platform data pipelines
             this.template.querySelector('lightning-record-edit-form').submit(fields);
         } catch (error) {
             console.error('Programmatic DML Chain Exception Error:', error);
@@ -117,7 +128,7 @@ export default class NewPropertyCreator extends LightningModal {
 
     handleSuccess(event) {
         this.showToast(this.labels.successTitle, this.labels.successMsg, 'success');
-        this.close(event.detail.id); 
+        this.close(event.detail.id); // Returns the newly created property ID back to the main dashboard sub-system listener loops
     }
 
     handleError(event) {

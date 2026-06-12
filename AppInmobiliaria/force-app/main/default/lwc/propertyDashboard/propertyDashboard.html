@@ -2,25 +2,28 @@
     <template if:true={selectedPropertyId}>
         <div class="slds-p-around_medium slds-theme_default slds-box">
             
-            <div class="slds-page-header slds-m-bottom_medium">
-                <div class="slds-page-header__row">
-                    <div class="slds-page-header__col-title">
-                        <div class="slds-media slds-media_center">
-                            <div class="slds-media__figure">
-                                <lightning-icon icon-name="custom:custom24" size="medium"></lightning-icon>
-                            </div>
-                            <div class="slds-media__body">
-                                <div class="slds-page-header__name">
-                                    <div class="slds-page-header__name-title">
-                                        <h1><span class="slds-page-header__title slds-truncate" title="Property Workspace">Property Workspace</span></h1>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="slds-p-around_none slds-m-bottom_medium slds-border_bottom" style="border-bottom: 1px solid #e5e5e5; padding-bottom: 12px;">
+                <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                    <div class="slds-media slds-media_center">
+                        <div class="slds-media__figure">
+                            <lightning-icon icon-name="custom:custom24" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <h1 class="slds-text-heading_medium" style="font-weight: 700; color: #1c274c;">{labels.workspaceTitle}</h1>
                         </div>
                     </div>
-                    <div class="slds-page-header__col-actions">
+                    <div>
+                        <template if:false={isEditMode}>
+                            <lightning-button 
+                                label={labels.btnEdit} 
+                                icon-name="utility:edit" 
+                                variant="brand"
+                                onclick={handleEnableEdit}
+                                class="slds-m-right_small">
+                            </lightning-button>
+                        </template>
                         <lightning-button 
-                            label="Back to Dashboard Hub" 
+                            label={labels.backToDashboard} 
                             icon-name="utility:back" 
                             variant="neutral"
                             onclick={handleBackToDashboard}>
@@ -29,121 +32,377 @@
                 </div>
             </div>
 
-            <lightning-record-view-form record-id={selectedPropertyId} object-api-name="gbcinmo__Property__c">
-                <div class="slds-grid slds-wrap slds-gutters slds-p-horizontal_small">
-                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
-                        <lightning-output-field field-name="Name"></lightning-output-field>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
-                        <lightning-output-field field-name="gbcinmo__Street__c"></lightning-output-field>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
-                        <lightning-output-field field-name="gbcinmo__Postal_Code__c"></lightning-output-field>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
-                        <lightning-output-field field-name="gbcinmo__City__c"></lightning-output-field>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
-                        <lightning-output-field field-name="gbcinmo__State_Province__c"></lightning-output-field>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
-                        <lightning-output-field field-name="gbcinmo__Country__c"></lightning-output-field>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
-                        <lightning-output-field field-name="gbcinmo__Doorman__c"></lightning-output-field>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_x-small">
-                        <lightning-output-field field-name="gbcinmo__Has_Elevator__c"></lightning-output-field>
-                    </div>
-                    <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
-                        <lightning-output-field field-name="gbcinmo__Comments__c"></lightning-output-field>
-                    </div>
-                </div>
-            </lightning-record-view-form>
+            <div class="slds-grid slds-wrap slds-gutters">
+                
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_5-of-12 slds-border_right slds-p-right_large">
+                    <h3 class="slds-text-heading_small slds-m-bottom_small" style="font-weight: 700; color: #0176d3;">
+                        <lightning-icon icon-name="custom:custom24" size="small" class="slds-m-right_x-small"></lightning-icon>
+                        {labels.dossierDetails}
+                    </h3>
 
-            <div class="slds-m-top_large">
-                <h3 class="slds-text-heading_small slds-m-bottom_medium slds-border_bottom slds-p-bottom_x-small">
-                    <lightning-icon icon-name="custom:custom85" size="small" class="slds-m-right_x-small"></lightning-icon>
-                    Associated Units (Apartments / Offices)
-                </h3>
-                <template if:true={hasUnits}>
-                    <div style="height: 250px;">
-                        <lightning-datatable key-field="Id" data={relatedUnitsData} columns={unitColumns} hide-checkbox-column></lightning-datatable>
-                    </div>
-                </template>
-                <template if:false={hasUnits}>
-                    <div class="slds-illustration slds-illustration_small slds-p-around_large slds-text-align_center" style="background: #f3f3f3; border-radius: 4px;">
-                        <div class="slds-text-color_weak slds-text-heading_medium">No units registered yet</div>
-                        <p class="slds-text-color_weak slds-m-top_xxx-small">This property building does not have any sub-units attached yet.</p>
-                    </div>
-                </template>
+                    <template if:false={isEditMode}>
+                        <lightning-record-view-form record-id={selectedPropertyId} object-api-name="gbcinmo__Property__c">
+                            
+                            <div class="slds-m-bottom_small">
+                                <h4 class="slds-text-title_caps slds-p-vertical_xxx-small slds-p-horizontal_x-small" style="background: #f3f3f3; font-weight: 700; font-size: 11px; border-radius: 3px; color: #333;">{labels.propInfo}</h4>
+                                <div class="slds-grid slds-wrap slds-gutters_direct-x-small">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.propertyName}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="Name" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-m-bottom_small slds-m-top_small">
+                                <h4 class="slds-text-title_caps slds-p-vertical_xxx-small slds-p-horizontal_x-small" style="background: #f3f3f3; font-weight: 700; font-size: 11px; border-radius: 3px; color: #333;">{labels.locationInfo}</h4>
+                                <div class="slds-grid slds-wrap slds-gutters_direct-x-small">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.country}</span>
+                                            <div class="slds-p-top_xxx-small slds-p-left_xx-small" style="font-size: 13px; color: #555; font-weight: 600;">{rawLocationRecord.country}</div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.stateProvince}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__State_Province__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.city}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__City__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.neighborhood}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__Neighborhood__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.address}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__Street__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.zipCode}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__Zip_Code__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-m-bottom_small slds-m-top_small">
+                                <h4 class="slds-text-title_caps slds-p-vertical_xxx-small slds-p-horizontal_x-small" style="background: #f3f3f3; font-weight: 700; font-size: 11px; border-radius: 3px; color: #333;">{labels.featuresTitle}</h4>
+                                <div class="slds-grid slds-wrap slds-gutters_direct-x-small">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.doorman}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__Doorman__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.hasElevator}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__Has_Elevator__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 65px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.comments}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__Comments__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-m-top_small">
+                                <h4 class="slds-text-title_caps slds-p-vertical_xxx-small slds-p-horizontal_x-small" style="background: #f3f3f3; font-weight: 700; font-size: 11px; border-radius: 3px; color: #333;">{labels.systemInfo}</h4>
+                                <div class="slds-grid slds-wrap slds-gutters_direct-x-small">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.createdBy}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="CreatedById" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.propertyRef}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__Property_Reference__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.modifiedBy}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="LastModifiedById" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.owner}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="OwnerId" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </lightning-record-view-form>
+                    </template>
+
+                    <template if:true={isEditMode}>
+                        <lightning-record-edit-form 
+                            record-id={selectedPropertyId} 
+                            object-api-name="gbcinmo__Property__c" 
+                            onsubmit={handleUpdateSubmit}
+                            onsuccess={handleUpdateSuccess}
+                            class="workspace-edit-form">
+
+                            <div class="slds-m-bottom_small">
+                                <h4 class="slds-text-title_caps slds-p-vertical_xxx-small slds-p-horizontal_x-small" style="background: #0176d3; font-weight: 700; font-size: 11px; border-radius: 3px; color: white;">{labels.propInfo}</h4>
+                                <div class="slds-grid slds-wrap slds-gutters_direct-x-small">
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.propertyName}</span>
+                                            <div class="slds-form-element__control"><lightning-input-field field-name="Name" variant="label-hidden"></lightning-input-field></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-m-bottom_small slds-m-top_small">
+                                <h4 class="slds-text-title_caps slds-p-vertical_xxx-small slds-p-horizontal_x-small" style="background: #0176d3; font-weight: 700; font-size: 11px; border-radius: 3px; color: white;">{labels.locationInfo}</h4>
+                                
+                                <div class="slds-grid slds-wrap slds-gutters_direct-x-small slds-p-vertical_x-small">
+                                    <div class="slds-col slds-size_1-of-1 slds-p-bottom_x-small">
+                                        <lightning-input 
+                                            type="checkbox" 
+                                            label={labels.toggleLocationModify} 
+                                            checked={showLocationPicker} 
+                                            onchange={handleToggleLocationPicker}>
+                                        </lightning-input>
+                                    </div>
+
+                                    <template if:false={showLocationPicker}>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                            <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px; background: #fdfdfd;">
+                                                <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.country}</span>
+                                                <div class="slds-p-top_xxx-small slds-p-left_xx-small" style="font-size: 13px; color: #555; font-weight: 600;">{rawLocationRecord.country}</div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                            <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px; background: #fdfdfd;">
+                                                <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.stateProvince}</span>
+                                                <div class="slds-p-top_xxx-small slds-p-left_xx-small" style="font-size: 13px; color: #555; font-weight: 600;">{rawLocationRecord.state}</div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                            <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px; background: #fdfdfd;">
+                                                <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.city}</span>
+                                                <div class="slds-p-top_xxx-small slds-p-left_xx-small" style="font-size: 13px; color: #555; font-weight: 600;">{rawLocationRecord.city}</div>
+                                            </div>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                            <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px; background: #fdfdfd;">
+                                                <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.neighborhood}</span>
+                                                <div class="slds-p-top_xxx-small slds-p-left_xx-small" style="font-size: 13px; color: #555; font-weight: 600;">{rawLocationRecord.neighborhood}</div>
+                                            </div>
+                                        </div>
+                                    </template>
+
+                                    <template if:true={showLocationPicker}>
+                                        <div class="slds-col slds-size_1-of-1 slds-m-bottom_x-small" style="min-height: 180px;">
+                                            <c-location-selector 
+                                                class="workspace-location-selector"
+                                                country={workspaceCountry}
+                                                state={workspaceState}
+                                                city={workspaceCity}
+                                                neighborhood={workspaceNeighborhood}
+                                                onlocationchange={handleLocationChangeWorkspace}>
+                                            </c-location-selector>
+                                        </div>
+                                    </template>
+
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-top_small">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;"><abbr class="slds-required" title="required">*</abbr>{labels.address}</span>
+                                            <div class="slds-form-element__control"><lightning-input-field field-name="gbcinmo__Street__c" variant="label-hidden" required></lightning-input-field></div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-top_small">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.zipCode}</span>
+                                            <div class="slds-form-element__control"><lightning-input-field field-name="gbcinmo__Zip_Code__c" variant="label-hidden"></lightning-input-field></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-m-bottom_small slds-m-top_small">
+                                <h4 class="slds-text-title_caps slds-p-vertical_xxx-small slds-p-horizontal_x-small" style="background: #0176d3; font-weight: 700; font-size: 11px; border-radius: 3px; color: white;">{labels.featuresTitle}</h4>
+                                <div class="slds-grid slds-wrap slds-gutters_direct-x-small">
+                                    
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.doorman}</span>
+                                            <div class="slds-form-element__control">
+                                                <template if:false={isQuickAddDoormanWorkspace}>
+                                                    <lightning-input-field field-name="gbcinmo__Doorman__c" variant="label-hidden"></lightning-input-field>
+                                                    <div class="slds-text-align_right slds-p-top_xxx-small">
+                                                        <a onclick={toggleDoormanModeWorkspace} class="slds-text-link_reset slds-text-link" style="font-size: 11px; font-weight: 600;">{labels.quickAddLink}</a>
+                                                    </div>
+                                                </template>
+                                                <template if:true={isQuickAddDoormanWorkspace}>
+                                                    <div class="slds-box slds-theme_shade slds-p-around_x-small slds-m-top_xxx-small" style="border-left: 3px solid #0176d3;">
+                                                        <div class="slds-text-title_caps slds-m-bottom_xx-small" style="font-weight: 700; color: #0176d3; font-size: 10px;">{labels.quickAddHeader}</div>
+                                                        <lightning-input label={labels.firstNameLabel} data-id="doormanFirstWorkspace" class="slds-m-bottom_xxx-small"></lightning-input>
+                                                        <lightning-input label={labels.lastNameLabel} required data-id="doormanLastWorkspace" class="slds-m-bottom_xxx-small"></lightning-input>
+                                                        <div class="slds-text-align_right slds-m-top_xx-small">
+                                                            <a onclick={toggleDoormanModeWorkspace} class="slds-text-color_error" style="font-size: 11px; font-weight: 600;">{labels.cancelLink}</a>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.hasElevator}</span>
+                                            <div class="slds-form-element__control"><lightning-input-field field-name="gbcinmo__Has_Elevator__c" variant="label-hidden"></lightning-input-field></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="slds-col slds-size_1-of-1">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 65px;">
+                                            <div class="slds-form-element__control">
+                                                <lightning-input-field field-name="gbcinmo__Comments__c" variant="label-hidden"></lightning-input-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-m-top_small">
+                                <h4 class="slds-text-title_caps slds-p-vertical_xxx-small slds-p-horizontal_x-small" style="background: #f3f3f3; font-weight: 700; font-size: 11px; border-radius: 3px; color: #333;">{labels.systemInfo}</h4>
+                                <div class="slds-grid slds-wrap slds-gutters_direct-x-small">
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.createdBy}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="CreatedById" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.propertyRef}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="gbcinmo__Property_Reference__c" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.modifiedBy}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="LastModifiedById" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                        <div class="slds-form-element slds-p-vertical_xxx-small slds-border_bottom" style="min-height: 52px;">
+                                            <span class="slds-form-element__label slds-text-color_weak" style="font-weight: 600; font-size: 11px;">{labels.owner}</span>
+                                            <div class="slds-form-element__control"><lightning-output-field field-name="OwnerId" variant="label-hidden"></lightning-output-field></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-m-top_medium slds-p-top_small slds-text-align_right slds-border_top" style="border-top: 1px dashed #ddd;">
+                                <lightning-button label={labels.btnCancel} variant="neutral" onclick={handleCancelEdit} class="slds-m-right_small"></lightning-button>
+                                <lightning-button label={labels.btnSave} variant="brand" type="submit" icon-name="utility:save"></lightning-button>
+                            </div>
+
+                        </lightning-record-edit-form>
+                    </template>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_7-of-12 slds-p-left_large">
+                    <h3 class="slds-text-heading_small slds-m-bottom_medium" style="font-weight: 700; color: #0176d3;">
+                        <lightning-icon icon-name="custom:custom85" size="small" class="slds-m-right_x-small"></lightning-icon>
+                        {labels.catalogTitle}
+                    </h3>
+                    <template if:true={hasUnits}>
+                        <div style="height: 450px;">
+                            <lightning-datatable key-field="Id" data={relatedUnitsData} columns={unitColumns} hide-checkbox-column></lightning-datatable>
+                        </div>
+                    </template>
+                    <template if:false={hasUnits}>
+                        <div class="slds-illustration slds-illustration_small slds-p-around_large slds-text-align_center" style="background: #fdfdfd; border: 1px dashed #ddd; border-radius: 4px; min-height: 200px;">
+                            <div class="slds-text-color_weak slds-text-heading_medium">{labels.emptyUnitsTitle}</div>
+                            <p class="slds-text-color_weak slds-m-top_xxx-small">{labels.emptyUnitsDesc}</p>
+                        </div>
+                    </template>
+                </div>
+
             </div>
         </div>
     </template>
 
     <template if:false={selectedPropertyId}>
-        <lightning-tabset variant="scoped">
+        <lightning-tabset variant="scoped" active-tab-value={activeTabName}>
             
-            <lightning-tab label="Operations & Alerts" icon-name="standard:dashboard">
+            <lightning-tab label={labels.tabOperations} value="operations_tab" onactive={handleTabActivated} icon-name="standard:dashboard">
                 <div class="slds-m-vertical_medium slds-grid slds-wrap slds-gutters slds-grid_align-center">
-                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewProperty}><lightning-icon icon-name="custom:custom24" size="small"></lightning-icon><span class="btn-text">New Property</span></button></div>
-                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewUnit}><lightning-icon icon-name="custom:custom85" size="small"></lightning-icon><span class="btn-text">New Unit</span></button></div>
-                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewListing}><lightning-icon icon-name="standard:opportunity" size="small"></lightning-icon><span class="btn-text">New Listing</span></button></div>
-                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewRequest}><lightning-icon icon-name="custom:custom15" size="small"></lightning-icon><span class="btn-text">New Request</span></button></div>
-                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewLead}><lightning-icon icon-name="custom:custom67" size="small"></lightning-icon><span class="btn-text">New Lead</span></button></div>
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewProperty}><lightning-icon icon-name="custom:custom24" size="small"></lightning-icon><span class="btn-text">{labels.newProperty}</span></button></div>
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewUnit}><lightning-icon icon-name="custom:custom85" size="small"></lightning-icon><span class="btn-text">{labels.newUnit}</span></button></div>
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewListing}><lightning-icon icon-name="standard:opportunity" size="small"></lightning-icon><span class="btn-text">{labels.newListing}</span></button></div>
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewRequest}><lightning-icon icon-name="custom:custom15" size="small"></lightning-icon><span class="btn-text">{labels.newRequest}</span></button></div>
+                    <div class="slds-col slds-p-bottom_small"><button class="dashboard-btn" onclick={navNewLead}><lightning-icon icon-name="custom:custom67" size="small"></lightning-icon><span class="btn-text">{labels.newLead}</span></button></div>
                 </div>
 
                 <div class="slds-m-top_large slds-p-top_medium slds-border_top">
-                    <h2 class="slds-text-heading_small slds-m-bottom_medium slds-text-color_error">
-                        <lightning-icon icon-name="utility:warning" size="small" variant="error" class="slds-m-right_x-small"></lightning-icon><strong>Attention Required Alerts</strong>
+                    <h2 class="slds-text-heading_small slds-m-bottom_medium slds-text-color_error slds-p-left_small">
+                        <lightning-icon icon-name="utility:warning" size="small" variant="error" class="slds-m-right_x-small"></lightning-icon>
+                        <strong>{labels.alertsHeader}</strong>
                     </h2>
                     
-                    <div class="slds-m-bottom_medium">
+                    <div class="slds-m-bottom_medium slds-p-horizontal_small">
                         <div class="slds-media slds-media_center slds-m-bottom_small">
                             <div class="slds-media__figure"><lightning-icon icon-name="standard:opportunity" size="small"></lightning-icon></div>
-                            <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Active Listings Desk</strong></h3></div>
+                            <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>{labels.deskListings}</strong></h3></div>
                         </div>
                         <div class="slds-grid slds-gutters">
-                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleListingsNoMatches}><span class="slds-badge slds-theme_error slds-m-right_small">{countListingsNoMatches}</span>Listings with 0 matches</button></div>
-                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleListingsPending}><span class="slds-badge slds-theme_warning slds-m-right_small">{countListingsPending}</span>Listings with pending matches</button></div>
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleListingsNoMatches}><span class="slds-badge slds-theme_error slds-m-right_small">{countListingsNoMatches}</span>{labels.deskListings} {labels.noMatches}</button></div>
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleListingsPending}><span class="slds-badge slds-theme_warning slds-m-right_small">{countListingsPending}</span>{labels.deskListings} {labels.pendingMatches}</button></div>
                         </div>
                         <template if:true={showListingsTable}>
                             <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
-                                <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">Showing: <strong>{tableTitle}</strong></div>
+                                <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">{labels.showing}: <strong>{tableTitle}</strong></div>
                                 <div style="height: 200px;"><lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable></div>
                             </div>
                         </template>
                     </div>
 
-                    <div class="slds-m-bottom_medium slds-m-top_large">
+                    <div class="slds-m-bottom_medium slds-p-horizontal_small slds-m-top_large">
                         <div class="slds-media slds-media_center slds-m-bottom_small">
                             <div class="slds-media__figure"><lightning-icon icon-name="custom:custom15" size="small"></lightning-icon></div>
-                            <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Active Requests Desk</strong></h3></div>
+                            <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>{labels.deskRequests}</strong></h3></div>
                         </div>
                         <div class="slds-grid slds-gutters">
-                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleRequestsNoMatches}><span class="slds-badge slds-theme_error slds-m-right_small">{countRequestsNoMatches}</span>Requests with 0 matches</button></div>
-                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleRequestsPending}><span class="slds-badge slds-theme_warning slds-m-right_small">{countRequestsPending}</span>Requests with pending matches</button></div>
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleRequestsNoMatches}><span class="slds-badge slds-theme_error slds-m-right_small">{countRequestsNoMatches}</span>{labels.deskRequests} {labels.noMatches}</button></div>
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleRequestsPending}><span class="slds-badge slds-theme_warning slds-m-right_small">{countRequestsPending}</span>{labels.deskRequests} {labels.pendingMatches}</button></div>
                         </div>
                         <template if:true={showRequestsTable}>
                             <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
-                                <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">Showing: <strong>{tableTitle}</strong></div>
+                                <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">{labels.showing}: <strong>{tableTitle}</strong></div>
                                 <div style="height: 200px;"><lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable></div>
                             </div>
                         </template>
                     </div>
 
-                    <div class="slds-m-bottom_medium slds-m-top_large">
+                    <div class="slds-m-bottom_medium slds-p-horizontal_small slds-m-top_large">
                         <div class="slds-media slds-media_center slds-m-bottom_small">
                             <div class="slds-media__figure"><lightning-icon icon-name="custom:custom67" size="small"></lightning-icon></div>
-                            <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>Listing Leads Desk</strong></h3></div>
+                            <div class="slds-media__body"><h3 class="slds-text-heading_small slds-text-color_weak"><strong>{labels.deskLeads}</strong></h3></div>
                         </div>
                         <div class="slds-grid slds-gutters">
-                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleLeadsOverdue}><span class="slds-badge slds-theme_error slds-m-right_small">{countLeadsOverdue}</span>Overdue Follow-ups</button></div>
-                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleLeadsNew}><span class="slds-badge slds-theme_warning slds-m-right_small">{countLeadsNew}</span>New Leads to check</button></div>
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleLeadsOverdue}><span class="slds-badge slds-theme_error slds-m-right_small">{countLeadsOverdue}</span>{labels.overdueFollowups}</button></div>
+                            <div class="slds-col slds-size_1-of-2"><button class="slds-button slds-button_outline-brand slds-button_stretch" onclick={toggleLeadsNew}><span class="slds-badge slds-theme_warning slds-m-right_small">{countLeadsNew}</span>{labels.newLeadsCheck}</button></div>
                         </div>
                         <template if:true={showLeadsTable}>
                             <div class="slds-m-top_medium slds-p-around_small slds-box slds-theme_default">
-                                <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">Showing: <strong>{tableTitle}</strong></div>
+                                <div class="slds-text-title_caps slds-m-bottom_small slds-text-color_weak">{labels.showing}: <strong>{tableTitle}</strong></div>
                                 <div style="height: 200px;"><lightning-datatable key-field="Id" data={currentTableData} columns={currentColumns} hide-checkbox-column onrowaction={handleRowAction}></lightning-datatable></div>
                             </div>
                         </template>
@@ -151,12 +410,12 @@
                 </div>
             </lightning-tab>
 
-            <lightning-tab label="Real Estate Portfolio" icon-name="custom:custom24">
+            <lightning-tab label={labels.tabPortfolio} value="portfolio_tab" onactive={handleTabActivated} icon-name="custom:custom24">
                 <div class="slds-grid slds-wrap slds-p-around_small">
                     
                     <div class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-border_right slds-p-right_small">
                         <lightning-vertical-navigation selected-item="properties_opt">
-                            <lightning-vertical-navigation-section label="Console Menu">
+                            <lightning-vertical-navigation-section label={labels.tabPortfolio}>
                                 <lightning-vertical-navigation-item label="Properties (Buildings)" name="properties_opt" icon-name="custom:custom24"></lightning-vertical-navigation-item>
                                 <lightning-vertical-navigation-item label="Property Units" name="units_opt" icon-name="custom:custom85" disabled></lightning-vertical-navigation-item>
                                 <lightning-vertical-navigation-item label="Opportunities / Listings" name="listings_opt" icon-name="standard:opportunity" disabled></lightning-vertical-navigation-item>
@@ -170,19 +429,35 @@
                         <div class="slds-grid slds-grid_align-spread slds-m-bottom_medium slds-grid_vertical-align-center">
                             <div>
                                 <h3 class="slds-text-heading_small"><strong>Registered Buildings Portfolio</strong></h3>
-                                <p class="slds-text-color_weak" style="font-size: 12px;">Launch individual building workspace benches using action row brand triggers.</p>
+                                <p class="slds-text-color_weak" style="font-size: 12px;">{labels.portfolioSubtitle}</p>
                             </div>
-                            <div><lightning-button variant="brand" label="New Property" icon-name="utility:add" onclick={navNewProperty}></lightning-button></div>
+                            <div>
+                                <lightning-button 
+                                    variant="brand" 
+                                    label="New Property (Building)" 
+                                    icon-name="utility:add" 
+                                    onclick={navNewProperty}>
+                                </lightning-button>
+                            </div>
                         </div>
                         <div style="height: 350px;">
-                            <lightning-datatable key-field="Id" data={propertiesInventoryData} columns={propertyInventoryColumns} hide-checkbox-column onrowaction={handlePropertyInventoryAction}></lightning-datatable>
+                            <lightning-datatable 
+                                key-field="Id" 
+                                data={propertiesInventoryData} 
+                                columns={propertyInventoryColumns} 
+                                hide-checkbox-column
+                                sorted-by={sortedByField}
+                                sorted-direction={sortedDirection}
+                                onsort={handlePropertiesSort}
+                                onrowaction={handlePropertyInventoryAction}>
+                            </lightning-datatable>
                         </div>
                     </div>
 
                 </div>
             </lightning-tab>
 
-            <lightning-tab label="Geo Map View" icon-name="standard:map">
+            <lightning-tab label={labels.tabMap} value="map_tab" onactive={handleTabActivated} icon-name="standard:map">
                 <div class="slds-p-around_small">
                     <c-global-property-map></c-global-property-map>
                 </div>

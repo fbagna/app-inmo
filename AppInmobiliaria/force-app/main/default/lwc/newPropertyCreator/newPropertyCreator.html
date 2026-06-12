@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="slds-col slds-size_1-of-1">
-                    <c-location-selector></c-location-selector>
+                    <c-location-selector onlocationchange={handleLocationChange}></c-location-selector>
                 </div>
                 
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_small">
@@ -30,7 +30,7 @@
                     <lightning-input-field field-name="gbcinmo__Street__c" variant="label-hidden" required></lightning-input-field>
                 </div>
                 <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-m-bottom_small">
-                    <lightning-input-field field-name="gbcinmo__Postal_Code__c"></lightning-input-field>
+                    <lightning-input-field field-name="gbcinmo__Zip_Code__c"></lightning-input-field>
                 </div>
 
                 <div class="slds-col slds-size_1-of-1 slds-m-top_medium slds-m-bottom_small">

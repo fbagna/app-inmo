@@ -4,7 +4,18 @@
         <label>Inmobiliaria Zona</label>
         <name>Inmobiliaria_Zona</name>
     </customApplications>
-
+        <customLabels>
+        <label>Características</label>
+        <name>Section_Features</name>
+    </customLabels>
+    <customLabels>
+        <label>Editar Propiedad</label>
+        <name>Btn_Edit</name>
+    </customLabels>
+    <customLabels>
+        <label>Propiedad actualizada correctamente.</label>
+        <name>PropertyToastUpdateSuccessMsg</name>
+    </customLabels>
     <customLabels>
         <label>No hay fotos subidas. Arrastra imágenes a la sección de Archivos (Files) para verlas en el carrusel.</label>
         <name>Carousel_No_Photos</name>
@@ -52,6 +63,251 @@
     <customLabels>
         <label>Cargando...</label>
         <name>LoadingText</name>
+    </customLabels>
+    <customLabels>
+        <label>Nueva Propiedad (Edificio/Dirección)</label>
+        <name>PropertyModalTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Dirección</label>
+        <name>PropertyAddressLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Especificaciones del Edificio</label>
+        <name>PropertySectionSpecs</name>
+    </customLabels>
+    <customLabels>
+        <label>+ ¿No encuentras al portero? Crear contacto</label>
+        <name>PropertyQuickAddLink</name>
+    </customLabels>
+    <customLabels>
+        <label>Alta Rápida de Portero</label>
+        <name>PropertyQuickAddHeader</name>
+    </customLabels>
+    <customLabels>
+        <label>Nombre</label>
+        <name>PropertyFirstNameLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Apellidos</label>
+        <name>PropertyLastNameLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar Alta Rápida</label>
+        <name>PropertyCancelLink</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>PropertyBtnCancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Guardar Propiedad</label>
+        <name>PropertyBtnSave</name>
+    </customLabels>
+    <customLabels>
+        <label>Atención</label>
+        <name>PropertyToastAttention</name>
+    </customLabels>
+    <customLabels>
+        <label>Por favor, rellena todos los campos de ubicación obligatorios marcados con asterisco.</label>
+        <name>PropertyToastAttentionMsg</name>
+    </customLabels>
+    <customLabels>
+        <label>Ha ocurrido un error en segundo plano al procesar la creación del contacto.</label>
+        <name>PropertyToastBackgroundError</name>
+    </customLabels>
+    <customLabels>
+        <label>¡Completado!</label>
+        <name>PropertyToastSuccessTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Propiedad creada correctamente.</label>
+        <name>PropertyToastSuccessMsg</name>
+    </customLabels>
+    <customLabels>
+        <label>Mapa de Propiedades Disponibles</label>
+        <name>Map_Card_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Buscando ubicaciones...</label>
+        <name>Map_Searching_Text</name>
+    </customLabels>
+    <customLabels>
+        <label>Ubicación</label>
+        <name>Map_Label_Prefix</name>
+    </customLabels>
+
+    <customLabels>
+        <label>Espacio de Trabajo de la Propiedad</label>
+        <name>Workspace_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Volver al Panel Principal</label>
+        <name>Btn_Back_To_Dashboard</name>
+    </customLabels>
+    <customLabels>
+        <label>Detalles del Dossier Inmobiliario</label>
+        <name>Section_Dossier_Details</name>
+    </customLabels>
+    <customLabels>
+        <label>Información de la Propiedad</label>
+        <name>Section_Prop_Info</name>
+    </customLabels>
+    <customLabels>
+        <label>Información de Ubicación</label>
+        <name>Section_Location_Info</name>
+    </customLabels>
+    <customLabels>
+        <label>Comentarios de Agencia</label>
+        <name>Section_Comments</name>
+    </customLabels>
+    <customLabels>
+        <label>Información del Sistema</label>
+        <name>Section_System_Info</name>
+    </customLabels>
+    <customLabels>
+        <label>Nombre del Edificio</label>
+        <name>Field_Prop_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>Portero</label>
+        <name>Field_Doorman</name>
+    </customLabels>
+    <customLabels>
+        <label>Tiene Ascensor</label>
+        <name>Field_Has_Elevator</name>
+    </customLabels>
+    <customLabels>
+        <label>Dirección</label>
+        <name>Field_Address</name>
+    </customLabels>
+    <customLabels>
+        <label>Código Postal</label>
+        <name>Field_Zip_Code</name>
+    </customLabels>
+    <customLabels>
+        <label>País</label>
+        <name>Field_Country</name>
+    </customLabels>
+    <customLabels>
+        <label>Provincia</label>
+        <name>Field_State_Province</name>
+    </customLabels>
+    <customLabels>
+        <label>Ciudad</label>
+        <name>Field_City</name>
+    </customLabels>
+    <customLabels>
+        <label>Barrio / Zona</label>
+        <name>Field_Neighborhood</name>
+    </customLabels>
+    <customLabels>
+        <label>Creado Por</label>
+        <name>Field_Created_By</name>
+    </customLabels>
+    <customLabels>
+        <label>Referencia Autonumérica</label>
+        <name>Field_Prop_Ref</name>
+    </customLabels>
+    <customLabels>
+        <label>Última Modificación Por</label>
+        <name>Field_Modified_By</name>
+    </customLabels>
+    <customLabels>
+        <label>Propietario del Registro</label>
+        <name>Field_Owner</name>
+    </customLabels>
+    <customLabels>
+        <label>Catálogo de Unidades Asociadas</label>
+        <name>Catalog_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Sin unidades registradas todavía</label>
+        <name>Empty_Units_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Este edificio principal no tiene sub-unidades o pisos vinculados en el sistema.</label>
+        <name>Empty_Units_Desc</name>
+    </customLabels>
+    <customLabels>
+        <label>Operaciones y Alertas</label>
+        <name>Tab_Operations</name>
+    </customLabels>
+    <customLabels>
+        <label>Cartera Inmobiliaria</label>
+        <name>Tab_Portfolio</name>
+    </customLabels>
+    <customLabels>
+        <label>Vista de Mapa Geo</label>
+        <name>Tab_Map</name>
+    </customLabels>
+    <customLabels>
+        <label>Nueva Propiedad</label>
+        <name>Btn_New_Property</name>
+    </customLabels>
+    <customLabels>
+        <label>Nueva Unidad</label>
+        <name>Btn_New_Unit</name>
+    </customLabels>
+    <customLabels>
+        <label>Nueva Oferta</label>
+        <name>Btn_New_Listing</name>
+    </customLabels>
+    <customLabels>
+        <label>Nueva Demanda</label>
+        <name>Btn_New_Request</name>
+    </customLabels>
+    <customLabels>
+        <label>Nueva Noticia</label>
+        <name>Btn_New_Lead</name>
+    </customLabels>
+    <customLabels>
+        <label>Alertas que Requieren Atención</label>
+        <name>Alerts_Header</name>
+    </customLabels>
+    <customLabels>
+        <label>Panel de Ofertas Activas</label>
+        <name>Desk_Listings</name>
+    </customLabels>
+    <customLabels>
+        <label>Panel de Demandas Activas</label>
+        <name>Desk_Requests</name>
+    </customLabels>
+    <customLabels>
+        <label>Panel de Captación de Noticias</label>
+        <name>Desk_Leads</name>
+    </customLabels>
+    <customLabels>
+        <label>con 0 cruces</label>
+        <name>Alert_No_Matches</name>
+    </customLabels>
+    <customLabels>
+        <label>con cruces pendientes</label>
+        <name>Alert_Pending_Matches</name>
+    </customLabels>
+    <customLabels>
+        <label>Seguimientos Vencidos</label>
+        <name>Alert_Overdue</name>
+    </customLabels>
+    <customLabels>
+        <label>Nuevas Noticias por Verificar</label>
+        <name>Alert_New_Leads</name>
+    </customLabels>
+    <customLabels>
+        <label>Mostrando</label>
+        <name>Msg_Showing</name>
+    </customLabels>
+    <customLabels>
+        <label>Ver</label>
+        <name>Col_View</name>
+    </customLabels>
+    <customLabels>
+        <label>Abrir Espacio de Trabajo</label>
+        <name>Col_Open_Workspace</name>
+    </customLabels>
+    <customLabels>
+        <label>Ordena las filas dinámicamente haciendo clic en los encabezados. Accede al espacio de trabajo mediante los botones de marca.</label>
+        <name>Portfolio_Subtitle</name>
     </customLabels>
 
     <flowDefinitions>

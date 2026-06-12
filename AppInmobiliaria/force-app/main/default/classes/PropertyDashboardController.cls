@@ -1,7 +1,7 @@
 public with sharing class PropertyDashboardController {
     
     /**
-     * Fetches the most recent Property records to display on the dashboard list view.
+     * Fetches the most recent Property records with verified database schema fields.
      * @return List of gbcinmo__Property__c records.
      */
     @AuraEnabled(cacheable=true)
@@ -9,9 +9,19 @@ public with sharing class PropertyDashboardController {
         return [
             SELECT Id, 
                    Name, 
+                   OwnerId,
+                   CreatedById,
+                   LastModifiedById,
+                   gbcinmo__Property_Reference__c,
                    gbcinmo__Street__c,
+                   gbcinmo__Zip_Code__c,
                    gbcinmo__City__c,
-                   gbcinmo__State_Province__c
+                   gbcinmo__State_Province__c,
+                   gbcinmo__Neighborhood__c,
+                   gbcinmo__Country__c,
+                   gbcinmo__Doorman__c,
+                   gbcinmo__Has_Elevator__c,
+                   gbcinmo__Comments__c
             FROM gbcinmo__Property__c 
             WITH USER_MODE
             ORDER BY CreatedDate DESC
@@ -22,7 +32,7 @@ public with sharing class PropertyDashboardController {
     /**
      * Fetches all child Property Unit records belonging to a specific parent Property container.
      * @param propertyId The ID of the parent Property object record.
-     * @return List of matching gbcinmo__Property_Unit__c records ordered alphabetically.
+     * @return List of matching gbcinmo__Property_Unit__c records.
      */
     @AuraEnabled(cacheable=true)
     public static List<gbcinmo__Property_Unit__c> getRelatedUnits(Id propertyId) {

@@ -84,7 +84,6 @@
         <shortDescription>Loading Spinner Text</shortDescription>
         <value>Loading...</value>
     </labels>
-
     <labels>
         <fullName>PropertyModalTitle</fullName>
         <language>en_US</language>
@@ -210,5 +209,334 @@
         <protected>true</protected>
         <shortDescription>Text prefix used before address description in markers</shortDescription>
         <value>Location</value>
+    </labels>
+    <labels>
+        <fullName>Workspace_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Header workspace section label text</shortDescription>
+        <value>Property Workspace</value>
+    </labels>
+    <labels>
+        <fullName>Btn_Back_To_Dashboard</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Button label to exit workspace interface layout</shortDescription>
+        <value>Back to Dashboard Hub</value>
+    </labels>
+    <labels>
+        <fullName>Section_Dossier_Details</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title tag segment for current dossier dossier tracking</shortDescription>
+        <value>Property Dossier Details</value>
+    </labels>
+    <labels>
+        <fullName>Section_Prop_Info</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title descriptor tag for general building parameters</shortDescription>
+        <value>Property Information</value>
+    </labels>
+    <labels>
+        <fullName>Section_Location_Info</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title descriptor tag for physical geography parameters</shortDescription>
+        <value>Location Information</value>
+    </labels>
+    <labels>
+        <fullName>Section_Features</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title descriptor tag for property specifications and custom extras</shortDescription>
+        <value>Features</value>
+    </labels>
+    <labels>
+        <fullName>Section_Comments</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title descriptor tag for free agency annotations</shortDescription>
+        <value>Comments</value>
+    </labels>
+    <labels>
+        <fullName>Section_System_Info</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title descriptor tag for data logging properties</shortDescription>
+        <value>System Information</value>
+    </labels>
+    <labels>
+        <fullName>Field_Prop_Name</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Property Name</value>
+    </labels>
+    <labels>
+        <fullName>Field_Doorman</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Doorman</value>
+    </labels>
+    <labels>
+        <fullName>Field_Has_Elevator</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Has Elevator</value>
+    </labels>
+    <labels>
+        <fullName>Field_Address</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Address</value>
+    </labels>
+    <labels>
+        <fullName>Field_Zip_Code</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Zip Code</value>
+    </labels>
+    <labels>
+        <fullName>Field_Country</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Country</value>
+    </labels>
+    <labels>
+        <fullName>Field_State_Province</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>State / Province</value>
+    </labels>
+    <labels>
+        <fullName>Field_City</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>City</value>
+    </labels>
+    <labels>
+        <fullName>Field_Neighborhood</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Neighborhood</value>
+    </labels>
+    <labels>
+        <fullName>Field_Created_By</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Created By</value>
+    </labels>
+    <labels>
+        <fullName>Field_Prop_Ref</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Property Reference</value>
+    </labels>
+    <labels>
+        <fullName>Field_Modified_By</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Last Modified By</value>
+    </labels>
+    <labels>
+        <fullName>Field_Owner</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Data element lookup label descriptor reference text</shortDescription>
+        <value>Owner</value>
+    </labels>
+    <labels>
+        <fullName>Catalog_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Related lists header title container string text</shortDescription>
+        <value>Associated Units Catalog</value>
+    </labels>
+    <labels>
+        <fullName>Empty_Units_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Fallback display illustration main title alert string</shortDescription>
+        <value>No units registered yet</value>
+    </labels>
+    <labels>
+        <fullName>Empty_Units_Desc</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Fallback display illustration explanation description layout text</shortDescription>
+        <value>This parent property building layout does not contain sub-apartments attached.</value>
+    </labels>
+    <labels>
+        <fullName>Tab_Operations</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Tab header label description string tag</shortDescription>
+        <value>Operations &amp; Alerts</value>
+    </labels>
+    <labels>
+        <fullName>Tab_Portfolio</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Tab header label description string tag</shortDescription>
+        <value>Real Estate Portfolio</value>
+    </labels>
+    <labels>
+        <fullName>Tab_Map</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Tab header label description string tag</shortDescription>
+        <value>Geo Map View</value>
+    </labels>
+    <labels>
+        <fullName>Btn_New_Property</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quick action button label launcher selector</shortDescription>
+        <value>New Property</value>
+    </labels>
+    <labels>
+        <fullName>Btn_New_Unit</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quick action button label launcher selector</shortDescription>
+        <value>New Unit</value>
+    </labels>
+    <labels>
+        <fullName>Btn_New_Listing</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quick action button label launcher selector</shortDescription>
+        <value>New Listing</value>
+    </labels>
+    <labels>
+        <fullName>Btn_New_Request</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quick action button label launcher selector</shortDescription>
+        <value>New Request</value>
+    </labels>
+    <labels>
+        <fullName>Btn_New_Lead</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Quick action button label launcher selector</shortDescription>
+        <value>New Lead</value>
+    </labels>
+    <labels>
+        <fullName>Alerts_Header</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Core operational alert layout section title block</shortDescription>
+        <value>Attention Required Alerts</value>
+    </labels>
+    <labels>
+        <fullName>Desk_Listings</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Specific business sub-unit counter category layout header</shortDescription>
+        <value>Active Listings Desk</value>
+    </labels>
+    <labels>
+        <fullName>Desk_Requests</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Specific business sub-unit counter category layout header</shortDescription>
+        <value>Active Requests Desk</value>
+    </labels>
+    <labels>
+        <fullName>Desk_Leads</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Specific business sub-unit counter category layout header</shortDescription>
+        <value>Listing Leads Desk</value>
+    </labels>
+    <labels>
+        <fullName>Alert_No_Matches</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Counter dynamic button tracking suffix descriptor</shortDescription>
+        <value>with 0 matches</value>
+    </labels>
+    <labels>
+        <fullName>Alert_Pending_Matches</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Counter dynamic button tracking suffix descriptor</protected>
+        <value>with pending matches</value>
+    </labels>
+    <labels>
+        <fullName>Alert_Overdue</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Counter dynamic button tracking suffix descriptor</shortDescription>
+        <value>Overdue Follow-ups</value>
+    </labels>
+    <labels>
+        <fullName>Alert_New_Leads</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Counter dynamic button tracking suffix descriptor</shortDescription>
+        <value>New Leads to check</value>
+    </labels>
+    <labels>
+        <fullName>Msg_Showing</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Dynamic datatable status contextual tracker text prefix</shortDescription>
+        <value>Showing</value>
+    </labels>
+    <labels>
+        <fullName>Col_View</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Row level standard action action-button label text</shortDescription>
+        <value>View</value>
+    </labels>
+    <labels>
+        <fullName>Col_Open_Workspace</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Row level inventory specialized split screen action launcher label</shortDescription>
+        <value>Open Workspace</value>
+    </labels>
+    <labels>
+        <fullName>Portfolio_Subtitle</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Inventory card operational usage guidance descriptor subtitle</shortDescription>
+        <value>Sort rows dynamically by clicking headers. Access workspace via brand buttons.</value>
+    </labels>
+    <labels>
+        <fullName>Btn_Edit</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for the record edit trigger button action</shortDescription>
+        <value>Edit Property</value>
+    </labels>
+    <labels>
+        <fullName>PropertyToastUpdateSuccessMsg</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Toast success feedback message after editing data</shortDescription>
+        <value>Property updated successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Workspace_Toggle_Location_Modify</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Checkbox toggle instruction text to allow regional cascade modifications</shortDescription>
+        <value>Do you want to modify the region or zone of this property?</value>
     </labels>
 </CustomLabels>
