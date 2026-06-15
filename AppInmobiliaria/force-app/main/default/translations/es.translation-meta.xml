@@ -17,6 +17,98 @@
         <name>PropertyToastUpdateSuccessMsg</name>
     </customLabels>
     <customLabels>
+        <label>Nueva Unidad de Propiedad</label>
+        <name>Modal_Unit_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Guardar y Nueva</label>
+        <name>Btn_Save_And_New</name>
+    </customLabels>
+    <customLabels>
+        <label>Información</label>
+        <name>Unit_Section_Information</name>
+    </customLabels>
+    <customLabels>
+        <label>Características de la Propiedad</label>
+        <name>Unit_Section_Features</name>
+    </customLabels>
+    <customLabels>
+        <label>Información Extra</label>
+        <name>Unit_Section_Extra</name>
+    </customLabels>
+    <customLabels>
+        <label>Información del Sistema</label>
+        <name>Unit_Section_System</name>
+    </customLabels>
+    <customLabels>
+        <label>Enlace de referencia de la publicación de la propiedad en portales externos.</label>
+        <name>Unit_HelpText_Listing_Url</name>
+    </customLabels>
+    <customLabels>
+        <label>Unidad de Propiedad creada correctamente.</label>
+        <name>Unit_Toast_Success_Create_Msg</name>
+    </customLabels>
+    <customLabels>
+        <label>Tipo de Propiedad</label>
+        <name>Field_Property_Type</name>
+    </customLabels>
+    <customLabels>
+        <label>Planta / Piso</label>
+        <name>Field_Floor</name>
+    </customLabels>
+    <customLabels>
+        <label>Contacto del Propietario</label>
+        <name>Field_Owner_Contact</name>
+    </customLabels>
+    <customLabels>
+        <label>Puerta</label>
+        <name>Field_Door</name>
+    </customLabels>
+    <customLabels>
+        <label>Bloque</label>
+        <name>Field_Block</name>
+    </customLabels>
+    <customLabels>
+        <label>Estado de Ocupación</label>
+        <name>Field_Occupancy_Status</name>
+    </customLabels>
+    <customLabels>
+        <label>Escalera</label>
+        <name>Field_Staircase</name>
+    </customLabels>
+    <customLabels>
+        <label>Metros Cuadrados (m²)</label>
+        <name>Field_Square_Meters</name>
+    </customLabels>
+    <customLabels>
+        <label>Habitaciones</label>
+        <name>Field_Bedrooms</name>
+    </customLabels>
+    <customLabels>
+        <label>Baños</label>
+        <name>Field_Bathrooms</name>
+    </customLabels>
+    <customLabels>
+        <label>Características y Notas</label>
+        <name>Field_Features_Notes</name>
+    </customLabels>
+    <customLabels>
+        <label>URL del Anuncio</label>
+        <name>Field_Listing_Url</name>
+    </customLabels>
+    <customLabels>
+        <label>Referencia Catastral</label>
+        <name>Field_Cadastral_Ref</name>
+    </customLabels>
+    <customLabels>
+        <label>Referencia de la Unidad</label>
+        <name>Field_Unit_Reference</name>
+    </customLabels>
+    <customLabels>
+        <label>Propiedad</label>
+        <name>Field_Property_Lookup</name>
+    </customLabels>
+    <customLabels>
         <label>No hay fotos subidas. Arrastra imágenes a la sección de Archivos (Files) para verlas en el carrusel.</label>
         <name>Carousel_No_Photos</name>
     </customLabels>

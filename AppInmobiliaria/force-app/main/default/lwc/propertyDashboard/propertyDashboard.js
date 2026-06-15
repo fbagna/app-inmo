@@ -4,10 +4,8 @@ import { refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { createRecord, getRecord } from 'lightning/uiRecordApi'; 
 import NewPropertyModal from 'c/newPropertyCreator';
+import NewUnitModal from 'c/newUnitCreator'; 
 
-/* ========================================================================= */
-/* --- APPEXCHANGE ABSOLUTE STRING ROUTING FIELDS MATRIX (BYPASSES LWC1504)  */
-/* ========================================================================= */
 const WORKSPACE_FIELDS = [
     'gbcinmo__Property__c.gbcinmo__Country__c',
     'gbcinmo__Property__c.gbcinmo__State_Province__c',
@@ -15,9 +13,11 @@ const WORKSPACE_FIELDS = [
     'gbcinmo__Property__c.gbcinmo__Neighborhood__c'
 ];
 
-/* ========================================================================= */
-/* --- APPEXCHANGE COMPLIANT CUSTOM LABELS IMPORTS (ZERO HARDCODE) -------- */
-/* ========================================================================= */
+const UNIT_FIELDS_EXVENT = [
+    'gbcinmo__Property_Unit__c.gbcinmo__Property__c',
+    'gbcinmo__Property_Unit__c.gbcinmo__Property__r.Name'
+];
+
 import labelWorkspaceTitle from '@salesforce/label/c.Workspace_Title';
 import labelBtnBackToDashboard from '@salesforce/label/c.Btn_Back_To_Dashboard';
 import labelSectionDossierDetails from '@salesforce/label/c.Section_Dossier_Details';
@@ -40,11 +40,11 @@ import labelFieldPropRef from '@salesforce/label/c.Field_Prop_Ref';
 import labelFieldModifiedBy from '@salesforce/label/c.Field_Modified_By';
 import labelFieldOwner from '@salesforce/label/c.Field_Owner';
 import labelCatalogTitle from '@salesforce/label/c.Catalog_Title';
-import labelEmptyUnitsTitle from '@salesforce/label/c.Empty_Units_Title';
+import labelEmptyUnitsTitle from '@salesforce/label/c.Empty_Units_Title'; 
 import labelEmptyUnitsDesc from '@salesforce/label/c.Empty_Units_Desc';
-import labelTabOperations from '@salesforce/label/c.Tab_Operations';
-import labelTabPortfolio from '@salesforce/label/c.Tab_Portfolio';
-import labelTabMap from '@salesforce/label/c.Tab_Map';
+import tabOperations from '@salesforce/label/c.Tab_Operations';
+import tabPortfolio from '@salesforce/label/c.Tab_Portfolio';
+import tabMap from '@salesforce/label/c.Tab_Map';
 import labelBtnNewProperty from '@salesforce/label/c.Btn_New_Property';
 import labelBtnNewUnit from '@salesforce/label/c.Btn_New_Unit';
 import labelBtnNewListing from '@salesforce/label/c.Btn_New_Listing';
@@ -78,11 +78,9 @@ import labelQuickAddLink from '@salesforce/label/c.PropertyQuickAddLink';
 import labelQuickAddHeader from '@salesforce/label/c.PropertyQuickAddHeader';
 import labelToggleLocationModify from '@salesforce/label/c.Workspace_Toggle_Location_Modify';
 
-/* ========================================================================= */
-/* --- SECURE APEX METHODS REFERENCES (WITH USER_MODE BOUNDARIES) --------- */
-/* ========================================================================= */
 import getRecentProperties from '@salesforce/apex/PropertyDashboardController.getRecentProperties';
 import getRelatedUnits from '@salesforce/apex/PropertyDashboardController.getRelatedUnits';
+import getAllPropertyUnits from '@salesforce/apex/PropertyDashboardController.getAllPropertyUnits'; 
 import getListingsWithoutMatches from '@salesforce/apex/PropertyAlertsController.getListingsWithoutMatches';
 import getListingsWithPendingMatches from '@salesforce/apex/PropertyAlertsController.getListingsWithPendingMatches';
 import getRequestsWithoutMatches from '@salesforce/apex/PropertyAlertsController.getRequestsWithoutMatches';
@@ -93,28 +91,35 @@ import getNewLeads from '@salesforce/apex/PropertyAlertsController.getNewLeads';
 export default class PropertyDashboard extends NavigationMixin(LightningElement) {
 
     @track selectedPropertyId = '';
+    @track selectedUnitId = ''; 
+    @track parentPropertyId = '';
+    @track parentPropertyName = '';
+    
+    @track showFlowModal = false;
     @track activeMenuOption = 'properties_opt'; 
     @track activeTabName = 'operations_tab'; 
     @track propertiesInventoryData = [];
+    @track allUnitsPortfolioData = []; 
     @track relatedUnitsData = [];
     @track sortedByField = 'Name';
     @track sortedDirection = 'asc';
     
     @track isEditMode = false;
+    @track isUnitEditMode = false; 
+    @track isQuickAddOwnerWorkspace = false;
     @track isWorkspaceFieldsLoaded = false;
     @track isQuickAddDoormanWorkspace = false;
     @track showLocationPicker = false;
     
-    // Master structure keeping database baseline memory states safely stored
     @track rawLocationRecord = { country: '', state: '', city: '', neighborhood: '' };
 
-    // Individual reactive elements mapped directly to html tags parameters
     @track workspaceCountry = '';
     @track workspaceState = '';
     @track workspaceCity = '';
     @track workspaceNeighborhood = '';
     
     wiredPropertiesResult;
+    wiredUnitsPortfolioResult; 
     wiredWorkspaceRecordResult; 
 
     labels = {
@@ -142,9 +147,9 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         catalogTitle: labelCatalogTitle,
         emptyUnitsTitle: labelEmptyUnitsTitle,
         emptyUnitsDesc: labelEmptyUnitsDesc,
-        tabOperations: labelTabOperations,
-        tabPortfolio: labelTabPortfolio,
-        tabMap: labelTabMap,
+        tabOperations: tabOperations,
+        tabPortfolio: tabPortfolio,
+        tabMap: tabMap,
         newProperty: labelBtnNewProperty,
         newUnit: labelBtnNewUnit,
         newListing: labelBtnNewListing,
@@ -182,7 +187,20 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
             { label: 'Floor', fieldName: 'gbcinmo__Floor__c', type: 'text', initialWidth: 100 },
             { label: 'Door', fieldName: 'gbcinmo__Door__c', type: 'text', initialWidth: 100 },
             { label: 'Square Meters (m²)', fieldName: 'gbcinmo__Square_Meters__c', type: 'number', initialWidth: 140 },
-            { label: 'Occupancy Status', fieldName: 'gbcinmo__Occupancy_Status__c', type: 'text', initialWidth: 160 }
+            { label: 'Occupancy Status', fieldName: 'gbcinmo__Occupancy_Status__c', type: 'text', initialWidth: 160 },
+            { type: 'button', typeAttributes: { label: 'Open', name: 'open_unit_workspace', variant: 'brand-outline' }, initialWidth: 90 }
+        ];
+    }
+
+    get globalUnitsColumns() {
+        return [
+            { label: 'Unit Name', fieldName: 'Name', type: 'text', initialWidth: 160, sortable: true },
+            { label: 'Parent Property building', fieldName: 'parentBuildingName', type: 'text', initialWidth: 190, sortable: true },
+            { label: 'Floor', fieldName: 'gbcinmo__Floor__c', type: 'text', initialWidth: 90, sortable: true },
+            { label: 'Door', fieldName: 'gbcinmo__Door__c', type: 'text', initialWidth: 90, sortable: true },
+            { label: 'Square Meters (m²)', fieldName: 'gbcinmo__Square_Meters__c', type: 'number', initialWidth: 140, sortable: true },
+            { label: 'Occupancy Status', fieldName: 'gbcinmo__Occupancy_Status__c', type: 'text', initialWidth: 150, sortable: true },
+            { type: 'button', typeAttributes: { label: 'Open Workspace', name: 'open_unit_global', variant: 'brand' }, initialWidth: 160 }
         ];
     }
 
@@ -225,7 +243,8 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         ];
     }
 
-    get isViewProperties() { return this.activeMenuOption === 'properties_opt'; }
+    get isPropertiesSegmentActive() { return this.activeMenuOption === 'properties_opt'; }
+    get isUnitsSegmentActive() { return this.activeMenuOption === 'units_opt'; }
 
     handleMenuSelect(event) {
         this.activeMenuOption = event.detail.name;
@@ -248,6 +267,29 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         else if (error) { this.relatedUnitsData = []; }
     }
 
+    @wire(getAllPropertyUnits)
+    wiredAllUnitsPortfolio(result) {
+        this.wiredUnitsPortfolioResult = result;
+        if (result.data) {
+            this.allUnitsPortfolioData = result.data.map(unit => ({
+                ...unit,
+                parentBuildingName: unit.gbcinmo__Property__r ? unit.gbcinmo__Property__r.Name : ''
+            }));
+        } else if (result.error) {
+            this.allUnitsPortfolioData = [];
+        }
+    }
+
+    @wire(getRecord, { recordId: '$selectedUnitId', fields: UNIT_FIELDS_EXVENT })
+    wiredUnitRecordDetails({ error, data }) {
+        if (data) {
+            this.parentPropertyId = data.fields.gbcinmo__Property__c?.value || '';
+            this.parentPropertyName = data.fields.gbcinmo__Property__r?.value?.fields?.Name?.value || '';
+        } else if (error) {
+            this.parentPropertyId = ''; this.parentPropertyName = '';
+        }
+    }
+
     get hasUnits() {
         return this.relatedUnitsData && this.relatedUnitsData.length > 0;
     }
@@ -258,7 +300,7 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         if (result.data) {
             const fields = result.data.fields;
             this.rawLocationRecord = {
-                country: fields.gbcinmo__Country__c?.value || '',
+                country: fields.gbcinmo__Country__c?.value || 'España', 
                 state: fields.gbcinmo__State_Province__c?.value || '',
                 city: fields.gbcinmo__City__c?.value || '',
                 neighborhood: fields.gbcinmo__Neighborhood__c?.value || ''
@@ -266,30 +308,53 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         }
     }
 
-    handlePropertiesSort(event) {
+    handleInventorySort(event) {
         this.sortedByField = event.detail.fieldName;
         this.sortedDirection = event.detail.sortDirection;
-        this.executePropertiesSort(this.sortedByField, this.sortedDirection);
-    }
 
-    executePropertiesSort(fieldName, direction) {
-        let clonedData = JSON.parse(JSON.stringify(this.propertiesInventoryData));
-        let keySelector = (record) => record[fieldName];
-        let reverseMultiplier = direction === 'asc' ? 1 : -1;
+        let targetDataArray = this.isPropertiesSegmentActive ? 'propertiesInventoryData' : 'allUnitsPortfolioData';
+        let clonedData = JSON.parse(JSON.stringify(this[targetDataArray]));
+        let keySelector = (record) => record[this.sortedByField];
+        let reverseMultiplier = this.sortedDirection === 'asc' ? 1 : -1;
 
         clonedData.sort((alpha, beta) => {
             let valAlpha = keySelector(alpha) ? keySelector(alpha).toString().toLowerCase() : '';
             let valBeta = keySelector(beta) ? keySelector(beta).toString().toLowerCase() : '';
             return reverseMultiplier * ((valAlpha > valBeta) - (valBeta > valAlpha));
         });
-        this.propertiesInventoryData = clonedData;
+        this[targetDataArray] = clonedData;
     }
 
     handlePropertyInventoryAction(event) {
         if (event.detail.action.name === 'open_workspace') {
             this.selectedPropertyId = event.detail.row.Id; 
+            this.selectedUnitId = '';
             this.isEditMode = false;
-            this.isWorkspaceFieldsLoaded = false;
+        }
+    }
+
+    handleUnitCatalogAction(event) {
+        if (event.detail.action.name === 'open_unit_workspace') {
+            this.selectedUnitId = event.detail.row.Id;
+            this.isUnitEditMode = false;
+        }
+    }
+
+    handleGlobalUnitAction(event) {
+        if (event.detail.action.name === 'open_unit_global') {
+            const chosenRow = event.detail.row;
+            this.selectedUnitId = chosenRow.Id;
+            this.selectedPropertyId = chosenRow.gbcinmo__Property__c || ''; 
+            this.isUnitEditMode = false;
+        }
+    }
+
+    handleNavigateToParentPropertyWorkspace(event) {
+        event.preventDefault();
+        if (this.parentPropertyId) {
+            this.selectedPropertyId = this.parentPropertyId;
+            this.selectedUnitId = ''; 
+            this.isEditMode = false;
         }
     }
 
@@ -298,16 +363,23 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         if (resultRecordId) { 
             await refreshApex(this.wiredPropertiesResult);
             this.selectedPropertyId = resultRecordId; 
+            this.selectedUnitId = '';
             this.isEditMode = false;
-            this.isWorkspaceFieldsLoaded = false;
         }
     }
 
     handleBackToDashboard() {
         this.selectedPropertyId = ''; 
+        this.selectedUnitId = '';
         this.relatedUnitsData = [];
         this.isEditMode = false;
+        this.isUnitEditMode = false;
         this.isWorkspaceFieldsLoaded = false;
+    }
+
+    handleBackToPropertyWorkspace() {
+        this.selectedUnitId = '';
+        this.isUnitEditMode = false;
     }
 
     handleEnableEdit() {
@@ -320,16 +392,60 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         this.isEditMode = false;
     }
 
-    /**
-     * @description Dynamic checkbox toggle listener. Forces parent string variables synchronization
-     * immediately to feed incoming properties maps right as the fresh child instance mounts.
-     */
+    handleEnableUnitEdit() {
+        this.isQuickAddOwnerWorkspace = false;
+        this.isUnitEditMode = true;
+    }
+
+    handleCancelUnitEdit() {
+        this.isUnitEditMode = false;
+    }
+
+    handleManageCover() {
+        this.showFlowModal = true;
+    }
+
+    handleCloseFlowModal() {
+        this.showFlowModal = false;
+    }
+
+    get flowInputVariables() {
+        return [
+            {
+                name: 'recordId',
+                type: 'String',
+                value: this.selectedUnitId
+            }
+        ];
+    }
+
+    async handleFlowStatusChange(event) {
+        if (event.detail.status === 'FINISHED' || event.detail.status === 'FINISHED_SCREEN') {
+            this.showFlowModal = false;
+            this.dispatchEvent(new ShowToastEvent({ title: 'Success', message: 'Cover photo updated successfully.', variant: 'success' }));
+            
+            await refreshApex(this.wiredUnitsPortfolioResult);
+            await refreshApex(this.wiredPropertiesResult);
+            
+            const activeForm = this.template.querySelector('lightning-record-view-form');
+            if (activeForm) {
+                const savedId = this.selectedUnitId;
+                this.selectedUnitId = '';
+                setTimeout(() => { this.selectedUnitId = savedId; }, 50);
+            }
+        }
+    }
+
+    toggleQuickAddOwnerWorkspace(event) {
+        event.preventDefault();
+        this.isQuickAddOwnerWorkspace = !this.isQuickAddOwnerWorkspace;
+    }
+
     handleToggleLocationPicker(event) {
         this.showLocationPicker = event.target.checked;
         if (this.showLocationPicker) {
             this.isWorkspaceFieldsLoaded = false;
             
-            // Sync values to tracking state holders sychronously
             this.workspaceCountry = this.rawLocationRecord.country;
             this.workspaceState = this.rawLocationRecord.state;
             this.workspaceCity = this.rawLocationRecord.city;
@@ -397,11 +513,40 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
                 fields['gbcinmo__Neighborhood__c'] = this.rawLocationRecord.neighborhood;
             }
 
-            this.template.querySelector('.workspace-edit-form').submit(fields);
+            this.workspaceEditFormSubmit(fields);
         } catch (error) {
             console.error('Workspace Update Exception Error:', error);
             this.dispatchEvent(new ShowToastEvent({ title: 'Error', message: this.labels.backgroundError, variant: 'error' }));
         }
+    }
+
+    workspaceEditFormSubmit(fields) {
+        const editForm = this.template.querySelector('.workspace-edit-form');
+        if (editForm) { editForm.submit(fields); }
+    }
+
+    async handleUnitWorkspaceSubmit(event) {
+        event.preventDefault();
+        const fields = event.detail.fields;
+
+        if (this.isQuickAddOwnerWorkspace) {
+            const ownerInput = this.template.querySelector('[data-id="quickOwnerWorkspaceField"]');
+            if (ownerInput) {
+                ownerInput.reportValidity();
+                if (!ownerInput.checkValidity()) return;
+            }
+            try {
+                const recordInput = { apiName: 'Account', fields: { 'Name': ownerInput.value } };
+                const newOwnerAccount = await createRecord(recordInput);
+                fields['gbcinmo__Owner_Contact__c'] = newOwnerAccount.id;
+            } catch (error) {
+                console.error('Workspace background owner generation failed:', JSON.stringify(error));
+                return;
+            }
+        }
+
+        const unitForm = this.template.querySelector('.unit-workspace-edit-form');
+        if (unitForm) { unitForm.submit(fields); }
     }
 
     async handleUpdateSuccess() {
@@ -411,7 +556,27 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         await refreshApex(this.wiredPropertiesResult);
     }
 
-    navNewUnit() { this.navigateToNewRecord('gbcinmo__Property_Unit__c'); }
+    async handleUnitUpdateSuccess() {
+        this.dispatchEvent(new ShowToastEvent({ title: this.labels.successTitle, message: 'Property Unit updated successfully.', variant: 'success' }));
+        this.isUnitEditMode = false;
+        this.isQuickAddOwnerWorkspace = false;
+        await refreshApex(this.wiredUnitsPortfolioResult);
+        await refreshApex(this.wiredPropertiesResult);
+    }
+
+    async navNewUnit() { 
+        const resultRecordId = await NewUnitModal.open({ 
+            size: 'medium',
+            propertyId: this.selectedPropertyId
+        });
+        if (resultRecordId) {
+            await refreshApex(this.wiredPropertiesResult);
+            await refreshApex(this.wiredUnitsPortfolioResult);
+            this.selectedUnitId = resultRecordId;
+            this.isUnitEditMode = false;
+        }
+    }
+
     navNewListing() { this.navigateToNewRecord('Opportunity'); } 
     navNewRequest() { this.navigateToNewRecord('gbcinmo__Property_Request__c'); }
     navNewLead() { this.navigateToNewRecord('gbcinmo__Listing_Lead__c'); }
@@ -439,7 +604,7 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
     @wire(getListingsWithoutMatches) wiredListingsNoMatches({ data }) { if(data) { this.listingsNoMatches = data.map(r => ({ ...r, recordUrl: `/lightning/r/Opportunity/${r.Id}/view` })); this.countListingsNoMatches = data.length; } }
     @wire(getListingsWithPendingMatches) wiredListingsPending({ data }) { if(data) { this.listingsPending = data.map(r => ({ ...r, recordUrl: `/lightning/r/Opportunity/${r.Id}/view` })); this.countListingsPending = data.length; } }
     @wire(getRequestsWithoutMatches) wiredRequestsNoMatches({ data }) { if(data) { this.requestsNoMatches = data.map(r => this.formatRequest(r)); this.countRequestsNoMatches = data.length; } }
-    @wire(getRequestsWithPendingMatches) wiredWorkspaceRecordResult({ data }) { if(data) { this.requestsPending = data.map(r => this.formatRequest(r)); this.countRequestsPending = data.length; } }
+    @wire(getRequestsWithPendingMatches) wiredRequestsPendingMatches({ data }) { if(data) { this.requestsPending = data.map(r => this.formatRequest(r)); this.countRequestsPending = data.length; } }
     @wire(getOverdueLeads) wiredLeadsOverdue({ data }) { if(data) { this.leadsOverdue = data.map(r => this.formatLead(r)); this.countLeadsOverdue = data.length; } }
     @wire(getNewLeads) wiredLeadsNew({ data }) { if(data) { this.leadsNew = data.map(r => this.formatLead(r)); this.countLeadsNew = data.length; } }
 

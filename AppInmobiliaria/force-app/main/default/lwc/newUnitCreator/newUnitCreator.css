@@ -1,0 +1,4 @@
+/* Hides any native inline help text tooltips injected automatically by Salesforce custom field definitions */
+.unit-edit-form lightning-helptext {
+    display: none !important;
+}

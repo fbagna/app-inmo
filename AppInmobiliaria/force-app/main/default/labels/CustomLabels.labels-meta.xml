@@ -539,4 +539,165 @@
         <shortDescription>Checkbox toggle instruction text to allow regional cascade modifications</shortDescription>
         <value>Do you want to modify the region or zone of this property?</value>
     </labels>
+    <labels>
+        <fullName>Modal_Unit_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Header title for the property unit creation modal</shortDescription>
+        <value>New Property Unit</value>
+    </labels>
+    <labels>
+        <fullName>Btn_Save_And_New</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for save and new button action form</shortDescription>
+        <value>Save &amp; New</value>
+    </labels>
+    <labels>
+        <fullName>Unit_Section_Information</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Section title for unit general information</shortDescription>
+        <value>Information</value>
+    </labels>
+    <labels>
+        <fullName>Unit_Section_Features</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Section title for unit building features</shortDescription>
+        <value>Property Features</value>
+    </labels>
+    <labels>
+        <fullName>Unit_Section_Extra</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Section title for unit publishing links data</shortDescription>
+        <value>Extra Information</value>
+    </labels>
+    <labels>
+        <fullName>Unit_Section_System</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Section title for system logging references fields</shortDescription>
+        <value>System Information</value>
+    </labels>
+    <labels>
+        <fullName>Unit_HelpText_Listing_Url</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Helptext descriptor content for publishing reference link</shortDescription>
+        <value>URL link reference pointing to external real estate publishing web platforms.</value>
+    </labels>
+    <labels>
+        <fullName>Unit_Toast_Success_Create_Msg</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Toast feedback message after successful record save</shortDescription>
+        <value>Property Unit created successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Field_Property_Type</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Property Type field</shortDescription>
+        <value>Property Type</value>
+    </labels>
+    <labels>
+        <fullName>Field_Floor</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Floor field</shortDescription>
+        <value>Floor</value>
+    </labels>
+    <labels>
+        <fullName>Field_Owner_Contact</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Owner Contact field</shortDescription>
+        <value>Owner Contact</value>
+    </labels>
+    <labels>
+        <fullName>Field_Door</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Door field</shortDescription>
+        <value>Door</value>
+    </labels>
+    <labels>
+        <fullName>Field_Block</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Block field</shortDescription>
+        <value>Block</value>
+    </labels>
+    <labels>
+        <fullName>Field_Occupancy_Status</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Occupancy Status field</shortDescription>
+        <value>Occupancy Status</value>
+    </labels>
+    <labels>
+        <fullName>Field_Staircase</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Staircase field</shortDescription>
+        <value>Staircase</value>
+    </labels>
+    <labels>
+        <fullName>Field_Square_Meters</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Square Meters field</shortDescription>
+        <value>Square Meters</value>
+    </labels>
+    <labels>
+        <fullName>Field_Bedrooms</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Bedrooms field</shortDescription>
+        <value>Bedrooms</value>
+    </labels>
+    <labels>
+        <fullName>Field_Bathrooms</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Bathrooms field</shortDescription>
+        <value>Bathrooms</value>
+    </labels>
+    <labels>
+        <fullName>Field_Features_Notes</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Features and Notes field</shortDescription>
+        <value>Features and Notes</value>
+    </labels>
+    <labels>
+        <fullName>Field_Listing_Url</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Listing URL field</shortDescription>
+        <value>Listing URL</value>
+    </labels>
+    <labels>
+        <fullName>Field_Cadastral_Ref</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Cadastral Reference field</shortDescription>
+        <value>Cadastral Reference</value>
+    </labels>
+    <labels>
+        <fullName>Field_Unit_Reference</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for Unit Reference field</shortDescription>
+        <value>Unit Reference</value>
+    </labels>
+    <labels>
+        <fullName>Field_Property_Lookup</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Label for the parent Property lookup reference field</shortDescription>
+        <value>Property</value>
+    </labels>
 </CustomLabels>

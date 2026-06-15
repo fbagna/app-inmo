@@ -1,0 +1,107 @@
+<template>
+    <lightning-modal-header label={labels.modalTitle}></lightning-modal-header>
+
+    <lightning-modal-body>
+        <lightning-record-edit-form 
+            object-api-name="gbcinmo__Property_Unit__c"
+            onsubmit={handleSubmit}
+            onsuccess={handleSuccess}
+            onerror={handleError}
+            class="unit-edit-form">
+
+            <h3 class="slds-section__title slds-theme_shade slds-m-bottom_small" style="font-weight: 700; border-radius: 4px; padding-left: 8px;">
+                {labels.sectionInformation}
+            </h3>
+            <div class="slds-grid slds-wrap slds-gutters_medium">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="Name" required></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Property_Type__c" required></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Floor__c"></lightning-input-field>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_x-small">
+                    <lightning-input-field field-name="gbcinmo__Property__c" value={_propertyId}></lightning-input-field>
+                    <div class="slds-text-align_right slds-p-top_xxx-small" style="margin-top: -10px;">
+                        <a onclick={handleLaunchPropertyModal} class="slds-text-link" style="font-size: 11px; font-weight: 600;">+ {labels.quickPropertyLink}</a>
+                    </div>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Door__c"></lightning-input-field>
+                </div>
+                
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-p-bottom_x-small">
+                    <template if:false={isQuickAddOwner}>
+                        <lightning-input-field field-name="gbcinmo__Owner_Contact__c"></lightning-input-field>
+                        <div class="slds-text-align_right slds-p-top_xxx-small" style="margin-top: -10px;">
+                            <a onclick={toggleQuickAddOwner} class="slds-text-link" style="font-size: 11px; font-weight: 600;">+ {labels.quickOwnerLink}</a>
+                        </div>
+                    </template>
+                    <template if:true={isQuickAddOwner}>
+                        <div class="slds-box slds-theme_shade slds-p-around_x-small" style="border-left: 3px solid #0176d3; margin-top: 4px;">
+                            <div class="slds-text-title_caps slds-m-bottom_xx-small" style="font-weight: 700; color: #0176d3; font-size: 10px;">{labels.quickOwnerHeader}</div>
+                            <lightning-input label={labels.ownerNameLabel} required data-id="quickOwnerName" class="slds-m-bottom_xxx-small"></lightning-input>
+                            <div class="slds-text-align_right slds-m-top_xx-small">
+                                <a onclick={toggleQuickAddOwner} class="slds-text-color_error" style="font-size: 11px; font-weight: 600;">{labels.cancelLink}</a>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Block__c"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Occupancy_Status__c"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Staircase__c"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2"></div>
+            </div>
+
+            <h3 class="slds-section__title slds-theme_shade slds-m-top_medium slds-m-bottom_small" style="font-weight: 700; border-radius: 4px; padding-left: 8px;">
+                {labels.sectionFeatures}
+            </h3>
+            <div class="slds-grid slds-wrap slds-gutters_medium">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Square_Meters__c"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Bedrooms__c"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Bathrooms__c"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2"></div>
+                <div class="slds-col slds-size_1-of-1">
+                    <lightning-input-field field-name="gbcinmo__Features_and_Notes__c"></lightning-input-field>
+                </div>
+            </div>
+
+            <h3 class="slds-section__title slds-theme_shade slds-m-top_medium slds-m-bottom_small" style="font-weight: 700; border-radius: 4px; padding-left: 8px;">
+                {labels.sectionExtra}
+            </h3>
+            <div class="slds-grid slds-wrap slds-gutters_medium">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Listing_URL__c"></lightning-input-field>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                    <lightning-input-field field-name="gbcinmo__Cadastral_Reference__c"></lightning-input-field>
+                </div>
+            </div>
+
+            <button type="submit" class="slds-hide programmatic-submit-btn"></button>
+        </lightning-record-edit-form>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button label={labels.btnCancel} variant="neutral" onclick={handleCancel}></lightning-button>
+        <lightning-button label={labels.btnSaveNew} variant="neutral" onclick={handleSaveAndNew} class="slds-m-horizontal_x-small"></lightning-button>
+        <lightning-button label={labels.btnSave} variant="brand" onclick={handleSaveCommit}></lightning-button>
+    </lightning-modal-footer>
+</template>
