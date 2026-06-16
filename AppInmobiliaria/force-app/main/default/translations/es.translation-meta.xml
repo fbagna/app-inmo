@@ -4,7 +4,7 @@
         <label>Inmobiliaria Zona</label>
         <name>Inmobiliaria_Zona</name>
     </customApplications>
-        <customLabels>
+    <customLabels>
         <label>Características</label>
         <name>Section_Features</name>
     </customLabels>
@@ -228,7 +228,6 @@
         <label>Ubicación</label>
         <name>Map_Label_Prefix</name>
     </customLabels>
-
     <customLabels>
         <label>Espacio de Trabajo de la Propiedad</label>
         <name>Workspace_Title</name>
@@ -401,7 +400,66 @@
         <label>Ordena las filas dinámicamente haciendo clic en los encabezados. Accede al espacio de trabajo mediante los botones de marca.</label>
         <name>Portfolio_Subtitle</name>
     </customLabels>
-
+    <customLabels>
+        <label>Eliminar Unidad</label>
+        <name>Btn_Delete_Unit</name>
+    </customLabels>
+    <customLabels>
+        <label>Confirmar Eliminación</label>
+        <name>Delete_Confirm_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>¿Está seguro de que desea eliminar de forma permanente esta unidad? Esta acción no se puede deshacer.</label>
+        <name>Delete_Confirm_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>La unidad de propiedad fue eliminada correctamente.</label>
+        <name>Delete_Success_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>Hubo un error al intentar eliminar la unidad de propiedad.</label>
+        <name>Delete_Error_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>Eliminar Propiedad</label>
+        <name>Btn_Delete_Property</name>
+    </customLabels>
+    <customLabels>
+        <label>Confirmar Eliminación de Propiedad</label>
+        <name>Property_Delete_Confirm_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>¿Está seguro de que desea eliminar de forma permanente este edificio y todas sus unidades asociadas? Esta acción no se puede deshacer.</label>
+        <name>Property_Delete_Confirm_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>La propiedad fue eliminada correctamente del sistema junto con su catálogo de unidades.</label>
+        <name>Property_Delete_Success_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>Hubo un error al intentar eliminar el registro de propiedad seleccionado.</label>
+        <name>Property_Delete_Error_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>Relacionado</label>
+        <name>Tab_Related_Workspace</name>
+    </customLabels>
+    <customLabels>
+        <label>Galería Fotográfica</label>
+        <name>Tab_Photo_Gallery_Workspace</name>
+    </customLabels>
+    <customLabels>
+        <label>Mapa</label>
+        <name>Tab_Map_Workspace</name>
+    </customLabels>
+    <customLabels>
+        <label>Ofertas</label>
+        <name>Header_Workspace_Opportunities</name>
+    </customLabels>
+    <customLabels>
+        <label>Noticias de Captación</label>
+        <name>Header_Workspace_Leads</name>
+    </customLabels>
     <flowDefinitions>
         <flows>
             <screens>
@@ -443,7 +501,6 @@
         <flows/>
         <fullName>sfdc_default_ReportExport_Protection_Flow</fullName>
     </flowDefinitions>
-
     <quickActions>
         <label></label>
         <name>LogACall</name>
@@ -488,7 +545,6 @@
         <label></label>
         <name>SendEmail</name>
     </quickActions>
-
     <reportTypes>
         <description></description>
         <label></label>

@@ -2,10 +2,29 @@ import { LightningElement, wire, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 import { refreshApex } from '@salesforce/apex'; 
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
-import { createRecord, getRecord } from 'lightning/uiRecordApi'; 
+import { createRecord, getRecord, deleteRecord } from 'lightning/uiRecordApi'; 
+import LightningConfirm from 'lightning/confirm'; 
 import NewPropertyModal from 'c/newPropertyCreator';
 import NewUnitModal from 'c/newUnitCreator'; 
 
+/* ========================================================================= */
+/* --- SECURE APEX METHODS REFERENCES (WITH USER_MODE BOUNDARIES) --------- */
+/* ========================================================================= */
+import getRecentProperties from '@salesforce/apex/PropertyDashboardController.getRecentProperties';
+import getRelatedUnits from '@salesforce/apex/PropertyDashboardController.getRelatedUnits';
+import getAllPropertyUnits from '@salesforce/apex/PropertyDashboardController.getAllPropertyUnits'; 
+import getUnitOpportunities from '@salesforce/apex/PropertyDashboardController.getUnitOpportunities';
+import getUnitListingLeads from '@salesforce/apex/PropertyDashboardController.getUnitListingLeads';
+import getListingsWithoutMatches from '@salesforce/apex/PropertyAlertsController.getListingsWithoutMatches';
+import getListingsWithPendingMatches from '@salesforce/apex/PropertyAlertsController.getListingsWithPendingMatches';
+import getRequestsWithoutMatches from '@salesforce/apex/PropertyAlertsController.getRequestsWithoutMatches';
+import getRequestsWithPendingMatches from '@salesforce/apex/PropertyAlertsController.getRequestsWithPendingMatches';
+import getOverdueLeads from '@salesforce/apex/PropertyAlertsController.getOverdueLeads';
+import getNewLeads from '@salesforce/apex/PropertyAlertsController.getNewLeads';
+
+/* ========================================================================= */
+/* --- APPEXCHANGE ABSOLUTE STRING ROUTING FIELDS MATRIX (BYPASSES LWC1504)  */
+/* ========================================================================= */
 const WORKSPACE_FIELDS = [
     'gbcinmo__Property__c.gbcinmo__Country__c',
     'gbcinmo__Property__c.gbcinmo__State_Province__c',
@@ -18,6 +37,9 @@ const UNIT_FIELDS_EXVENT = [
     'gbcinmo__Property_Unit__c.gbcinmo__Property__r.Name'
 ];
 
+/* ========================================================================= */
+/* --- APPEXCHANGE COMPLIANT CUSTOM LABELS IMPORTS (ZERO HARDCODE) -------- */
+/* ========================================================================= */
 import labelWorkspaceTitle from '@salesforce/label/c.Workspace_Title';
 import labelBtnBackToDashboard from '@salesforce/label/c.Btn_Back_To_Dashboard';
 import labelSectionDossierDetails from '@salesforce/label/c.Section_Dossier_Details';
@@ -59,7 +81,6 @@ import labelAlertPendingMatches from '@salesforce/label/c.Alert_Pending_Matches'
 import labelAlertOverdue from '@salesforce/label/c.Alert_Overdue';
 import labelAlertNewLeads from '@salesforce/label/c.Alert_New_Leads';
 import labelMsgShowing from '@salesforce/label/c.Msg_Showing';
-import labelColView from '@salesforce/label/c.Col_View';
 import labelColOpenWorkspace from '@salesforce/label/c.Col_Open_Workspace';
 import labelPortfolioSubtitle from '@salesforce/label/c.Portfolio_Subtitle';
 
@@ -78,15 +99,23 @@ import labelQuickAddLink from '@salesforce/label/c.PropertyQuickAddLink';
 import labelQuickAddHeader from '@salesforce/label/c.PropertyQuickAddHeader';
 import labelToggleLocationModify from '@salesforce/label/c.Workspace_Toggle_Location_Modify';
 
-import getRecentProperties from '@salesforce/apex/PropertyDashboardController.getRecentProperties';
-import getRelatedUnits from '@salesforce/apex/PropertyDashboardController.getRelatedUnits';
-import getAllPropertyUnits from '@salesforce/apex/PropertyDashboardController.getAllPropertyUnits'; 
-import getListingsWithoutMatches from '@salesforce/apex/PropertyAlertsController.getListingsWithoutMatches';
-import getListingsWithPendingMatches from '@salesforce/apex/PropertyAlertsController.getListingsWithPendingMatches';
-import getRequestsWithoutMatches from '@salesforce/apex/PropertyAlertsController.getRequestsWithoutMatches';
-import getRequestsWithPendingMatches from '@salesforce/apex/PropertyAlertsController.getRequestsWithPendingMatches';
-import getOverdueLeads from '@salesforce/apex/PropertyAlertsController.getOverdueLeads';
-import getNewLeads from '@salesforce/apex/PropertyAlertsController.getNewLeads';
+import labelBtnDeleteUnit from '@salesforce/label/c.Btn_Delete_Unit';
+import labelDeleteConfirmTitle from '@salesforce/label/c.Delete_Confirm_Title';
+import labelDeleteConfirmMessage from '@salesforce/label/c.Delete_Confirm_Message';
+import labelDeleteSuccessMessage from '@salesforce/label/c.Delete_Success_Message';
+import labelDeleteErrorMessage from '@salesforce/label/c.Delete_Error_Message';
+
+import labelBtnDeleteProperty from '@salesforce/label/c.Btn_Delete_Property';
+import labelPropertyDeleteConfirmTitle from '@salesforce/label/c.Property_Delete_Confirm_Title';
+import labelPropertyDeleteConfirmMessage from '@salesforce/label/c.Property_Delete_Confirm_Message';
+import labelPropertyDeleteSuccessMessage from '@salesforce/label/c.Property_Delete_Success_Message';
+import labelPropertyDeleteErrorMessage from '@salesforce/label/c.Property_Delete_Error_Message';
+
+import labelTabRelatedWorkspace from '@salesforce/label/c.Tab_Related_Workspace';
+import labelTabPhotoGalleryWorkspace from '@salesforce/label/c.Tab_Photo_Gallery_Workspace';
+import labelTabMapWorkspace from '@salesforce/label/c.Tab_Map_Workspace';
+import labelHeaderWorkspaceOpportunities from '@salesforce/label/c.Header_Workspace_Opportunities';
+import labelHeaderWorkspaceLeads from '@salesforce/label/c.Header_Workspace_Leads';
 
 export default class PropertyDashboard extends NavigationMixin(LightningElement) {
 
@@ -100,7 +129,22 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
     @track activeTabName = 'operations_tab'; 
     @track propertiesInventoryData = [];
     @track allUnitsPortfolioData = []; 
+    
     @track relatedUnitsData = [];
+    @track processedRelatedUnits = [];
+    @track relatedSortedBy = 'Name';
+    @track relatedSortedDirection = 'asc';
+
+    @track unitOpportunitiesData = [];
+    @track unitListingLeadsData = [];
+    @track countUnitOpportunities = 0;
+    @track countUnitListingLeads = 0;
+
+    @track opportunitiesSortedBy = 'Name';
+    @track opportunitiesSortedDirection = 'asc';
+    @track leadsSortedBy = 'Name';
+    @track leadsSortedDirection = 'asc';
+
     @track sortedByField = 'Name';
     @track sortedDirection = 'asc';
     
@@ -121,6 +165,9 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
     wiredPropertiesResult;
     wiredUnitsPortfolioResult; 
     wiredWorkspaceRecordResult; 
+    wiredRelatedUnitsResult;
+    wiredUnitOpportunitiesResult;
+    wiredUnitListingLeadsResult;
 
     labels = {
         workspaceTitle: labelWorkspaceTitle,
@@ -178,41 +225,138 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         cancelLink: labelCancelLink,
         quickAddLink: labelQuickAddLink,
         quickAddHeader: labelQuickAddHeader,
-        toggleLocationModify: labelToggleLocationModify
+        toggleLocationModify: labelToggleLocationModify,
+        btnDeleteUnit: labelBtnDeleteUnit,
+        deleteConfirmTitle: labelDeleteConfirmTitle,
+        deleteConfirmMessage: labelDeleteConfirmMessage,
+        deleteSuccessMessage: labelDeleteSuccessMessage,
+        deleteErrorMessage: labelDeleteErrorMessage,
+        btnDeleteProperty: labelBtnDeleteProperty,
+        propertyDeleteConfirmTitle: labelPropertyDeleteConfirmTitle,
+        propertyDeleteConfirmMessage: labelPropertyDeleteConfirmMessage,
+        propertyDeleteSuccessMessage: labelPropertyDeleteSuccessMessage,
+        propertyDeleteErrorMessage: labelPropertyDeleteErrorMessage,
+        tabRelatedWorkspace: labelTabRelatedWorkspace,
+        tabPhotoGalleryWorkspace: labelTabPhotoGalleryWorkspace,
+        tabMapWorkspace: labelTabMapWorkspace,
+        headerWorkspaceOpportunities: labelHeaderWorkspaceOpportunities,
+        headerWorkspaceLeads: labelHeaderWorkspaceLeads
     };
 
     get unitColumns() {
         return [
-            { label: 'Unit / Code', fieldName: 'Name', type: 'text', initialWidth: 150 },
-            { label: 'Floor', fieldName: 'gbcinmo__Floor__c', type: 'text', initialWidth: 100 },
-            { label: 'Door', fieldName: 'gbcinmo__Door__c', type: 'text', initialWidth: 100 },
-            { label: 'Square Meters (m²)', fieldName: 'gbcinmo__Square_Meters__c', type: 'number', initialWidth: 140 },
-            { label: 'Occupancy Status', fieldName: 'gbcinmo__Occupancy_Status__c', type: 'text', initialWidth: 160 },
-            { type: 'button', typeAttributes: { label: 'Open', name: 'open_unit_workspace', variant: 'brand-outline' }, initialWidth: 90 }
+            { 
+                label: 'Unit Name', 
+                fieldName: 'Name',
+                type: 'button', 
+                sortable: true, 
+                initialWidth: 170,
+                typeAttributes: { 
+                    label: { fieldName: 'Name' }, 
+                    name: 'open_unit_workspace', 
+                    variant: 'base' 
+                } 
+            },
+            { label: 'Thumbnail', fieldName: 'gbcinmo__Thumbnail__c', type: 'richText', sortable: false, initialWidth: 110 },
+            { label: 'Reference', fieldName: 'gbcinmo__Unit_Reference__c', type: 'text', sortable: true, initialWidth: 130 },
+            { label: 'Property Type', fieldName: 'gbcinmo__Property_Type__c', type: 'text', sortable: true, initialWidth: 140 },
+            { label: 'State', fieldName: 'gbcinmo__State_Province__c', type: 'text', sortable: true, initialWidth: 110 },
+            { label: 'City', fieldName: 'parentCity', type: 'text', sortable: true, initialWidth: 110 },
+            { label: 'Neighborhood', fieldName: 'parentNeighborhood', type: 'text', sortable: true, initialWidth: 130 }
         ];
     }
 
     get globalUnitsColumns() {
         return [
-            { label: 'Unit Name', fieldName: 'Name', type: 'text', initialWidth: 160, sortable: true },
-            { label: 'Parent Property building', fieldName: 'parentBuildingName', type: 'text', initialWidth: 190, sortable: true },
-            { label: 'Floor', fieldName: 'gbcinmo__Floor__c', type: 'text', initialWidth: 90, sortable: true },
-            { label: 'Door', fieldName: 'gbcinmo__Door__c', type: 'text', initialWidth: 90, sortable: true },
-            { label: 'Square Meters (m²)', fieldName: 'gbcinmo__Square_Meters__c', type: 'number', initialWidth: 140, sortable: true },
-            { label: 'Occupancy Status', fieldName: 'gbcinmo__Occupancy_Status__c', type: 'text', initialWidth: 150, sortable: true },
-            { type: 'button', typeAttributes: { label: 'Open Workspace', name: 'open_unit_global', variant: 'brand' }, initialWidth: 160 }
+            { 
+                label: 'Unit Name', 
+                fieldName: 'Name',
+                type: 'button', 
+                sortable: true, 
+                initialWidth: 170,
+                typeAttributes: { 
+                    label: { fieldName: 'Name' }, 
+                    name: 'open_unit_global', 
+                    variant: 'base' 
+                } 
+            },
+            { label: 'Thumbnail', fieldName: 'gbcinmo__Thumbnail__c', type: 'richText', sortable: false, initialWidth: 110 },
+            { label: 'Reference', fieldName: 'gbcinmo__Unit_Reference__c', type: 'text', sortable: true, initialWidth: 130 },
+            { 
+                label: 'Property', 
+                fieldName: 'propertyUrl', 
+                type: 'url', 
+                sortable: true, 
+                typeAttributes: { label: { fieldName: 'parentBuildingName' }, target: '_self' },
+                initialWidth: 160 
+            },
+            { label: 'Property Type', fieldName: 'gbcinmo__Property_Type__c', type: 'text', sortable: true, initialWidth: 140 },
+            { label: 'State', fieldName: 'gbcinmo__State_Province__c', type: 'text', sortable: true, initialWidth: 110 },
+            { label: 'City', fieldName: 'parentCity', type: 'text', sortable: true, initialWidth: 110 },
+            { label: 'Neighborhood', fieldName: 'parentNeighborhood', type: 'text', sortable: true, initialWidth: 130 }
         ];
     }
 
     get propertyInventoryColumns() {
         return [
-            { label: this.labels.propertyName, fieldName: 'Name', type: 'text', initialWidth: 180, sortable: true },
+            { 
+                label: this.labels.propertyName, 
+                fieldName: 'Name', 
+                type: 'button', 
+                sortable: true, 
+                initialWidth: 190,
+                typeAttributes: { 
+                    label: { fieldName: 'Name' }, 
+                    name: 'open_workspace', 
+                    variant: 'base' 
+                } 
+            },
             { label: this.labels.propertyRef, fieldName: 'gbcinmo__Property_Reference__c', type: 'text', initialWidth: 150, sortable: true },
             { label: this.labels.address, fieldName: 'gbcinmo__Street__c', type: 'text', initialWidth: 220, sortable: true },
             { label: this.labels.stateProvince, fieldName: 'gbcinmo__State_Province__c', type: 'text', initialWidth: 140, sortable: true },
             { label: this.labels.city, fieldName: 'gbcinmo__City__c', type: 'text', initialWidth: 130, sortable: true },
             { label: this.labels.neighborhood, fieldName: 'gbcinmo__Neighborhood__c', type: 'text', initialWidth: 140, sortable: true },
-            { type: 'button', typeAttributes: { label: labelColOpenWorkspace, name: 'open_workspace', variant: 'brand' }, initialWidth: 160 }
+            { label: 'Zip Code', fieldName: 'gbcinmo__Zip_Code__c', type: 'text', initialWidth: 110, sortable: true }
+        ];
+    }
+
+    /**
+     * @description RECONFIGURED IN-WORKSPACE OPPORTUNITIES GRID SCHEMA
+     * REFACTORED: Linked fieldName mapping pointer to look up over 'gbcinmo__Agency_Fee_Percentage__c' natively.
+     */
+    get workspaceOpportunityColumns() {
+        return [
+            { 
+                label: 'Name', 
+                fieldName: 'recordUrl', 
+                type: 'url', 
+                sortable: true,
+                typeAttributes: { label: { fieldName: 'Name' }, target: '_blank' },
+                initialWidth: 150 
+            },
+            { label: 'Stage', fieldName: 'StageName', type: 'text', sortable: true, initialWidth: 100 },
+            { label: 'Operation Type', fieldName: 'gbcinmo__Operation_Type__c', type: 'text', sortable: true, initialWidth: 130 },
+            { label: 'Amount', fieldName: 'Amount', type: 'currency', sortable: true, initialWidth: 110 },
+            { label: 'Agency Fee (%)', fieldName: 'gbcinmo__Agency_Fee_Percentage__c', type: 'number', sortable: true, initialWidth: 130 },
+            { label: 'Agency Profit', fieldName: 'gbcinmo__Agency_Profit__c', type: 'currency', sortable: true, initialWidth: 120 },
+            { label: 'Listing Expiration Date', fieldName: 'gbcinmo__Listing_Expiration_Date__c', type: 'date-local', sortable: true, initialWidth: 170 }
+        ];
+    }
+
+    get workspaceListingLeadColumns() {
+        return [
+            { 
+                label: 'Lead Ref', 
+                fieldName: 'recordUrl', 
+                type: 'url', 
+                sortable: true,
+                typeAttributes: { label: { fieldName: 'Name' }, target: '_blank' },
+                initialWidth: 110 
+            },
+            { label: 'Status', fieldName: 'gbcinmo__Status__c', type: 'text', sortable: true, initialWidth: 110 },
+            { label: 'Lead Source', fieldName: 'gbcinmo__Lead_Source__c', type: 'text', sortable: true, initialWidth: 120 },
+            { label: 'Follow Up', fieldName: 'gbcinmo__Follow_Up_Date__c', type: 'date-local', sortable: true, initialWidth: 110 },
+            { label: 'Description', fieldName: 'gbcinmo__Description__c', type: 'text', sortable: true, initialWidth: 180 }
         ];
     }
 
@@ -262,9 +406,19 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
     }
 
     @wire(getRelatedUnits, { propertyId: '$selectedPropertyId' })
-    wiredUnits({ error, data }) {
-        if (data) { this.relatedUnitsData = data; } 
-        else if (error) { this.relatedUnitsData = []; }
+    wiredUnits(result) {
+        this.wiredRelatedUnitsResult = result;
+        if (result.data) {
+            this.relatedUnitsData = result.data;
+            this.processedRelatedUnits = result.data.map(unit => ({
+                ...unit,
+                parentCity: unit.gbcinmo__Property__r ? unit.gbcinmo__Property__r.gbcinmo__City__c : '',
+                parentNeighborhood: unit.gbcinmo__Property__r ? unit.gbcinmo__Property__r.gbcinmo__Neighborhood__c : ''
+            }));
+        } else if (result.error) {
+            this.relatedUnitsData = [];
+            this.processedRelatedUnits = [];
+        }
     }
 
     @wire(getAllPropertyUnits)
@@ -273,10 +427,43 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         if (result.data) {
             this.allUnitsPortfolioData = result.data.map(unit => ({
                 ...unit,
-                parentBuildingName: unit.gbcinmo__Property__r ? unit.gbcinmo__Property__r.Name : ''
+                parentBuildingName: unit.gbcinmo__Property__r ? unit.gbcinmo__Property__r.Name : '',
+                propertyUrl: unit.gbcinmo__Property__c ? `/lightning/r/gbcinmo__Property__c/${unit.gbcinmo__Property__c}/view` : '',
+                ownerName: unit.gbcinmo__Owner_Contact__r ? unit.gbcinmo__Owner_Contact__r.Name : '',
+                ownerUrl: unit.gbcinmo__Owner_Contact__c ? `/lightning/r/Account/${unit.gbcinmo__Owner_Contact__c}/view` : '',
+                parentCity: unit.gbcinmo__Property__r ? unit.gbcinmo__Property__r.gbcinmo__City__c : '',
+                parentNeighborhood: unit.gbcinmo__Property__r ? unit.gbcinmo__Property__r.gbcinmo__Neighborhood__c : ''
             }));
         } else if (result.error) {
             this.allUnitsPortfolioData = [];
+        }
+    }
+
+    @wire(getUnitOpportunities, { unitId: '$selectedUnitId' })
+    wiredUnitOpportunities(result) {
+        this.wiredUnitOpportunitiesResult = result;
+        if (result.data) {
+            this.unitOpportunitiesData = result.data.map(record => ({
+                ...record,
+                recordUrl: `/lightning/r/Opportunity/${record.Id}/view`
+            }));
+            this.countUnitOpportunities = result.data.length;
+        } else if (result.error) {
+            this.unitOpportunitiesData = []; this.countUnitOpportunities = 0;
+        }
+    }
+
+    @wire(getUnitListingLeads, { unitId: '$selectedUnitId' })
+    wiredUnitListingLeads(result) {
+        this.wiredUnitListingLeadsResult = result;
+        if (result.data) {
+            this.unitListingLeadsData = result.data.map(record => ({
+                ...record,
+                recordUrl: `/lightning/r/gbcinmo__Listing_Lead__c/${record.Id}/view`
+            }));
+            this.countUnitListingLeads = result.data.length;
+        } else if (result.error) {
+            this.unitListingLeadsData = []; this.countUnitListingLeads = 0;
         }
     }
 
@@ -291,7 +478,7 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
     }
 
     get hasUnits() {
-        return this.relatedUnitsData && this.relatedUnitsData.length > 0;
+        return this.processedRelatedUnits && this.processedRelatedUnits.length > 0;
     }
 
     @wire(getRecord, { recordId: '$selectedPropertyId', fields: WORKSPACE_FIELDS })
@@ -314,7 +501,13 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
 
         let targetDataArray = this.isPropertiesSegmentActive ? 'propertiesInventoryData' : 'allUnitsPortfolioData';
         let clonedData = JSON.parse(JSON.stringify(this[targetDataArray]));
-        let keySelector = (record) => record[this.sortedByField];
+        
+        let keySelector = (record) => {
+            if (this.sortedByField === 'propertyUrl') return record.parentBuildingName;
+            if (this.sortedByField === 'ownerUrl') return record.ownerName;
+            return record[this.sortedByField];
+        };
+        
         let reverseMultiplier = this.sortedDirection === 'asc' ? 1 : -1;
 
         clonedData.sort((alpha, beta) => {
@@ -323,6 +516,59 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
             return reverseMultiplier * ((valAlpha > valBeta) - (valBeta > valAlpha));
         });
         this[targetDataArray] = clonedData;
+    }
+
+    handleRelatedUnitsSort(event) {
+        this.relatedSortedBy = event.detail.fieldName;
+        this.relatedSortedDirection = event.detail.sortDirection;
+        let clonedData = JSON.parse(JSON.stringify(this.processedRelatedUnits));
+        let keySelector = (record) => record[this.relatedSortedBy];
+        let reverseMultiplier = this.relatedSortedDirection === 'asc' ? 1 : -1;
+        
+        clonedData.sort((alpha, beta) => {
+            let valAlpha = keySelector(alpha) ? keySelector(alpha).toString().toLowerCase() : '';
+            let valBeta = keySelector(beta) ? keySelector(beta).toString().toLowerCase() : '';
+            return reverseMultiplier * ((valAlpha > valBeta) - (valBeta > valAlpha));
+        });
+        this.processedRelatedUnits = clonedData;
+    }
+
+    handleOpportunitiesSort(event) {
+        this.opportunitiesSortedBy = event.detail.fieldName;
+        this.opportunitiesSortedDirection = event.detail.sortDirection;
+        let clonedData = JSON.parse(JSON.stringify(this.unitOpportunitiesData));
+        
+        let keySelector = (record) => {
+            if (this.opportunitiesSortedBy === 'recordUrl') return record.Name;
+            return record[this.opportunitiesSortedBy];
+        };
+        let reverseMultiplier = this.opportunitiesSortedDirection === 'asc' ? 1 : -1;
+        
+        clonedData.sort((alpha, beta) => {
+            let valAlpha = keySelector(alpha) ? keySelector(alpha).toString().toLowerCase() : '';
+            let valBeta = keySelector(beta) ? keySelector(beta).toString().toLowerCase() : '';
+            return reverseMultiplier * ((valAlpha > valBeta) - (valBeta > valAlpha));
+        });
+        this.unitOpportunitiesData = clonedData;
+    }
+
+    handleListingLeadsSort(event) {
+        this.leadsSortedBy = event.detail.fieldName;
+        this.leadsSortedDirection = event.detail.sortDirection;
+        let clonedData = JSON.parse(JSON.stringify(this.unitListingLeadsData));
+        
+        let keySelector = (record) => {
+            if (this.leadsSortedBy === 'recordUrl') return record.Name;
+            return record[this.leadsSortedBy];
+        };
+        let reverseMultiplier = this.leadsSortedDirection === 'asc' ? 1 : -1;
+        
+        clonedData.sort((alpha, beta) => {
+            let valAlpha = keySelector(alpha) ? keySelector(alpha).toString().toLowerCase() : '';
+            let valBeta = keySelector(beta) ? keySelector(beta).toString().toLowerCase() : '';
+            return reverseMultiplier * ((valAlpha > valBeta) - (valBeta > valAlpha));
+        });
+        this.unitListingLeadsData = clonedData;
     }
 
     handlePropertyInventoryAction(event) {
@@ -372,6 +618,7 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         this.selectedPropertyId = ''; 
         this.selectedUnitId = '';
         this.relatedUnitsData = [];
+        this.processedRelatedUnits = [];
         this.isEditMode = false;
         this.isUnitEditMode = false;
         this.isWorkspaceFieldsLoaded = false;
@@ -382,23 +629,71 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         this.isUnitEditMode = false;
     }
 
-    handleEnableEdit() {
-        this.isQuickAddDoormanWorkspace = false;
-        this.showLocationPicker = false; 
-        this.isEditMode = true;
+    async handleDeleteProperty() {
+        const confirmed = await LightningConfirm.open({
+            message: this.labels.propertyDeleteConfirmMessage,
+            variant: 'headerless',
+            label: this.labels.propertyDeleteConfirmTitle,
+            theme: 'destructive'
+        });
+        
+        if (confirmed) {
+            try {
+                await deleteRecord(this.selectedPropertyId);
+                this.dispatchEvent(new ShowToastEvent({
+                    title: 'Success',
+                    message: this.labels.propertyDeleteSuccessMessage,
+                    variant: 'success'
+                }));
+                this.selectedPropertyId = '';
+                this.selectedUnitId = '';
+                this.isEditMode = false;
+                await refreshApex(this.wiredPropertiesResult);
+                await refreshApex(this.wiredUnitsPortfolioResult);
+            } catch (error) {
+                console.error('Operational Delete Property Exception Failed:', error);
+                this.dispatchEvent(new ShowToastEvent({
+                    title: 'Error',
+                    message: this.labels.propertyDeleteErrorMessage,
+                    variant: 'error'
+                }));
+            }
+        }
     }
 
-    handleCancelEdit() {
-        this.isEditMode = false;
-    }
-
-    handleEnableUnitEdit() {
-        this.isQuickAddOwnerWorkspace = false;
-        this.isUnitEditMode = true;
-    }
-
-    handleCancelUnitEdit() {
-        this.isUnitEditMode = false;
+    async handleDeleteUnit() {
+        const confirmed = await LightningConfirm.open({
+            message: this.labels.deleteConfirmMessage,
+            variant: 'headerless',
+            label: this.labels.deleteConfirmTitle,
+            theme: 'destructive'
+        });
+        
+        if (confirmed) {
+            try {
+                await deleteRecord(this.selectedUnitId);
+                this.dispatchEvent(new ShowToastEvent({
+                    title: 'Success',
+                    message: this.labels.deleteSuccessMessage,
+                    variant: 'success'
+                }));
+                this.selectedUnitId = '';
+                this.isUnitEditMode = false;
+                
+                await refreshApex(this.wiredUnitsPortfolioResult);
+                await refreshApex(this.wiredPropertiesResult);
+                if (this.selectedPropertyId) {
+                    await refreshApex(this.wiredRelatedUnitsResult);
+                }
+            } catch (error) {
+                console.error('Operational Delete Unit Exception Failed:', error);
+                this.dispatchEvent(new ShowToastEvent({
+                    title: 'Error',
+                    message: this.labels.deleteErrorMessage,
+                    variant: 'error'
+                }));
+            }
+        }
     }
 
     handleManageCover() {
@@ -426,6 +721,9 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
             
             await refreshApex(this.wiredUnitsPortfolioResult);
             await refreshApex(this.wiredPropertiesResult);
+            if (this.selectedPropertyId) {
+                await refreshApex(this.wiredRelatedUnitsResult);
+            }
             
             const activeForm = this.template.querySelector('lightning-record-view-form');
             if (activeForm) {
@@ -441,16 +739,14 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         this.isQuickAddOwnerWorkspace = !this.isQuickAddOwnerWorkspace;
     }
 
-    handleToggleLocationPicker(event) {
+    handleToggleLocationModify(event) {
         this.showLocationPicker = event.target.checked;
         if (this.showLocationPicker) {
             this.isWorkspaceFieldsLoaded = false;
-            
             this.workspaceCountry = this.rawLocationRecord.country;
             this.workspaceState = this.rawLocationRecord.state;
             this.workspaceCity = this.rawLocationRecord.city;
             this.workspaceNeighborhood = this.rawLocationRecord.neighborhood;
-            
             this.isWorkspaceFieldsLoaded = true;
         }
     }
@@ -474,7 +770,6 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         if (this.showLocationPicker) {
             const locationCmp = this.template.querySelector('.workspace-location-selector');
             const isLocationValid = locationCmp ? locationCmp.validate() : true;
-
             if (!isLocationValid) {
                 this.dispatchEvent(new ShowToastEvent({ title: this.labels.attentionTitle, message: this.labels.attentionMsg, variant: 'warning' }));
                 return;
@@ -493,10 +788,8 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
             if (this.isQuickAddDoormanWorkspace) {
                 const firstName = this.template.querySelector('[data-id="doormanFirstWorkspace"]').value;
                 const lastName = this.template.querySelector('[data-id="doormanLastWorkspace"]').value;
-
                 const contactFields = { 'FirstName': firstName, 'LastName': lastName };
                 const contactRecordInput = { apiName: 'Contact', fields: contactFields };
-                
                 const newContact = await createRecord(contactRecordInput);
                 fields['gbcinmo__Doorman__c'] = newContact.id;
             }
@@ -544,7 +837,6 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
                 return;
             }
         }
-
         const unitForm = this.template.querySelector('.unit-workspace-edit-form');
         if (unitForm) { unitForm.submit(fields); }
     }
@@ -562,6 +854,9 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         this.isQuickAddOwnerWorkspace = false;
         await refreshApex(this.wiredUnitsPortfolioResult);
         await refreshApex(this.wiredPropertiesResult);
+        if (this.selectedPropertyId) {
+            await refreshApex(this.wiredRelatedUnitsResult);
+        }
     }
 
     async navNewUnit() { 
@@ -626,13 +921,6 @@ export default class PropertyDashboard extends NavigationMixin(LightningElement)
         this.showRequestsTable = type.startsWith('REQ_');
         this.showLeadsTable = type.startsWith('LEAD_');
     }
-
-    toggleListingsNoMatches() { this.toggleTable(this.listingsNoMatches, 'LIST_NO_MATCHES', this.columnsListings, 'Opportunity', `${this.labels.deskListings} ${this.labels.noMatches}`); }
-    toggleListingsPending() { this.toggleTable(this.listingsPending, 'LIST_PENDING', this.columnsListings, 'Opportunity', `${this.labels.deskListings} ${this.labels.pendingMatches}`); }
-    toggleRequestsNoMatches() { this.toggleTable(this.requestsNoMatches, 'REQ_NO_MATCHES', this.columnsRequests, 'gbcinmo__Property_Request__c', `${this.labels.deskRequests} ${this.labels.noMatches}`); }
-    toggleRequestsPending() { this.toggleTable(this.requestsPending, 'REQ_PENDING', this.columnsRequests, 'gbcinmo__Property_Request__c', `${this.labels.deskRequests} ${this.labels.pendingMatches}`); }
-    toggleLeadsOverdue() { this.toggleTable(this.leadsOverdue, 'LEAD_OVERDUE', this.columnsLeads, 'gbcinmo__Listing_Lead__c', this.labels.overdueFollowups); }
-    toggleLeadsNew() { this.toggleTable(this.leadsNew, 'LEAD_NEW', this.columnsLeads, 'gbcinmo__Listing_Lead__c', this.labels.newLeadsCheck); }
 
     handleRowAction(event) {
         this[NavigationMixin.Navigate]({ type: 'standard__recordPage', attributes: { recordId: event.detail.row.Id, objectApiName: this.activeObject, actionName: 'view' } });

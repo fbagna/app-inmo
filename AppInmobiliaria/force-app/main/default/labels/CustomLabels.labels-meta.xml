@@ -473,7 +473,7 @@
         <fullName>Alert_Pending_Matches</fullName>
         <language>en_US</language>
         <protected>true</protected>
-        <shortDescription>Counter dynamic button tracking suffix descriptor</protected>
+        <shortDescription>Counter dynamic button tracking suffix descriptor</shortDescription>
         <value>with pending matches</value>
     </labels>
     <labels>
@@ -699,5 +699,110 @@
         <protected>true</protected>
         <shortDescription>Label for the parent Property lookup reference field</shortDescription>
         <value>Property</value>
+    </labels>
+    <labels>
+        <fullName>Btn_Delete_Unit</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Button label to execute record deletion routines</shortDescription>
+        <value>Delete Unit</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Confirm_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title banner for the delete verification overlay</shortDescription>
+        <value>Confirm Deletion</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Confirm_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Warning body description context for structural deletion alerts</shortDescription>
+        <value>Are you sure you want to permanently delete this property unit? This action cannot be undone.</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Success_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Success callback message notification text parameters</shortDescription>
+        <value>The property unit was deleted successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Delete_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error callback exception description text parameters</shortDescription>
+        <value>There was an error attempting to delete the property unit.</value>
+    </labels>
+    <labels>
+        <fullName>Btn_Delete_Property</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Button label to execute master property record deletion routines</shortDescription>
+        <value>Delete Property</value>
+    </labels>
+    <labels>
+        <fullName>Property_Delete_Confirm_Title</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Title banner for the master property delete verification overlay</shortDescription>
+        <value>Confirm Property Deletion</value>
+    </labels>
+    <labels>
+        <fullName>Property_Delete_Confirm_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Warning body description context for master property deletion alerts</shortDescription>
+        <value>Are you sure you want to permanently delete this property building and all its associated units? This action cannot be undone.</value>
+    </labels>
+    <labels>
+        <fullName>Property_Delete_Success_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Success callback message notification text parameters for property</shortDescription>
+        <value>The property building was deleted successfully.</value>
+    </labels>
+    <labels>
+        <fullName>Property_Delete_Error_Message</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error callback exception description text parameters for property</shortDescription>
+        <value>There was an error attempting to delete the property building.</value>
+    </labels>
+    <labels>
+        <fullName>Tab_Related_Workspace</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Tab header mapping label for related lists segment</shortDescription>
+        <value>Related</value>
+    </labels>
+    <labels>
+        <fullName>Tab_Photo_Gallery_Workspace</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Tab header mapping label for property carousel section</shortDescription>
+        <value>Photo Gallery</value>
+    </labels>
+    <labels>
+        <fullName>Tab_Map_Workspace</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Tab header mapping label for standalone google maps segment</shortDescription>
+        <value>Map</value>
+    </labels>
+    <labels>
+        <fullName>Header_Workspace_Opportunities</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Section header title label for inner opportunities table</shortDescription>
+        <value>Opportunities</value>
+    </labels>
+    <labels>
+        <fullName>Header_Workspace_Leads</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Section header title label for inner listing leads table</shortDescription>
+        <value>Listing Leads</value>
     </labels>
 </CustomLabels>
